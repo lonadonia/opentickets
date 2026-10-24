@@ -136,11 +136,8 @@ Results from this delivery are recorded in `design-handoff/opentickets-visual-re
 
 ## Hosted preview
 
-Latest design (preview):
-https://opentickets-visual-refresh-git-ebe08e-hakims-projects-8cc34b62.vercel.app. This is the branch URL, so it
-follows new deployments of this branch. The short URL https://opentickets-visual-refresh.vercel.app still shows the
-first build until a deployment is promoted. Details and status are in
-`design-handoff/opentickets-visual-refresh/05_GITHUB_VERCEL_HANDOFF.md`.
+https://opentickets-visual-refresh.vercel.app (built from `main`, Vercel project `opentickets-visual-refresh`).
+Details, other links and status are in `design-handoff/opentickets-visual-refresh/05_GITHUB_VERCEL_HANDOFF.md`.
 
 The repository root is a static site with no build step, so any static host works. On Vercel: framework preset
 **Other**, build command `node tools/build.mjs` (or none), output directory `.`. No environment variables are needed.

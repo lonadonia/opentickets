@@ -13,31 +13,30 @@ GitHub status:      PUSHED
 GitHub repo URL:    https://github.com/lonadonia/opentickets
 Visibility:         PUBLIC (verified via GitHub API). The repository was supplied for this session; switch it to
                     private in GitHub settings if the client work should not be public
-Branch:             claude/optimistic-mendel-e0pjrn
-Commits:            ea2896e (first build) → 25e0db7 (handoff) → af79153 (design refinement pass); this file is
-                    updated in the commit after af79153
+Branches:           main (created from the refined version at the owner's request) and
+                    claude/optimistic-mendel-e0pjrn (working branch); both carry the same history
+Commits:            ea2896e (first build) → 25e0db7 (handoff) → af79153 (design refinement pass) →
+                    16543d7 (QA/deploy notes) → this file's update (docs only)
 
 Vercel readiness:   VERIFIED_READY (static output at repo root, no env vars, no vercel.json needed)
 Vercel project:     opentickets-visual-refresh (team "hakim's projects"), created by this delivery
 
-Latest design (refinement pass, commit af79153)
-  Deployment:       dpl_BoQAwj97N943o5VpZuuKoueX5X5C, target PREVIEW, state READY
-  Branch URL:       https://opentickets-visual-refresh-git-ebe08e-hakims-projects-8cc34b62.vercel.app
-                    (Vercel's branch alias, so it follows the latest deployment of this branch)
-  Deployment URL:   https://opentickets-visual-refresh-qefx68wew-hakims-projects-8cc34b62.vercel.app
-  Verified:         DEPLOYED_VERIFIED: new ot-core.js served (200) via Vercel's authenticated fetch. Preview URLs may
-                    require being signed in to Vercel (Deployment Protection), so public access was not checked
+Main link (refined design, from main)
+  Deployment:       dpl_8v3XcTsppighdYapXYZUYboVrkJ7, target PRODUCTION of this demo project, state READY,
+                    built from main @ 16543d7 (later commits only touch docs)
+  URL:              https://opentickets-visual-refresh.vercel.app
+  Verified:         DEPLOYED_VERIFIED: refined ot-tokens.css served (200) via Vercel's authenticated fetch
+  Rollback:         the first build (dpl_72eDwetZgrW23NmPa1yxB6M6fwk7) stays available for Instant Rollback
 
-First build (commit ea2896e)
-  Deployment:       dpl_72eDwetZgrW23NmPa1yxB6M6fwk7, state READY (recorded by Vercel as the project's production)
-  URL:              https://opentickets-visual-refresh.vercel.app. Still shows the FIRST design: moving this short URL
-                    to the refined design means promoting the new deployment, which needs the owner's go-ahead
-  Verified:         home page 200 with 27 grid items, 11 hero slides and the Isotope script; JS/CSS 200
+Other links
+  main branch:      https://opentickets-visual-refresh-git-main-hakims-projects-8cc34b62.vercel.app
+  working branch:   https://opentickets-visual-refresh-git-ebe08e-hakims-projects-8cc34b62.vercel.app
+                    (preview links may ask you to sign in to Vercel)
 Environment keys:   none
 Production (client):UNCHANGED. Nothing was deployed to opentickets.co.za, DNS or any client system
 ```
 
-## Note on the Vercel target
+## Note on the first Vercel deployment (history)
 
 The deployment was requested without a target (preview by default), but Vercel recorded it as **`target: production`
 for the new `opentickets-visual-refresh` project**, most likely because it was the project's first deployment and the
