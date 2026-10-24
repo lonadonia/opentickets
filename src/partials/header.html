@@ -1,0 +1,45 @@
+<!--
+  TOP NAVIGATION — fixed, shrinks on scroll (ot-core.js toggles .is-condensed).
+  Keeps the legacy hooks: #sidebarToggleTop, .navbar-search, #nav-search-input, #languageDropdown.
+-->
+<header class="ot-header" id="ot-header" data-ot-header>
+  <div class="ot-header__inner">
+    <button id="sidebarToggleTop" class="ot-icon-btn ot-header__toggle d-md-none" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#accordionSidebar" aria-controls="accordionSidebar" aria-label="Open menu">
+      <svg class="ot-icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
+
+    <a class="ot-brand" href="{{ routes.home }}">
+      <img class="ot-brand__logo" src="{{ base }}assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150">
+    </a>
+
+    <!--
+      TOPBAR SEARCH = THE ISOTOPE FILTER CONTROL. Keep this exact position (first item after the logo/rail)
+      and keep id="nav-search-input": typing dispatches window `filter-grid` (>= 3 chars or empty);
+      pressing Enter submits GET ?q= to the search page.
+    -->
+    <form action="{{ routes.search }}" method="GET" class="ot-nav-search navbar-search d-none d-sm-flex" role="search">
+      <label class="visually-hidden" for="nav-search-input">Search events or venues</label>
+      <input type="text" name="q" id="nav-search-input" class="form-control" placeholder="Search events or venues…"
+             aria-label="Search" autocomplete="off" value="{{ query }}">
+      <button class="ot-nav-search__btn" type="submit" aria-label="Search">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-search"></use></svg>
+      </button>
+    </form>
+
+    <div class="ot-header__actions">
+      <a class="ot-icon-btn d-sm-none" href="{{ routes.search }}" aria-label="Search">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-search"></use></svg>
+      </a>
+      <div class="dropdown">
+        <button class="ot-lang-btn dropdown-toggle" id="languageDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg class="ot-icon" aria-hidden="true"><use href="#i-globe"></use></svg>
+          <span><span class="d-none d-lg-inline">Language: </span>{{ currentLanguageLabel }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end ot-dropdown" aria-labelledby="languageDropdown">
+{{{ languageItems }}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

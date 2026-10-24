@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#1f2533">
+  <!-- Live theme: keep the existing favicon and csrf-token meta here -->
+  <link rel="icon" type="image/png" href="{{ base }}assets/images/brand/logo-icon.png">
+  <link rel="preload" href="{{ base }}assets/fonts/be-vietnam-pro/be-vietnam-pro-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base }}assets/fonts/be-vietnam-pro/be-vietnam-pro-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ base }}assets/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ base }}assets/css/ot-fonts.css">
+  <link rel="stylesheet" href="{{ base }}assets/css/ot-tokens.css">
+  <link rel="stylesheet" href="{{ base }}assets/css/ot-theme.css">
+</head>
+<body id="page-top" class="{{ bodyClass }}">
+{{{ icons }}}
+<a class="ot-skip-link" href="#main">Skip to content</a>
+{{> header }}
+{{> sidebar }}
+<div class="ot-shell" id="content-wrapper">
+  <main id="main" class="ot-main" tabindex="-1">

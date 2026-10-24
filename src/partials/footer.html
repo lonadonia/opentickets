@@ -1,0 +1,43 @@
+<!-- FOOTER — same four groups and destinations as the live footer -->
+<footer class="ot-footer">
+  <div class="ot-container">
+    <div class="ot-footer__grid">
+      <div class="ot-footer__col ot-footer__brand">
+        <img class="ot-footer__logo" src="{{ base }}assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150" loading="lazy">
+        <h2 class="ot-footer__title">Get in Touch</h2>
+        <ul class="ot-footer__social">
+{{{ socialLinks }}}
+        </ul>
+      </div>
+      <div class="ot-footer__col">
+        <h2 class="ot-footer__title">Support</h2>
+        <ul class="ot-footer__links">
+          <li><a href="{{ routes.support }}"><svg class="ot-icon" aria-hidden="true"><use href="#i-support"></use></svg>Support</a></li>
+          <li><a href="{{ routes.plugins }}"><svg class="ot-icon" aria-hidden="true"><use href="#i-puzzle"></use></svg>CMS Plugins</a></li>
+          <li><a href="{{ routes.faq }}"><svg class="ot-icon" aria-hidden="true"><use href="#i-faq"></use></svg>FAQs</a></li>
+        </ul>
+      </div>
+      <div class="ot-footer__col">
+        <h2 class="ot-footer__title">Legal</h2>
+        <ul class="ot-footer__links">
+          <li><a href="{{ routes.privacy }}"><svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>Privacy Policy</a></li>
+          <li><a href="{{ routes.terms }}"><svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>Terms and Conditions</a></li>
+        </ul>
+      </div>
+      <div class="ot-footer__col">
+        <h2 class="ot-footer__title" id="ot-footer-language">Language</h2>
+        <div class="dropup">
+          <button class="ot-lang-btn ot-lang-btn--footer dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-describedby="ot-footer-language">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-globe"></use></svg><span>{{ currentLanguageLabel }}</span>
+          </button>
+          <ul class="dropdown-menu ot-dropdown">
+{{{ languageItems }}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="ot-footer__legal">
+      &copy; 2024-2026 - <a href="{{ routes.home }}">Open Tickets</a> - All rights reserved.
+    </p>
+  </div>
+</footer>

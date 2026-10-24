@@ -1,0 +1,16 @@
+<li class="ot-ticket-row" data-ot-ticket data-price="{{ price }}">
+  <div class="ot-ticket-row__info">
+    <p class="ot-ticket-row__name" id="ticket-{{ index }}-name">{{ name }}</p>
+    <p class="ot-ticket-row__note">{{ note }}</p>
+  </div>
+  <p class="ot-ticket-row__price">{{ priceLabel }}</p>
+  <div class="ot-qty" role="group" aria-labelledby="ticket-{{ index }}-name">
+    <button class="ot-qty__btn" type="button" data-ot-qty="-1" aria-label="Remove one {{ name }} ticket" disabled>
+      <svg class="ot-icon" aria-hidden="true"><use href="#i-minus"></use></svg>
+    </button>
+    <output class="ot-qty__value" data-ot-qty-value aria-live="polite">0</output>
+    <button class="ot-qty__btn" type="button" data-ot-qty="1" aria-label="Add one {{ name }} ticket">
+      <svg class="ot-icon" aria-hidden="true"><use href="#i-plus"></use></svg>
+    </button>
+  </div>
+</li>

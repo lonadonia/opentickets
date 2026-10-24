@@ -1,0 +1,47 @@
+{
+  "_note": "Site-wide copy and destinations. Internal routes point at the four delivered screens; every other destination points at the live Open Tickets route inferred from the captured pages (see design-handoff 01, A-03). In the Laravel theme replace these with route() helpers.",
+  "lang": "en",
+  "siteName": "Open Tickets",
+  "routes": {
+    "home": "index.html",
+    "faq": "faq.html",
+    "search": "search.html",
+    "support": "https://opentickets.co.za/support",
+    "account": "https://opentickets.co.za/bookings",
+    "privacy": "https://opentickets.co.za/privacy-policy",
+    "terms": "https://opentickets.co.za/terms-and-conditions",
+    "customers": "https://opentickets.co.za/customers",
+    "plugins": "https://opentickets.co.za/plugins"
+  },
+  "languages": [
+    { "code": "en", "label": "English", "href": "https://opentickets.co.za/en" },
+    { "code": "af", "label": "Afrikaans", "href": "https://opentickets.co.za/af" },
+    { "code": "zu", "label": "isiZulu", "href": "https://opentickets.co.za/zu" },
+    { "code": "xh", "label": "isiXhosa", "href": "https://opentickets.co.za/xh" },
+    { "code": "st", "label": "Sesotho", "href": "https://opentickets.co.za/st" },
+    { "code": "de", "label": "Deutsch", "href": "https://opentickets.co.za/de" },
+    { "code": "fr", "label": "Français", "href": "https://opentickets.co.za/fr" },
+    { "code": "es", "label": "Español", "href": "https://opentickets.co.za/es" },
+    { "code": "pt", "label": "Português", "href": "https://opentickets.co.za/pt" }
+  ],
+  "currentLanguage": "en",
+  "social": [
+    { "label": "Instagram", "icon": "instagram", "href": "https://www.instagram.com/opentickets.za/" },
+    { "label": "LinkedIn", "icon": "linkedin", "href": "https://www.linkedin.com/company/open-tickets" },
+    { "label": "Facebook", "icon": "facebook", "href": "https://www.facebook.com/OpenTicketsZA" },
+    { "label": "WhatsApp", "icon": "whatsapp", "href": "https://wa.me/27873307575" }
+  ],
+  "faqCategories": [
+    { "title": "Tickets & Purchasing", "count": 2, "slug": "tickets-purchasing", "icon": "card" },
+    { "title": "Ticket Delivery & Downloading Tickets", "count": 3, "slug": "ticket-delivery-downloading-tickets", "icon": "download" },
+    { "title": "Account & Profile", "count": 4, "slug": "account-profile", "icon": "account" },
+    { "title": "General", "count": 6, "slug": "general", "icon": "info" },
+    { "title": "Football", "count": 4, "slug": "football", "icon": "trophy" }
+  ],
+  "faqCategoryBase": "https://opentickets.co.za/",
+  "representativeEvent": "01m5ena2smd0hden3vqrxdks07",
+  "sampleTickets": [
+    { "name": "General Admission", "note": "Open seating", "price": 60 },
+    { "name": "Main Stand", "note": "Covered seating", "price": 100 }
+  ]
+}

@@ -1,0 +1,18 @@
+<li class="ot-hero__slide osahan-slider-item" data-ot-hero-slide aria-roledescription="slide" aria-label="{{ index }} of {{ total }}">
+  <a class="ot-hero__media" href="{{ url }}" tabindex="-1" aria-hidden="true" draggable="false">
+    <img src="{{ heroImage }}" alt="" width="1210" height="450" loading="{{ loading }}" decoding="async" draggable="false">
+  </a>
+  <div class="ot-hero__caption">
+    <div class="ot-hero__caption-text">
+      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <h2 class="ot-hero__title"><a href="{{ url }}">{{ title }}</a></h2>
+      <p class="ot-hero__meta">
+        <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="{{ isoDateTime }}">{{ shortDate }} · {{ time }}</time></span>
+        <span><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg>{{ venue }}</span>
+      </p>
+    </div>
+    <a class="btn ot-btn ot-btn--primary ot-hero__cta" href="{{ url }}">
+      Get tickets<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    </a>
+  </div>
+</li>

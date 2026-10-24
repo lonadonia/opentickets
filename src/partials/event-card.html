@@ -1,0 +1,24 @@
+<div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="{{ dataName }}" data-venue="{{ dataVenue }}">
+  <article class="card e-card ot-card">
+    <a class="ot-card__link" href="{{ url }}" target="_self">
+      <div class="m-card-cover ot-card__cover">
+        <img src="{{ cardImage }}" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body ot-card__body">
+        <div class="ot-card__stub" aria-hidden="true">
+          <span class="ot-card__day">{{ day }}</span>
+          <span class="ot-card__month">{{ monthLabel }}</span>
+        </div>
+        <div class="ot-card__info">
+          <h3 class="card-text ot-card__title">{{ title }}</h3>
+          <p class="ot-card__meta">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>{{ venue }}</span>
+          </p>
+          <p class="ot-card__meta">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="{{ isoDateTime }}">{{ shortDate }} · {{ time }}</time>
+          </p>
+        </div>
+      </div>
+    </a>
+  </article>
+</div>

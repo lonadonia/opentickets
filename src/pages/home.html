@@ -1,0 +1,59 @@
+{{> layout-start }}
+    <h1 class="visually-hidden">Open Tickets — events and tickets</h1>
+
+    <!--
+      FEATURED HERO — collapses while the Isotope filter is active (query >= 3 chars), as the live slider does.
+      Replaces the Slick slider with a dependency-free, swipeable carousel (ot-hero.js). Keep the slide order from the CMS.
+    -->
+    <div class="ot-hero-collapse" data-ot-hero-collapse>
+      <div class="ot-hero-collapse__inner">
+        <section class="ot-hero" data-ot-hero aria-roledescription="carousel" aria-label="Featured events">
+          <div class="ot-hero__viewport">
+            <ul class="ot-hero__track" data-ot-hero-track aria-live="off">
+{{{ slides }}}
+            </ul>
+            <button class="ot-hero__arrow ot-hero__arrow--prev" type="button" data-ot-hero-prev aria-label="Previous featured event">
+              <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+            </button>
+            <button class="ot-hero__arrow ot-hero__arrow--next" type="button" data-ot-hero-next aria-label="Next featured event">
+              <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+            </button>
+          </div>
+          <div class="ot-hero__controls">
+            <button class="ot-hero__toggle" type="button" data-ot-hero-toggle aria-pressed="false">
+              <svg class="ot-icon ot-hero__toggle-pause" aria-hidden="true"><use href="#i-pause"></use></svg>
+              <svg class="ot-icon ot-hero__toggle-play" aria-hidden="true"><use href="#i-play"></use></svg>
+              <span class="visually-hidden">Pause automatic slide show</span>
+            </button>
+            <ol class="ot-hero__dots">
+{{{ dots }}}
+            </ol>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- EVENTS — Isotope grid. Selectors, data attributes and configuration are unchanged from the live site. -->
+    <section class="ot-section ot-events" aria-labelledby="events-heading">
+      <div class="ot-container">
+        <header class="ot-section__header">
+          <h2 class="ot-section__title" id="events-heading">Events</h2>
+          <p class="ot-section__meta" data-ot-grid-count
+             data-label-all="{n} upcoming events"
+             data-label-filtered="{shown} of {n} events match “{q}”"
+             aria-live="polite">{{ eventCount }} upcoming events</p>
+        </header>
+
+        <div class="row" id="events-grid">
+{{{ cards }}}
+        </div>
+
+        <div class="ot-empty" data-ot-grid-empty hidden>
+          <span class="ot-empty__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-search-x"></use></svg></span>
+          <h3 class="ot-empty__title">No events match “<span data-ot-query></span>”</h3>
+          <p class="ot-empty__text">Check the spelling, or try a team, artist or venue name. Press Enter to search all listings.</p>
+        </div>
+      </div>
+    </section>
+
+{{> layout-end }}

@@ -1,0 +1,120 @@
+{{> layout-start }}
+
+    <div class="ot-container">
+      <nav class="ot-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ routes.home }}">Events</a></li>
+          <li aria-current="page">{{ event.title }}</li>
+        </ol>
+      </nav>
+
+      <!-- EVENT BANNER — the organiser's 1210×450 banner, shown whole (never cropped) -->
+      <figure class="ot-event-banner">
+        <img src="{{ event.heroImage }}" alt="{{ event.alt }}" width="1210" height="450" fetchpriority="high">
+      </figure>
+
+      <div class="row g-4 g-xl-5 ot-event-layout">
+        <div class="col-lg-8">
+          <header class="ot-event-head">
+            <h1 class="ot-event-head__title">{{ event.title }}</h1>
+            <ul class="ot-event-facts">
+              <li>
+                <span class="ot-event-facts__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg></span>
+                <span><span class="ot-event-facts__label">Date</span><time datetime="{{ event.date }}">{{ event.longDate }}</time></span>
+              </li>
+              <li>
+                <span class="ot-event-facts__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+                <span><span class="ot-event-facts__label">Time</span><time datetime="{{ event.isoDateTime }}">{{ event.time }}</time></span>
+              </li>
+              <li>
+                <span class="ot-event-facts__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+                <span><span class="ot-event-facts__label">Venue</span>{{ event.venue }}</span>
+              </li>
+            </ul>
+          </header>
+
+          <!-- DESCRIPTION — live theme: render the organiser's description from the CMS here -->
+          <section class="ot-event-section" aria-labelledby="about-heading">
+            <div class="ot-event-section__head">
+              <h2 class="ot-event-section__title" id="about-heading">About this event</h2>
+              <span class="ot-sample-badge">Sample content</span>
+            </div>
+            <div class="ot-prose">
+              <p>This paragraph stands in for the event description. In the live theme the organiser’s description, line-up, age restrictions and venue notes appear here exactly as entered in the CMS.</p>
+              <p>Long descriptions keep a comfortable reading width, and headings, lists and links inside the description inherit these styles.</p>
+            </div>
+          </section>
+
+          <!--
+            TICKETS — booking entry point. Live theme: mount the existing ticket selector / booking component here
+            unchanged (same ids, wire: bindings and checkout route). The rows below are sample data styled with the
+            .ot-ticket-row / .ot-qty patterns; ot-event.js only updates the preview total.
+          -->
+          <section class="ot-event-section ot-tickets" id="tickets" aria-labelledby="tickets-heading">
+            <div class="ot-event-section__head">
+              <h2 class="ot-event-section__title" id="tickets-heading">Tickets</h2>
+              <span class="ot-sample-badge">Sample ticket data</span>
+            </div>
+            <ul class="ot-ticket-list">
+{{{ ticketRows }}}
+            </ul>
+            <div class="ot-tickets__footer">
+              <p class="ot-tickets__total">Total <output data-ot-total>R 0.00</output></p>
+              <button class="btn ot-btn ot-btn--primary" type="button" data-ot-checkout disabled aria-describedby="tickets-preview-note">
+                Continue to checkout<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </button>
+            </div>
+            <p class="ot-tickets__note" id="tickets-preview-note">Preview only: ticket types, prices and checkout come from the existing Open Tickets booking flow, which this refresh does not change.</p>
+          </section>
+
+          <section class="ot-event-section" aria-labelledby="good-to-know-heading">
+            <div class="ot-event-section__head">
+              <h2 class="ot-event-section__title" id="good-to-know-heading">Good to know</h2>
+            </div>
+            <ul class="ot-info-list">
+              <li>
+                <span class="ot-info-list__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg></span>
+                <p>You do not need printed tickets for any event purchased through us. You can download your tickets directly to your Apple or Google wallet or download as an HTML file.</p>
+              </li>
+              <li>
+                <span class="ot-info-list__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-support"></use></svg></span>
+                <p>Questions about this event? Visit the <a href="{{ routes.faq }}">FAQs</a> or <a href="{{ routes.support }}">chat with Support</a>.</p>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="col-lg-4 ot-booking-col" aria-label="Booking">
+          <div class="ot-booking-card" data-ot-booking-card>
+            <div class="ot-booking-card__stub" aria-hidden="true">
+              <span class="ot-booking-card__weekday">{{ event.weekdayShort }}</span>
+              <span class="ot-booking-card__day">{{ event.day }}</span>
+              <span class="ot-booking-card__month">{{ event.monthLabel }}</span>
+            </div>
+            <div class="ot-booking-card__body">
+              <p class="ot-booking-card__title">{{ event.title }}</p>
+              <ul class="ot-booking-card__facts">
+                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="{{ event.isoDateTime }}">{{ event.shortDate }} · {{ event.time }}</time></li>
+                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg>{{ event.venue }}</li>
+              </ul>
+              <!-- Booking entry point: live theme keeps its current "buy tickets" target here -->
+              <a class="btn ot-btn ot-btn--primary ot-btn--block" href="#tickets" data-ot-book>
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>Buy tickets
+              </a>
+              <p class="ot-booking-card__note"><svg class="ot-icon" aria-hidden="true"><use href="#i-wallet"></use></svg>Tickets go straight to your Apple or Google wallet</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Mobile booking bar — appears once the booking card scrolls out of view -->
+    <div class="ot-mobile-cta" data-ot-mobile-cta>
+      <div class="ot-mobile-cta__text">
+        <span class="ot-mobile-cta__title">{{ event.title }}</span>
+        <span class="ot-mobile-cta__meta">{{ event.shortDate }} · {{ event.time }}</span>
+      </div>
+      <a class="btn ot-btn ot-btn--primary" href="#tickets" data-ot-book>Buy tickets</a>
+    </div>
+
+{{> layout-end }}

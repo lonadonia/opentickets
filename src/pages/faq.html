@@ -1,0 +1,41 @@
+{{> layout-start }}
+
+    <div class="ot-container">
+      <!-- FAQ HERO — existing hero image and heading, re-composed as a split header -->
+      <section class="ot-page-hero ot-faq-hero" aria-labelledby="faq-heading">
+        <div class="ot-faq-hero__text">
+          <p class="ot-eyebrow">Help centre</p>
+          <h1 class="ot-page-hero__title" id="faq-heading">Frequently Asked Questions</h1>
+          <p class="ot-page-hero__lead">Choose a topic to see the questions and answers in it.</p>
+          <p class="ot-faq-hero__stat"><strong>{{ faqTotal }}</strong> answers across <strong>{{ faqTopics }}</strong> topics</p>
+        </div>
+        <figure class="ot-faq-hero__media">
+          <img src="{{ base }}assets/images/pages/hero-faqs.jpg" alt="" width="1210" height="450" fetchpriority="high">
+        </figure>
+      </section>
+
+      <!-- CATEGORIES — same five topics, question counts and destinations as the live FAQ index -->
+      <section class="ot-section ot-faq" aria-labelledby="faq-topics-heading">
+        <h2 class="visually-hidden" id="faq-topics-heading">FAQ topics</h2>
+        <ul class="row g-3 g-lg-4 list-unstyled ot-faq__grid">
+{{{ categories }}}
+        </ul>
+      </section>
+
+      <!-- SUPPORT — copy from the live Support page -->
+      <section class="ot-help-band" aria-labelledby="faq-help-heading">
+        <div class="ot-help-band__tip">
+          <span class="ot-help-band__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg></span>
+          <p>You do not need printed tickets for any event purchased through us. You can download your tickets directly to your Apple or Google wallet or download as an HTML file.</p>
+        </div>
+        <div class="ot-help-band__cta">
+          <h2 class="ot-help-band__title" id="faq-help-heading">Still need help?</h2>
+          <p>Ask our assistant about FAQs and upcoming events. If it cannot help, it will take a message for our support team.</p>
+          <a class="btn ot-btn ot-btn--primary" href="{{ routes.support }}">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg>Chat with Support
+          </a>
+        </div>
+      </section>
+    </div>
+
+{{> layout-end }}

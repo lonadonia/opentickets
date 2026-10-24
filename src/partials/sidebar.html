@@ -1,0 +1,66 @@
+<!--
+  SIDEBAR — one markup for both layouts (Bootstrap 5 responsive offcanvas):
+  >= 768px it is the fixed icon rail under the header; < 768px it opens as an off-canvas menu from #sidebarToggleTop.
+  Same items and destinations as the live sidebar, including the mobile-only "Search" link.
+-->
+<nav class="ot-rail offcanvas-md offcanvas-start" id="accordionSidebar" tabindex="-1" aria-label="Main">
+  <div class="offcanvas-header ot-rail__offcanvas-header">
+    <img class="ot-brand__logo" src="{{ base }}assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150">
+    <button type="button" class="ot-icon-btn" data-bs-dismiss="offcanvas" data-bs-target="#accordionSidebar" aria-label="Close menu">
+      <svg class="ot-icon" aria-hidden="true"><use href="#i-close"></use></svg>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="ot-rail__panel">
+      <ul class="ot-rail__list">
+        <li class="d-md-none">
+          <a class="ot-rail__link{{ activeClass.search }}" href="{{ routes.search }}" {{{ current.search }}}>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-search"></use></svg><span>Search</span>
+          </a>
+        </li>
+        <li>
+          <a class="ot-rail__link{{ activeClass.events }}" href="{{ routes.home }}" {{{ current.events }}}>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-events"></use></svg><span>Events</span>
+          </a>
+        </li>
+        <li>
+          <a class="ot-rail__link{{ activeClass.faq }}" href="{{ routes.faq }}" {{{ current.faq }}}>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-faq"></use></svg><span>FAQs</span>
+          </a>
+        </li>
+        <li>
+          <a class="ot-rail__link" href="{{ routes.support }}">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-support"></use></svg><span>Support</span>
+          </a>
+        </li>
+        <li>
+          <a class="ot-rail__link" href="{{ routes.account }}">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-account"></use></svg><span>My account</span>
+          </a>
+        </li>
+      </ul>
+
+      <p class="ot-rail__heading">Content</p>
+      <ul class="ot-rail__list">
+        <li>
+          <button class="ot-rail__link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ot-rail-pages"
+                  aria-expanded="false" aria-controls="ot-rail-pages">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-pages"></use></svg><span>Pages</span>
+            <svg class="ot-icon ot-rail__caret" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+          </button>
+          <div class="collapse" id="ot-rail-pages">
+            <ul class="ot-rail__sub">
+              <li><a href="{{ routes.privacy }}">Privacy</a></li>
+              <li><a href="{{ routes.terms }}">Terms</a></li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a class="ot-rail__link" href="{{ routes.customers }}">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-customers"></use></svg><span>Customers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

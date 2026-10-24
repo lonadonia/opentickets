@@ -1,0 +1,15 @@
+{
+  "name": "opentickets-visual-refresh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Open Tickets visual refresh: Home, FAQs, Event detail and Search results as Bootstrap 5 + vanilla JS templates, with the existing Isotope integration preserved.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "serve": "node tools/serve.mjs 8080",
+    "qa": "node tools/qa.cjs"
+  }
+}

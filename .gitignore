@@ -1,0 +1,18 @@
+# Dependencies and caches
+node_modules/
+.npm/
+
+# QA output (regenerate with `npm run qa`)
+qa-output/
+
+# Environment and platform files
+.env
+.env.*
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

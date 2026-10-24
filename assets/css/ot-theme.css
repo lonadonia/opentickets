@@ -1,0 +1,2150 @@
+/*
+ * Open Tickets — visual refresh theme (Bootstrap 5 companion stylesheet)
+ * ---------------------------------------------------------------
+ * Load order: bootstrap.min.css → ot-fonts.css → ot-tokens.css → ot-theme.css
+ * All values come from ot-tokens.css. Legacy hooks kept for the live theme:
+ * #events-grid, .grid-item, .e-card, .m-card-cover, .navbar-search, #nav-search-input,
+ * #sidebarToggleTop, #accordionSidebar, .scroll-to-top, .osahan-slider-item.
+ *
+ *  1. Base            6. Section + event card (ticket)   11. Event detail
+ *  2. Header          7. Empty state                     12. Booking card + mobile bar
+ *  3. Rail / menu     8. Buttons                         13. Footer
+ *  4. Shell           9. FAQ                             14. Floating actions
+ *  5. Featured hero  10. Search                          15. Utilities + motion
+ */
+
+/* 1. Base ------------------------------------------------------------- */
+html {
+  scroll-padding-top: calc(var(--ot-header-h) + 1rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--ot-font-sans);
+  font-size: var(--ot-text-md);
+  line-height: 1.6;
+  color: var(--ot-text);
+  background-color: var(--ot-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--ot-ink);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: var(--ot-primary-600);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ot-focus);
+  outline-offset: 2px;
+}
+
+.ot-icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  vertical-align: -0.25em;
+}
+
+.ot-skip-link {
+  position: fixed;
+  top: -4rem;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.75rem 1rem;
+  border-radius: var(--ot-radius-sm);
+  background: var(--ot-surface);
+  color: var(--ot-ink);
+  font-weight: 600;
+  box-shadow: var(--ot-shadow-lg);
+  transition: top var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-skip-link:focus {
+  top: 1rem;
+}
+
+/* 2. Header (fixed, shrinks on scroll) -------------------------------- */
+.ot-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1030;
+  height: var(--ot-header-h);
+  background-color: var(--ot-navy-800);
+  border-bottom: 1px solid var(--ot-navy-line);
+  transition:
+    height var(--ot-dur) var(--ot-ease),
+    background-color var(--ot-dur) var(--ot-ease),
+    box-shadow var(--ot-dur) var(--ot-ease);
+}
+
+.ot-header.is-condensed {
+  height: var(--ot-header-h-condensed);
+  background-color: rgba(23, 28, 40, 0.94);
+  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.7);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .ot-header.is-condensed {
+    background-color: rgba(23, 28, 40, 0.86);
+    backdrop-filter: saturate(140%) blur(14px);
+  }
+}
+
+.ot-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  padding-inline: 0.5rem 0.75rem;
+}
+
+.ot-brand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-inline: 0.25rem;
+}
+
+.ot-brand__logo {
+  display: block;
+  width: auto;
+  height: 2.25rem;
+  transition: height var(--ot-dur) var(--ot-ease);
+}
+
+.ot-header.is-condensed .ot-brand__logo {
+  height: 1.875rem;
+}
+
+.ot-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ot-on-dark);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--ot-on-dark);
+}
+
+/* Topbar search — the Isotope filter control */
+.ot-nav-search {
+  position: relative;
+  flex: 1 1 auto;
+  align-items: center;
+  max-width: 30rem;
+  margin: 0;
+}
+
+.ot-nav-search .form-control {
+  height: 2.75rem;
+  padding: 0 3.25rem 0 1.125rem;
+  border: 1px solid transparent;
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
+  color: var(--ot-ink);
+  font-size: 0.9375rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 1px 2px rgba(20, 26, 40, 0.08);
+  transition: height var(--ot-dur) var(--ot-ease), box-shadow var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-nav-search .form-control::placeholder {
+  color: var(--ot-muted);
+}
+
+.ot-nav-search .form-control:focus {
+  border-color: var(--ot-primary-400);
+  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.35);
+}
+
+.ot-header.is-condensed .ot-nav-search .form-control {
+  height: 2.375rem;
+}
+
+.ot-nav-search__btn {
+  position: absolute;
+  top: 50%;
+  right: 0.3125rem;
+  display: grid;
+  place-items: center;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--ot-primary-600);
+  color: #fff;
+  transform: translateY(-50%);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease), width var(--ot-dur) var(--ot-ease), height var(--ot-dur) var(--ot-ease);
+}
+
+.ot-nav-search__btn .ot-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.ot-nav-search__btn:hover {
+  background-color: var(--ot-primary-700);
+}
+
+.ot-header.is-condensed .ot-nav-search__btn {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.ot-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.ot-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: var(--ot-radius-pill);
+  background: transparent;
+  color: var(--ot-on-dark-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--ot-dur-fast) var(--ot-ease), background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-lang-btn:hover,
+.ot-lang-btn[aria-expanded="true"] {
+  color: var(--ot-on-dark);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.ot-lang-btn .ot-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.ot-dropdown {
+  --bs-dropdown-padding-x: 0.375rem;
+  --bs-dropdown-padding-y: 0.375rem;
+  --bs-dropdown-font-size: 0.9375rem;
+  --bs-dropdown-border-color: var(--ot-line);
+  --bs-dropdown-border-radius: var(--ot-radius-md);
+  --bs-dropdown-inner-border-radius: var(--ot-radius-sm);
+  --bs-dropdown-box-shadow: var(--ot-shadow-lg);
+  --bs-dropdown-link-color: var(--ot-text);
+  --bs-dropdown-link-hover-bg: var(--ot-canvas);
+  --bs-dropdown-link-active-bg: var(--ot-primary-600);
+  --bs-dropdown-item-padding-y: 0.5rem;
+  --bs-dropdown-item-border-radius: var(--ot-radius-sm);
+  min-width: 11rem;
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
+
+@media (min-width: 576px) {
+  .ot-header__inner {
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .ot-header__inner {
+    gap: 1.25rem;
+    padding-inline: 0 1.25rem;
+  }
+
+  /* The logo cell sits exactly above the rail, so the search keeps its place right of it */
+  .ot-brand {
+    width: var(--ot-rail-w);
+  }
+}
+
+/* 3. Rail (>= 768px) / off-canvas menu (< 768px) ---------------------- */
+.ot-rail__panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ot-rail__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-rail__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ot-on-dark-muted);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--ot-dur-fast) var(--ot-ease), background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-rail__link:hover,
+.ot-rail__link:focus-visible {
+  color: var(--ot-on-dark);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.ot-rail__link.active {
+  color: var(--ot-on-dark);
+  background-color: rgba(78, 115, 223, 0.2);
+}
+
+.ot-rail__link.active .ot-icon {
+  color: var(--ot-primary-300);
+}
+
+.ot-rail__link.active::before {
+  content: "";
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: -0.5rem;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background-color: var(--ot-primary-500);
+}
+
+.ot-rail__heading {
+  margin: 1rem 0 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ot-navy-line);
+  color: var(--ot-on-dark-muted);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ot-rail__caret {
+  transition: transform var(--ot-dur) var(--ot-ease);
+}
+
+.ot-rail__link[aria-expanded="true"] .ot-rail__caret {
+  transform: rotate(180deg);
+}
+
+.ot-rail__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+}
+
+.ot-rail__sub a {
+  display: block;
+  border-radius: var(--ot-radius-sm);
+  color: var(--ot-on-dark-muted);
+  text-decoration: none;
+}
+
+.ot-rail__sub a:hover {
+  color: var(--ot-on-dark);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+  .ot-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1020;
+    width: var(--ot-rail-w);
+  }
+
+  .ot-rail .offcanvas-body {
+    height: 100%;
+  }
+
+  .ot-rail__panel {
+    height: 100%;
+    padding: calc(var(--ot-header-h) + 0.75rem) 0.5rem 1rem;
+    overflow-y: auto;
+    background-color: var(--ot-navy-800);
+    border-right: 1px solid var(--ot-navy-line);
+    scrollbar-width: none;
+  }
+
+  .ot-rail__link {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.75rem 0.25rem;
+    border-radius: var(--ot-radius-md);
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ot-rail__link .ot-icon {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+
+  .ot-rail__heading {
+    text-align: center;
+  }
+
+  .ot-rail__caret {
+    display: none;
+  }
+
+  .ot-rail__sub a {
+    padding: 0.375rem 0.25rem;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ot-rail {
+    --bs-offcanvas-width: min(20rem, 86vw);
+    --bs-offcanvas-bg: var(--ot-navy-800);
+    --bs-offcanvas-color: var(--ot-on-dark);
+    --bs-offcanvas-border-width: 0;
+  }
+
+  .ot-rail__offcanvas-header {
+    justify-content: space-between;
+    padding: 1rem 0.75rem 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--ot-navy-line);
+  }
+
+  .ot-rail__offcanvas-header .ot-brand__logo {
+    height: 2.25rem;
+  }
+
+  .ot-rail .offcanvas-body {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  .ot-rail__link {
+    gap: 0.875rem;
+    min-height: 3rem;
+    padding: 0.625rem 1rem;
+    border-radius: var(--ot-radius-sm);
+    font-size: 0.9375rem;
+    text-align: left;
+  }
+
+  .ot-rail__link.active::before {
+    left: 0;
+  }
+
+  .ot-rail__caret {
+    margin-left: auto;
+  }
+
+  .ot-rail__heading {
+    padding-left: 1rem;
+  }
+
+  .ot-rail__sub a {
+    padding: 0.625rem 1rem 0.625rem 3.125rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* 4. Shell ------------------------------------------------------------ */
+.ot-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: var(--ot-header-h);
+  overflow-x: clip;
+}
+
+@media (min-width: 768px) {
+  .ot-shell {
+    margin-left: var(--ot-rail-w);
+  }
+}
+
+.ot-main {
+  flex: 1 0 auto;
+}
+
+.ot-main:focus {
+  outline: none;
+}
+
+.ot-container {
+  width: 100%;
+  max-width: var(--ot-container);
+  margin-inline: auto;
+  padding-inline: var(--ot-gutter);
+}
+
+/* Shared "fit" media: shows the organiser's artwork whole, with a soft blurred fill instead of letterbox bars */
+.ot-card__cover,
+.ot-hero__media,
+.ot-event-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--ot-navy-700);
+}
+
+.ot-card__cover::before,
+.ot-hero__media::before,
+.ot-event-banner::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  z-index: -1;
+  opacity: 0;
+  background: var(--ot-cover, none) center / cover no-repeat;
+  filter: blur(20px) saturate(1.15) brightness(0.8);
+  transition: opacity var(--ot-dur) var(--ot-ease);
+}
+
+.ot-card__cover.is-loaded::before,
+.ot-hero__media.is-loaded::before,
+.ot-event-banner.is-loaded::before {
+  opacity: 1;
+}
+
+.ot-card__cover > img,
+.ot-hero__media > img,
+.ot-event-banner > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 5. Featured hero ---------------------------------------------------- */
+.ot-hero-collapse {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--ot-dur-slow) var(--ot-ease),
+    opacity var(--ot-dur-slow) var(--ot-ease);
+}
+
+.ot-hero-collapse.is-collapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.ot-hero-collapse__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ot-hero {
+  padding: clamp(1rem, 0.5rem + 1.5vw, 2rem) 0 clamp(1.25rem, 1rem + 1vw, 2rem);
+  color: var(--ot-on-dark-muted);
+  background:
+    radial-gradient(70% 90% at 50% 0%, rgba(78, 115, 223, 0.16), transparent 70%),
+    linear-gradient(180deg, var(--ot-navy-800) 0%, var(--ot-navy-900) 100%);
+}
+
+.ot-hero__viewport {
+  --peek: clamp(1rem, 7vw, 7.5rem);
+  --slide-max: 78rem;
+  position: relative;
+  container-type: inline-size;
+}
+
+/* Side padding = the peek, widened on very large screens so slides never exceed --slide-max and stay centred */
+.ot-hero__track,
+.ot-hero__arrow {
+  --pad: var(--peek);
+}
+
+@supports (width: 1cqw) {
+  .ot-hero__track,
+  .ot-hero__arrow {
+    --pad: max(var(--peek), (100cqw - var(--slide-max)) / 2);
+  }
+}
+
+.ot-hero__track {
+  display: flex;
+  gap: clamp(0.5rem, 0.25rem + 1vw, 1.25rem);
+  position: relative;
+  margin: 0;
+  padding: 0 var(--pad);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ot-hero__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ot-hero__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  opacity: 0.4;
+  transform: scale(0.97);
+  transition: opacity var(--ot-dur) var(--ot-ease), transform var(--ot-dur) var(--ot-ease);
+}
+
+.ot-hero__slide.is-active,
+.ot-hero:not(.is-ready) .ot-hero__slide:first-child {
+  opacity: 1;
+  transform: none;
+}
+
+.ot-hero__media {
+  display: block;
+  aspect-ratio: 1210 / 450;
+  border-radius: var(--ot-radius-lg);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.75);
+  -webkit-user-drag: none;
+}
+
+.ot-hero__caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 0.25rem 0;
+  transition: opacity var(--ot-dur) var(--ot-ease);
+}
+
+.ot-hero__slide:not(.is-active) .ot-hero__caption {
+  opacity: 0;
+}
+
+.ot-hero:not(.is-ready) .ot-hero__slide:first-child .ot-hero__caption {
+  opacity: 1;
+}
+
+.ot-hero__caption-text {
+  min-width: 0;
+}
+
+.ot-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 0 0.375rem;
+  color: var(--ot-gold-400);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ot-hero__eyebrow .ot-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ot-hero__title {
+  margin: 0 0 0.375rem;
+  color: var(--ot-on-dark);
+  font-size: var(--ot-text-xl);
+  line-height: 1.25;
+}
+
+.ot-hero__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ot-hero__title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.ot-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.ot-hero__meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ot-hero__meta .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ot-primary-300);
+}
+
+.ot-hero__cta {
+  flex: 0 0 auto;
+}
+
+.ot-hero__arrow {
+  position: absolute;
+  top: 40%;
+  top: calc((100cqw - 2 * var(--pad)) / 2.689 / 2);
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background-color: rgba(18, 22, 33, 0.55);
+  color: #fff;
+  transform: translateY(-50%);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease), color var(--ot-dur-fast) var(--ot-ease);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .ot-hero__arrow {
+    backdrop-filter: blur(8px);
+  }
+}
+
+.ot-hero__arrow:hover {
+  background-color: #fff;
+  color: var(--ot-navy-800);
+}
+
+.ot-hero__arrow--prev {
+  left: calc(var(--pad) - 1.5rem);
+}
+
+.ot-hero__arrow--next {
+  right: calc(var(--pad) - 1.5rem);
+}
+
+.ot-hero__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-inline: var(--ot-gutter);
+}
+
+.ot-hero__toggle {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ot-on-dark-muted);
+}
+
+.ot-hero__toggle:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.ot-hero__toggle .ot-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.ot-hero__toggle-play,
+.ot-hero__toggle[aria-pressed="true"] .ot-hero__toggle-pause {
+  display: none;
+}
+
+.ot-hero__toggle[aria-pressed="true"] .ot-hero__toggle-play {
+  display: block;
+}
+
+.ot-hero__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-hero__dot {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.ot-hero__dot::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--ot-radius-pill);
+  background-color: rgba(255, 255, 255, 0.35);
+  transition: width var(--ot-dur) var(--ot-ease), background-color var(--ot-dur) var(--ot-ease);
+}
+
+.ot-hero__dot:hover::before {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.ot-hero__dot[aria-current="true"]::before {
+  width: 1.375rem;
+  background-color: var(--ot-primary-300);
+}
+
+@media (min-width: 768px) {
+  .ot-hero__arrow {
+    display: grid;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ot-hero__caption {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ot-hero__title {
+    font-size: 1.125rem;
+  }
+}
+
+/* 6. Section + event card (ticket) ------------------------------------ */
+.ot-section {
+  padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.ot-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ot-section__title {
+  position: relative;
+  margin: 0;
+  padding-left: 0.875rem;
+  font-size: var(--ot-text-2xl);
+  line-height: 1.2;
+}
+
+.ot-section__title::before {
+  content: "";
+  position: absolute;
+  top: 0.18em;
+  bottom: 0.18em;
+  left: 0;
+  width: 4px;
+  border-radius: 2px;
+  background-color: var(--ot-accent-500);
+}
+
+.ot-section__meta {
+  margin: 0;
+  color: var(--ot-muted);
+  font-size: 0.9375rem;
+}
+
+.ot-card {
+  --bs-card-bg: transparent;
+  --bs-card-border-width: 0;
+  --bs-card-border-radius: var(--ot-radius-md);
+  --bs-card-spacer-x: 0;
+  --bs-card-spacer-y: 0;
+  height: 100%;
+  filter: drop-shadow(0 1px 1px rgba(20, 26, 40, 0.06)) drop-shadow(0 10px 14px rgba(20, 26, 40, 0.09));
+  transition: transform var(--ot-dur) var(--ot-ease), filter var(--ot-dur) var(--ot-ease);
+}
+
+.ot-card:hover,
+.ot-card:focus-within {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 2px 2px rgba(20, 26, 40, 0.06)) drop-shadow(0 18px 22px rgba(20, 26, 40, 0.16));
+}
+
+.ot-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--ot-radius-md);
+  color: inherit;
+  text-decoration: none;
+}
+
+.ot-card__link:focus-visible {
+  outline-offset: 4px;
+}
+
+.ot-card__cover {
+  aspect-ratio: 1210 / 450;
+  border-radius: var(--ot-radius-md) var(--ot-radius-md) 0 0;
+  -webkit-mask:
+    radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+.ot-card__cover > img {
+  border-radius: 0;
+  transition: transform 600ms var(--ot-ease);
+}
+
+.ot-card:hover .ot-card__cover > img {
+  transform: scale(1.03);
+}
+
+.ot-card__body {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  border-radius: 0 0 var(--ot-radius-md) var(--ot-radius-md);
+  background-color: var(--ot-surface);
+  -webkit-mask:
+    radial-gradient(circle var(--ot-notch) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 0, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--ot-notch) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 0, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+.ot-card__stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.25rem;
+  background: linear-gradient(var(--ot-line-strong) 55%, transparent 0) right top / 1.5px 8px repeat-y;
+  text-align: center;
+}
+
+.ot-card__day {
+  color: var(--ot-accent-600);
+  font-family: var(--ot-font-display);
+  font-size: 2.125rem;
+  font-weight: 700;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-card__month {
+  margin-top: 0.25rem;
+  color: var(--ot-muted);
+  font-family: var(--ot-font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ot-card__info {
+  min-width: 0;
+  padding: 1rem 1.125rem 1.125rem 1rem;
+}
+
+.ot-card__title {
+  display: -webkit-box;
+  min-height: calc(2 * 1.35em);
+  margin: 0 0 0.5rem;
+  overflow: hidden;
+  color: var(--ot-ink);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  transition: color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-card:hover .ot-card__title {
+  color: var(--ot-primary-600);
+}
+
+.ot-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+  color: var(--ot-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.ot-card__meta + .ot-card__meta {
+  margin-top: 0.125rem;
+}
+
+.ot-card__meta > span,
+.ot-card__meta > time {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ot-card__meta .ot-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: var(--ot-subtle);
+}
+
+/* Isotope keeps the row height; give it room for the hover lift */
+#events-grid {
+  margin-top: -0.25rem;
+  padding-top: 0.25rem;
+}
+
+/* 7. Empty state ------------------------------------------------------ */
+.ot-empty {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 1rem;
+  text-align: center;
+}
+
+.ot-empty[hidden] {
+  display: none;
+}
+
+.ot-empty__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: var(--ot-primary-50);
+  color: var(--ot-primary-600);
+}
+
+.ot-empty__icon .ot-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.ot-empty__title {
+  margin-bottom: 0.5rem;
+  font-size: var(--ot-text-xl);
+  overflow-wrap: anywhere;
+}
+
+.ot-empty__text {
+  margin-bottom: 1.25rem;
+  color: var(--ot-muted);
+}
+
+/* 8. Buttons ---------------------------------------------------------- */
+.ot-btn {
+  --bs-btn-padding-y: 0.6875rem;
+  --bs-btn-padding-x: 1.375rem;
+  --bs-btn-font-size: 0.9375rem;
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: var(--ot-radius-pill);
+  --bs-btn-focus-shadow-rgb: 78, 115, 223;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.ot-btn .ot-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: transform var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-btn:hover .ot-icon:last-child:not(:first-child) {
+  transform: translateX(3px);
+}
+
+.ot-btn--primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--ot-primary-600);
+  --bs-btn-border-color: var(--ot-primary-600);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--ot-primary-700);
+  --bs-btn-hover-border-color: var(--ot-primary-700);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--ot-primary-700);
+  --bs-btn-active-border-color: var(--ot-primary-700);
+  --bs-btn-disabled-color: var(--ot-muted);
+  --bs-btn-disabled-bg: var(--ot-line);
+  --bs-btn-disabled-border-color: var(--ot-line);
+  --bs-btn-disabled-opacity: 1;
+  box-shadow: 0 10px 20px -12px rgba(58, 95, 212, 0.8);
+}
+
+.ot-btn--primary:disabled {
+  box-shadow: none;
+}
+
+.ot-btn--ghost {
+  --bs-btn-color: var(--ot-primary-600);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--ot-line-strong);
+  --bs-btn-hover-color: var(--ot-primary-700);
+  --bs-btn-hover-bg: var(--ot-primary-50);
+  --bs-btn-hover-border-color: var(--ot-primary-400);
+  --bs-btn-active-color: var(--ot-primary-700);
+  --bs-btn-active-bg: var(--ot-primary-50);
+  --bs-btn-active-border-color: var(--ot-primary-400);
+}
+
+.ot-btn--block {
+  width: 100%;
+}
+
+/* 9. FAQ -------------------------------------------------------------- */
+.ot-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 0.75rem;
+  color: var(--ot-primary-600);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ot-eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--ot-accent-500);
+}
+
+.ot-page-hero__title {
+  margin: 0 0 0.75rem;
+  font-size: var(--ot-text-3xl);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  overflow-wrap: break-word;
+}
+
+.ot-page-hero__lead {
+  max-width: 44ch;
+  margin-bottom: 1.25rem;
+  color: var(--ot-muted);
+  font-size: var(--ot-text-lg);
+}
+
+.ot-faq-hero {
+  display: grid;
+  gap: 1.5rem 3rem;
+  align-items: center;
+  padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) 0.5rem;
+}
+
+.ot-faq-hero__media {
+  order: -1;
+  margin: 0;
+  aspect-ratio: 1210 / 450;
+  overflow: hidden;
+  border-radius: var(--ot-radius-lg);
+  box-shadow: var(--ot-shadow-lg);
+}
+
+.ot-faq-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ot-faq-hero__stat {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
+  color: var(--ot-muted);
+  font-size: 0.875rem;
+}
+
+.ot-faq-hero__stat strong {
+  color: var(--ot-ink);
+}
+
+@media (min-width: 992px) {
+  .ot-faq-hero {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .ot-faq-hero__media {
+    order: 0;
+  }
+}
+
+.ot-faq {
+  padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+}
+
+.ot-faq__grid {
+  margin-bottom: 0;
+}
+
+.ot-faq-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-surface);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--ot-shadow-sm);
+  transition:
+    transform var(--ot-dur) var(--ot-ease),
+    box-shadow var(--ot-dur) var(--ot-ease),
+    border-color var(--ot-dur) var(--ot-ease);
+}
+
+.ot-faq-card:hover,
+.ot-faq-card:focus-visible {
+  border-color: transparent;
+  box-shadow: var(--ot-shadow-md);
+  transform: translateY(-3px);
+}
+
+.ot-faq-card__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background-color: var(--ot-primary-50);
+  color: var(--ot-primary-600);
+  transition: background-color var(--ot-dur) var(--ot-ease), color var(--ot-dur) var(--ot-ease);
+}
+
+.ot-faq-card__icon .ot-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.ot-faq-card:hover .ot-faq-card__icon {
+  background-color: var(--ot-primary-600);
+  color: #fff;
+}
+
+.ot-faq-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ot-faq-card__title {
+  color: var(--ot-ink);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ot-faq-card__count {
+  margin-top: 0.25rem;
+  color: var(--ot-muted);
+  font-size: 0.875rem;
+}
+
+.ot-faq-card__arrow {
+  color: var(--ot-subtle);
+  transition: transform var(--ot-dur) var(--ot-ease), color var(--ot-dur) var(--ot-ease);
+}
+
+.ot-faq-card:hover .ot-faq-card__arrow {
+  color: var(--ot-primary-600);
+  transform: translateX(4px);
+}
+
+@media (min-width: 992px) {
+  .ot-faq-card {
+    padding: 1.5rem;
+  }
+}
+
+.ot-help-band {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.ot-help-band__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--ot-line-strong);
+  border-radius: var(--ot-radius-lg);
+  background-color: var(--ot-surface);
+}
+
+.ot-help-band__tip p {
+  margin: 0;
+}
+
+.ot-help-band__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background-color: var(--ot-accent-50);
+  color: var(--ot-accent-600);
+}
+
+.ot-help-band__cta {
+  padding: 1.75rem;
+  border-radius: var(--ot-radius-lg);
+  color: var(--ot-on-dark-muted);
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 60%),
+    var(--ot-navy-800);
+}
+
+.ot-help-band__title {
+  margin-bottom: 0.5rem;
+  color: var(--ot-on-dark);
+  font-size: var(--ot-text-xl);
+}
+
+.ot-help-band__cta p {
+  max-width: 52ch;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .ot-help-band {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .ot-help-band__tip {
+    align-self: stretch;
+    align-items: center;
+  }
+}
+
+/* 10. Search ---------------------------------------------------------- */
+.ot-breadcrumb ol {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.375rem;
+  min-width: 0;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  color: var(--ot-muted);
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.ot-breadcrumb li {
+  flex: 0 0 auto;
+}
+
+.ot-breadcrumb li:last-child {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ot-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ot-breadcrumb li + li::before {
+  content: "/";
+  margin-right: 0.375rem;
+  color: var(--ot-subtle);
+}
+
+.ot-breadcrumb a {
+  color: var(--ot-muted);
+  text-decoration: none;
+}
+
+.ot-breadcrumb a:hover {
+  color: var(--ot-primary-600);
+  text-decoration: underline;
+}
+
+.ot-search-head {
+  padding-top: clamp(1rem, 0.75rem + 1vw, 1.75rem);
+}
+
+.ot-search-head .ot-page-hero__title {
+  margin-bottom: 0.375rem;
+}
+
+.ot-search-form {
+  position: relative;
+  display: flex;
+  gap: 0.375rem;
+  max-width: 40rem;
+  margin-top: 1.25rem;
+  padding: 0.375rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
+  box-shadow: var(--ot-shadow-sm);
+  transition: box-shadow var(--ot-dur-fast) var(--ot-ease), border-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-search-form:focus-within {
+  border-color: var(--ot-primary-400);
+  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.3);
+}
+
+.ot-search-form__icon {
+  position: absolute;
+  top: 50%;
+  left: 1.125rem;
+  color: var(--ot-subtle);
+  transform: translateY(-50%);
+}
+
+.ot-search-form .form-control {
+  min-width: 0;
+  padding-left: 2.625rem;
+  border: 0;
+  border-radius: var(--ot-radius-pill);
+  background: transparent;
+  color: var(--ot-ink);
+  box-shadow: none;
+}
+
+.ot-search-form .form-control:focus {
+  box-shadow: none;
+}
+
+.ot-search-form .form-control:focus-visible {
+  outline: none;
+}
+
+.ot-search-results {
+  padding-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+}
+
+/* 11. Event detail ---------------------------------------------------- */
+.ot-event-banner {
+  margin: 1rem 0 0;
+  aspect-ratio: 1210 / 450;
+  border-radius: var(--ot-radius-lg);
+  box-shadow: var(--ot-shadow-lg);
+}
+
+.ot-event-layout {
+  margin-top: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+  padding-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.ot-event-head__title {
+  margin-bottom: 1.25rem;
+  font-size: var(--ot-text-3xl);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+.ot-event-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-event-facts li {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-surface);
+  color: var(--ot-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ot-event-facts__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--ot-primary-50);
+  color: var(--ot-primary-600);
+}
+
+.ot-event-facts__label {
+  display: block;
+  margin-bottom: 0.125rem;
+  color: var(--ot-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ot-event-section {
+  margin-top: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+}
+
+.ot-event-section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ot-event-section__title {
+  margin: 0;
+  font-size: var(--ot-text-xl);
+}
+
+.ot-sample-badge {
+  padding: 0.25rem 0.625rem;
+  border: 1px dashed #e2bf62;
+  border-radius: var(--ot-radius-pill);
+  background-color: #fff7e2;
+  color: #7a4f00;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ot-prose {
+  max-width: 68ch;
+  line-height: 1.75;
+}
+
+.ot-prose > :last-child {
+  margin-bottom: 0;
+}
+
+.ot-ticket-list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-surface);
+  list-style: none;
+}
+
+.ot-ticket-row {
+  display: grid;
+  grid-template-areas: "info price qty";
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.ot-ticket-row + .ot-ticket-row {
+  border-top: 1px solid var(--ot-line);
+}
+
+.ot-ticket-row__info {
+  grid-area: info;
+  min-width: 0;
+}
+
+.ot-ticket-row__name {
+  margin: 0;
+  color: var(--ot-ink);
+  font-weight: 600;
+}
+
+.ot-ticket-row__note {
+  margin: 0;
+  color: var(--ot-muted);
+  font-size: 0.8125rem;
+}
+
+.ot-ticket-row__price {
+  grid-area: price;
+  margin: 0;
+  color: var(--ot-ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-qty {
+  display: inline-flex;
+  grid-area: qty;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-pill);
+}
+
+.ot-qty__btn {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--ot-primary-50);
+  color: var(--ot-primary-600);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease), color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-qty__btn:hover:not(:disabled) {
+  background-color: var(--ot-primary-600);
+  color: #fff;
+}
+
+.ot-qty__btn:disabled {
+  background-color: var(--ot-canvas);
+  color: var(--ot-subtle);
+}
+
+.ot-qty__value {
+  min-width: 1.75rem;
+  color: var(--ot-ink);
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-tickets__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  margin-top: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-navy-800);
+  color: var(--ot-on-dark-muted);
+}
+
+.ot-tickets__total {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.ot-tickets__total output {
+  color: var(--ot-on-dark);
+  font-size: 1.375rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-tickets__footer .ot-btn:disabled {
+  --bs-btn-disabled-bg: var(--ot-navy-700);
+  --bs-btn-disabled-border-color: var(--ot-navy-700);
+  --bs-btn-disabled-color: var(--ot-on-dark-muted);
+}
+
+.ot-tickets__note {
+  margin: 0.75rem 0 0;
+  color: var(--ot-muted);
+  font-size: 0.8125rem;
+}
+
+.ot-info-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-surface);
+}
+
+.ot-info-list p {
+  margin: 0.375rem 0 0;
+}
+
+.ot-info-list__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--ot-canvas);
+  color: var(--ot-primary-600);
+}
+
+@media (max-width: 575.98px) {
+  .ot-ticket-row {
+    grid-template-areas:
+      "info qty"
+      "price qty";
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 1rem;
+  }
+
+  .ot-tickets__footer .ot-btn {
+    width: 100%;
+  }
+}
+
+/* 12. Booking card (ticket) + mobile booking bar ---------------------- */
+.ot-booking-card {
+  --stub: 5.75rem;
+  position: sticky;
+  top: calc(var(--ot-header-h) + 1.25rem);
+  display: none;
+  grid-template-columns: var(--stub) minmax(0, 1fr);
+  border-radius: var(--ot-radius-lg);
+  color: var(--ot-on-dark-muted);
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 70%),
+    var(--ot-navy-800);
+  -webkit-mask:
+    radial-gradient(circle 0.75rem at var(--stub) 0, #0000 98%, #000),
+    radial-gradient(circle 0.75rem at var(--stub) 100%, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle 0.75rem at var(--stub) 0, #0000 98%, #000),
+    radial-gradient(circle 0.75rem at var(--stub) 100%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+.ot-booking-col {
+  filter: drop-shadow(0 22px 26px rgba(20, 26, 40, 0.22));
+}
+
+.ot-booking-card__stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.28) 55%, transparent 0) right top / 1.5px 9px repeat-y;
+  text-align: center;
+}
+
+.ot-booking-card__weekday,
+.ot-booking-card__month {
+  font-family: var(--ot-font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ot-booking-card__month {
+  color: var(--ot-gold-400);
+}
+
+.ot-booking-card__day {
+  margin-block: 0.125rem;
+  color: var(--ot-on-dark);
+  font-family: var(--ot-font-display);
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.ot-booking-card__body {
+  min-width: 0;
+  padding: 1.5rem 1.5rem 1.375rem 1.375rem;
+}
+
+.ot-booking-card__title {
+  margin-bottom: 0.75rem;
+  color: var(--ot-on-dark);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ot-booking-card__facts {
+  display: grid;
+  gap: 0.375rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.ot-booking-card__facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ot-booking-card__facts .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  color: var(--ot-primary-300);
+}
+
+.ot-booking-card__note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.875rem 0 0;
+  font-size: 0.8125rem;
+}
+
+.ot-booking-card__note .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ot-gold-400);
+}
+
+@media (min-width: 992px) {
+  .ot-booking-card {
+    display: grid;
+  }
+}
+
+.ot-mobile-cta {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1025;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--ot-navy-line);
+  background-color: rgba(23, 28, 40, 0.97);
+  color: var(--ot-on-dark-muted);
+  transform: translateY(0);
+  transition: transform var(--ot-dur) var(--ot-ease);
+}
+
+.ot-mobile-cta.is-hidden {
+  transform: translateY(110%);
+}
+
+.ot-mobile-cta__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.ot-mobile-cta__title {
+  overflow: hidden;
+  color: var(--ot-on-dark);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ot-mobile-cta__meta {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 992px) {
+  .ot-mobile-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .ot-page-event .ot-shell {
+    padding-bottom: 4.5rem;
+  }
+
+  .ot-page-event .ot-fab-stack {
+    bottom: 5.25rem;
+  }
+}
+
+/* 13. Footer ---------------------------------------------------------- */
+.ot-footer {
+  margin-top: auto;
+  padding: clamp(2.5rem, 2rem + 2vw, 3.5rem) 0 1.5rem;
+  background-color: var(--ot-navy-800);
+  color: var(--ot-on-dark-muted);
+}
+
+.ot-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.ot-footer__brand {
+  grid-column: 1 / -1;
+}
+
+.ot-footer__logo {
+  display: block;
+  width: auto;
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ot-footer__title {
+  margin-bottom: 1rem;
+  color: var(--ot-on-dark);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ot-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-social {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--ot-on-dark);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease), border-color var(--ot-dur-fast) var(--ot-ease), transform var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-social:hover {
+  border-color: var(--ot-primary-600);
+  background-color: var(--ot-primary-600);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.ot-social .ot-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.ot-footer__links {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 2.25rem;
+  color: var(--ot-on-dark-muted);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-footer__links a:hover {
+  color: var(--ot-on-dark);
+}
+
+.ot-footer__links .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ot-primary-300);
+}
+
+.ot-lang-btn--footer {
+  padding-inline: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ot-footer__legal {
+  margin: 2.5rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ot-navy-line);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.ot-footer__legal a {
+  color: var(--ot-on-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.ot-footer__legal a:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 768px) {
+  .ot-footer__grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  }
+
+  .ot-footer__brand {
+    grid-column: auto;
+  }
+}
+
+/* 14. Floating actions ------------------------------------------------ */
+.ot-fab-stack {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1024;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  transition: bottom var(--ot-dur) var(--ot-ease);
+}
+
+.ot-fab {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: var(--ot-shadow-lg);
+  transition:
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    opacity var(--ot-dur) var(--ot-ease),
+    transform var(--ot-dur) var(--ot-ease),
+    visibility var(--ot-dur) var(--ot-ease);
+}
+
+.ot-fab:hover {
+  color: #fff;
+}
+
+.ot-chat-launcher {
+  background-color: var(--ot-primary-600);
+}
+
+.ot-chat-launcher:hover {
+  background-color: var(--ot-primary-700);
+}
+
+.ot-fab--top {
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: rgba(31, 37, 51, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+}
+
+.ot-fab--top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.ot-fab--top:hover {
+  background-color: var(--ot-navy-950);
+}
+
+/* 15. Utilities + motion ---------------------------------------------- */
+.hover-scale {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ot-card:hover,
+  .ot-card:focus-within,
+  .ot-faq-card:hover,
+  .ot-card:hover .ot-card__cover > img {
+    transform: none;
+  }
+}

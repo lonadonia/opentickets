@@ -1,0 +1,13 @@
+<!--
+  FLOATING ACTIONS — scroll-to-top (legacy .scroll-to-top) stacked above the support chat launcher so they no longer overlap.
+  Live theme: the Livewire chatbot (floating variant) renders the launcher; keep its wire:click="toggle" and give it .ot-chat-launcher.
+  Static preview: the launcher links to the Support page, where the chat assistant lives.
+-->
+<aside class="ot-fab-stack" data-ot-fab-stack aria-label="Quick actions">
+  <a class="ot-fab ot-fab--top scroll-to-top" href="#page-top" data-ot-to-top aria-label="Back to top">
+    <svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+  </a>
+  <a class="ot-fab ot-chat-launcher" href="{{ routes.support }}" aria-label="Chat with support">
+    <svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+  </a>
+</aside>
