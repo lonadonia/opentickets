@@ -7,21 +7,32 @@ Stack:              Static HTML + Bootstrap 5.3.8 + custom CSS + vanilla JS + Is
 Package manager:    npm (no runtime or build dependencies; Playwright needed only for `npm run qa`)
 Local path:         /home/user/opentickets
 Local build:        PASS (`node tools/build.mjs`, exit 0)
-QA:                 PASS (`node tools/qa.cjs` → 49/49; axe-core 0 violations on 7 page/width combinations)
+QA:                 PASS (`node tools/qa.cjs` → 49/49; axe-core 0 violations on 8 page/width combinations;
+                    stage text contrast sweep: 95 samples, minimum 6.79:1)
 GitHub status:      PUSHED
 GitHub repo URL:    https://github.com/lonadonia/opentickets
 Visibility:         PUBLIC (verified via GitHub API). The repository was supplied for this session; switch it to
                     private in GitHub settings if the client work should not be public
 Branch:             claude/optimistic-mendel-e0pjrn
-Commit SHA:         ea2896e7872f336d6e20eb340dc197ac2fad0b71 (feature commit; this handoff file is in the following commit)
+Commits:            ea2896e (first build) → 25e0db7 (handoff) → af79153 (design refinement pass); this file is
+                    updated in the commit after af79153
+
 Vercel readiness:   VERIFIED_READY (static output at repo root, no env vars, no vercel.json needed)
 Vercel project:     opentickets-visual-refresh (team "hakim's projects"), created by this delivery
-Vercel deployment:  dpl_72eDwetZgrW23NmPa1yxB6M6fwk7, state READY, built from commit ea2896e
-Vercel URL:         https://opentickets-visual-refresh.vercel.app
-                    (also https://opentickets-visual-refresh-76b4p5aid-hakims-projects-8cc34b62.vercel.app)
-Vercel preview:     DEPLOYED_VERIFIED. The home page (200, 27 grid items, 11 hero slides, Isotope script), JS and CSS
-                    were fetched through Vercel's authenticated fetch. The build sandbox cannot reach *.vercel.app
-                    directly, so public (unauthenticated) access was not checked
+
+Latest design (refinement pass, commit af79153)
+  Deployment:       dpl_BoQAwj97N943o5VpZuuKoueX5X5C, target PREVIEW, state READY
+  Branch URL:       https://opentickets-visual-refresh-git-ebe08e-hakims-projects-8cc34b62.vercel.app
+                    (Vercel's branch alias, so it follows the latest deployment of this branch)
+  Deployment URL:   https://opentickets-visual-refresh-qefx68wew-hakims-projects-8cc34b62.vercel.app
+  Verified:         DEPLOYED_VERIFIED: new ot-core.js served (200) via Vercel's authenticated fetch. Preview URLs may
+                    require being signed in to Vercel (Deployment Protection), so public access was not checked
+
+First build (commit ea2896e)
+  Deployment:       dpl_72eDwetZgrW23NmPa1yxB6M6fwk7, state READY (recorded by Vercel as the project's production)
+  URL:              https://opentickets-visual-refresh.vercel.app. Still shows the FIRST design: moving this short URL
+                    to the refined design means promoting the new deployment, which needs the owner's go-ahead
+  Verified:         home page 200 with 27 grid items, 11 hero slides and the Isotope script; JS/CSS 200
 Environment keys:   none
 Production (client):UNCHANGED. Nothing was deployed to opentickets.co.za, DNS or any client system
 ```
