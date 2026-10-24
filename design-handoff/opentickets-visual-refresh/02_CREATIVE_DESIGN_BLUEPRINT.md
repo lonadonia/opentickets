@@ -31,11 +31,25 @@ The core tension is **premium vs. familiar**. It is resolved by changing finish,
 
 C fails the "no relearning" gate, and B weakens image legibility, so **A** is selected.
 
-## 3. Signature motif: the ticket stub
+## 3. Signature motifs
+
+### Stage + canvas (added in the refinement pass)
+- Every screen opens on a dark **stage** (`.ot-stage`): Home hero, FAQ header, Event banner, Search header.
+- **Ambient glow** (`.ot-ambient`): a heavily blurred copy of the event artwork tints the stage in that artwork's own
+  colours. On Home it cross-fades with the active slide (1.4 s); on FAQ/Event it uses the page image. A scrim and
+  vignette sit above it, so text never depends on the artwork. A sweep of 95 text samples (every event page at two
+  widths, every hero slide, FAQ/Search) measured a minimum of **6.8:1**.
+- **Ticket perforation:** the stage tears off into the light canvas along a row of small holes
+  (`--ot-perf-r` / `--ot-perf-gap`), and the footer repeats the edge on top, so the page reads like a ticket and its stub.
+
+### The ticket stub
 
 Taken from the Open Tickets logo (a ticket outline with side notches and a perforated line):
 
-- **Event cards:** half-circle notches where artwork meets details; the date sits in a stub column behind a perforated line.
+- **Event cards:** half-circle notches where artwork meets details; the stub column shows day (red), month and year
+  behind a perforated line; a quiet arrow chip turns into the booking colour on hover/focus.
+- **FAQ topics:** each topic is a ticket: icon, title and "View answers" on the left; the question count, set large
+  in Barlow Condensed, on the stub.
 - **Booking card (event page):** a dark ticket whose stub shows weekday, day and month, notched top and bottom.
 - **Section accent:** a short red bar, the date red, before section titles.
 
@@ -109,6 +123,10 @@ Breadcrumb → "Results for 'query'" (or "All events") → count → pill search
 | 390 / 360 | Rail becomes an off-canvas menu (hamburger, live `#sidebarToggleTop`); top bar shows logo, search icon (→ search page, as the live mobile "Search" item), language; hero caption stacks with a full-width CTA; 1-column cards; footer 2 columns |
 
 ## 8. Motion storyboard
+Refinement pass additions: ambient cross-fade 1.4 s; autoplay progress fills the active dot over the 6 s interval;
+inactive slides desaturate and recede (scale .955, 450 ms); captions rise in; content entering from below the fold
+fades up 24 px over 700 ms with a 70 ms stagger (only elements that start off-screen, so nothing visible flickers).
+
 Header condense (280 ms) · hero slide snap (native smooth scroll), 6 s autoplay paused on hover/focus/hidden tab/
 off-screen or by the user · hero collapse on filter (800 ms) · card lift 4 px with deeper shadow, artwork zoom 1.03 ·
 FAQ card lift and arrow nudge · mobile booking bar slide. Reduced motion: no autoplay, no transitions, instant scrolling.

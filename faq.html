@@ -184,76 +184,101 @@
 <div class="ot-shell" id="content-wrapper">
   <main id="main" class="ot-main" tabindex="-1">
 
-    <div class="ot-container">
-      <!-- FAQ HERO — existing hero image and heading, re-composed as a split header -->
-      <section class="ot-page-hero ot-faq-hero" aria-labelledby="faq-heading">
-        <div class="ot-faq-hero__text">
-          <p class="ot-eyebrow">Help centre</p>
-          <h1 class="ot-page-hero__title" id="faq-heading">Frequently Asked Questions</h1>
-          <p class="ot-page-hero__lead">Choose a topic to see the questions and answers in it.</p>
-          <p class="ot-faq-hero__stat"><strong>19</strong> answers across <strong>5</strong> topics</p>
+    <!-- FAQ STAGE — existing hero image and heading on the shared dark stage; the glow takes the image's colours -->
+    <section class="ot-stage ot-page-stage" data-ot-ambient-from=".ot-faq-hero__media img" aria-labelledby="faq-heading">
+      <div class="ot-ambient" aria-hidden="true">
+        <span class="ot-ambient__layer"></span>
+      </div>
+      <div class="ot-container">
+        <div class="ot-faq-hero">
+          <div class="ot-faq-hero__text">
+            <p class="ot-eyebrow ot-eyebrow--on-dark">Help centre</p>
+            <h1 class="ot-page-hero__title" id="faq-heading">Frequently Asked Questions</h1>
+            <p class="ot-page-hero__lead">Choose a topic to see the questions and answers in it.</p>
+            <ul class="ot-stat-list">
+              <li><strong>19</strong> answers</li>
+              <li><strong>5</strong> topics</li>
+            </ul>
+          </div>
+          <figure class="ot-faq-hero__media">
+            <img src="assets/images/pages/hero-faqs.jpg" alt="" width="1210" height="450" fetchpriority="high">
+          </figure>
         </div>
-        <figure class="ot-faq-hero__media">
-          <img src="assets/images/pages/hero-faqs.jpg" alt="" width="1210" height="450" fetchpriority="high">
-        </figure>
-      </section>
+      </div>
+    </section>
 
+    <div class="ot-container">
       <!-- CATEGORIES — same five topics, question counts and destinations as the live FAQ index -->
       <section class="ot-section ot-faq" aria-labelledby="faq-topics-heading">
-        <h2 class="visually-hidden" id="faq-topics-heading">FAQ topics</h2>
-        <ul class="row g-3 g-lg-4 list-unstyled ot-faq__grid">
-<li class="col-sm-6 col-xl-4">
+        <header class="ot-section__header ot-reveal">
+          <div>
+            <p class="ot-eyebrow">Browse by topic</p>
+            <h2 class="ot-section__title" id="faq-topics-heading">FAQ topics</h2>
+          </div>
+        </header>
+        <ul class="row g-3 g-lg-4 list-unstyled justify-content-center ot-faq__grid">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="https://opentickets.co.za/tickets-purchasing">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-card"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-card"></use></svg></span>
       <span class="ot-faq-card__title">Tickets &amp; Purchasing</span>
-      <span class="ot-faq-card__count">2 questions</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">2</span> <span class="ot-faq-card__unit">questions</span></span>
+    </span>
   </a>
 </li>
 
-<li class="col-sm-6 col-xl-4">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="https://opentickets.co.za/ticket-delivery-downloading-tickets">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
       <span class="ot-faq-card__title">Ticket Delivery &amp; Downloading Tickets</span>
-      <span class="ot-faq-card__count">3 questions</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">3</span> <span class="ot-faq-card__unit">questions</span></span>
+    </span>
   </a>
 </li>
 
-<li class="col-sm-6 col-xl-4">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="https://opentickets.co.za/account-profile">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-account"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-account"></use></svg></span>
       <span class="ot-faq-card__title">Account &amp; Profile</span>
-      <span class="ot-faq-card__count">4 questions</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">4</span> <span class="ot-faq-card__unit">questions</span></span>
+    </span>
   </a>
 </li>
 
-<li class="col-sm-6 col-xl-4">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="https://opentickets.co.za/general">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-info"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-info"></use></svg></span>
       <span class="ot-faq-card__title">General</span>
-      <span class="ot-faq-card__count">6 questions</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">6</span> <span class="ot-faq-card__unit">questions</span></span>
+    </span>
   </a>
 </li>
 
-<li class="col-sm-6 col-xl-4">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="https://opentickets.co.za/football">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-trophy"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-trophy"></use></svg></span>
       <span class="ot-faq-card__title">Football</span>
-      <span class="ot-faq-card__count">4 questions</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">4</span> <span class="ot-faq-card__unit">questions</span></span>
+    </span>
   </a>
 </li>
 
@@ -261,7 +286,7 @@
       </section>
 
       <!-- SUPPORT — copy from the live Support page -->
-      <section class="ot-help-band" aria-labelledby="faq-help-heading">
+      <section class="ot-help-band ot-reveal" aria-labelledby="faq-help-heading">
         <div class="ot-help-band__tip">
           <span class="ot-help-band__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg></span>
           <p>You do not need printed tickets for any event purchased through us. You can download your tickets directly to your Apple or Google wallet or download as an HTML file.</p>
@@ -283,6 +308,7 @@
     <div class="ot-footer__grid">
       <div class="ot-footer__col ot-footer__brand">
         <img class="ot-footer__logo" src="assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150" loading="lazy">
+        <p class="ot-footer__about">Tickets for football, festivals, shows and school events across South Africa — straight to your phone.</p>
         <h2 class="ot-footer__title">Get in Touch</h2>
         <ul class="ot-footer__social">
 <li><a class="ot-social" href="https://www.instagram.com/opentickets.za/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ot-icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a></li>
@@ -342,8 +368,9 @@
   <a class="ot-fab ot-fab--top scroll-to-top" href="#page-top" data-ot-to-top aria-label="Back to top">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
   </a>
-  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support" aria-label="Chat with support">
+  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+    <span class="ot-chat-launcher__label">Chat with support</span>
   </a>
 </aside>
 

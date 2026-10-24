@@ -6,16 +6,22 @@
  * #events-grid, .grid-item, .e-card, .m-card-cover, .navbar-search, #nav-search-input,
  * #sidebarToggleTop, #accordionSidebar, .scroll-to-top, .osahan-slider-item.
  *
- *  1. Base            6. Section + event card (ticket)   11. Event detail
- *  2. Header          7. Empty state                     12. Booking card + mobile bar
- *  3. Rail / menu     8. Buttons                         13. Footer
- *  4. Shell           9. FAQ                             14. Floating actions
- *  5. Featured hero  10. Search                          15. Utilities + motion
+ * Design language "Stub & Spotlight": every screen opens on a dark Stage lit by the colours of the
+ * event artwork, which tears off along a ticket perforation into the light content canvas. Cards,
+ * FAQ topics and the booking panel share the notched ticket-stub shape of the Open Tickets logo.
+ *
+ *  1. Base              7. Section + event card (ticket)   13. Booking card + mobile bar
+ *  2. Header            8. Empty state                     14. Footer
+ *  3. Rail / menu       9. Buttons                         15. Floating actions
+ *  4. Shell + media    10. FAQ                             16. Reveal + motion
+ *  5. Stage            11. Search
+ *  6. Featured hero    12. Event detail
  */
 
 /* 1. Base ------------------------------------------------------------- */
 html {
   scroll-padding-top: calc(var(--ot-header-h) + 1rem);
+  scrollbar-color: #c3c9d6 transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,10 +42,19 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background-color: rgba(78, 115, 223, 0.22);
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--ot-ink);
   font-weight: 700;
   letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
@@ -77,6 +92,62 @@ a {
   top: 1rem;
 }
 
+.ot-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 0.625rem;
+  color: var(--ot-primary-600);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.ot-eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--ot-accent-500);
+}
+
+.ot-eyebrow--on-dark {
+  color: var(--ot-gold-400);
+}
+
+.ot-count-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
+  color: var(--ot-muted);
+  font-size: 0.875rem;
+  box-shadow: var(--ot-shadow-sm);
+}
+
+.ot-count-pill .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ot-accent-600);
+}
+
+.ot-count-pill--on-dark {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--ot-on-stage-muted);
+  box-shadow: none;
+}
+
+.ot-count-pill--on-dark .ot-icon {
+  color: var(--ot-gold-400);
+}
+
 /* 2. Header (fixed, shrinks on scroll) -------------------------------- */
 .ot-header {
   position: fixed;
@@ -99,8 +170,8 @@ a {
 
 @supports (backdrop-filter: blur(1px)) {
   .ot-header.is-condensed {
-    background-color: rgba(23, 28, 40, 0.86);
-    backdrop-filter: saturate(140%) blur(14px);
+    background-color: rgba(23, 28, 40, 0.84);
+    backdrop-filter: saturate(150%) blur(16px);
   }
 }
 
@@ -195,6 +266,7 @@ a {
   border: 0;
   border-radius: 50%;
   background-color: var(--ot-primary-600);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
   color: #fff;
   transform: translateY(-50%);
   transition: background-color var(--ot-dur-fast) var(--ot-ease), width var(--ot-dur) var(--ot-ease), height var(--ot-dur) var(--ot-ease);
@@ -320,7 +392,8 @@ a {
 
 .ot-rail__link.active {
   color: var(--ot-on-dark);
-  background-color: rgba(78, 115, 223, 0.2);
+  background-image: linear-gradient(180deg, rgba(78, 115, 223, 0.3), rgba(78, 115, 223, 0.14));
+  box-shadow: inset 0 0 0 1px rgba(127, 152, 236, 0.22);
 }
 
 .ot-rail__link.active .ot-icon {
@@ -336,6 +409,7 @@ a {
   width: 3px;
   border-radius: 0 3px 3px 0;
   background-color: var(--ot-primary-500);
+  box-shadow: 0 0 12px rgba(78, 115, 223, 0.8);
 }
 
 .ot-rail__heading {
@@ -481,7 +555,7 @@ a {
   }
 }
 
-/* 4. Shell ------------------------------------------------------------ */
+/* 4. Shell + artwork frames ------------------------------------------- */
 .ot-shell {
   display: flex;
   flex-direction: column;
@@ -549,7 +623,122 @@ a {
   object-fit: contain;
 }
 
-/* 5. Featured hero ---------------------------------------------------- */
+/* Loading shimmer (only when JS can clear it once the image arrives) */
+.ot-js .ot-card__cover:not(.is-loaded),
+.ot-js .ot-hero__media:not(.is-loaded),
+.ot-js .ot-event-banner:not(.is-loaded) {
+  background-image: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.07) 50%, transparent 70%);
+  background-size: 220% 100%;
+  animation: ot-shimmer 1.6s linear infinite;
+}
+
+@keyframes ot-shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+/* 5. Stage ------------------------------------------------------------ */
+/*
+ * The dark band that opens every screen. An optional .ot-ambient layer takes the colours of the event
+ * artwork (set by JS from the loaded image), and the bottom edge tears off along a ticket perforation.
+ */
+.ot-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--ot-on-stage-muted);
+  background:
+    radial-gradient(70% 90% at 50% 0%, var(--ot-stage-glow), transparent 70%),
+    linear-gradient(180deg, var(--ot-stage-top) 0%, var(--ot-stage-bottom) 100%);
+}
+
+.ot-stage::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  height: var(--ot-perf-r);
+  background: radial-gradient(circle at 50% 100%, var(--ot-canvas) calc(var(--ot-perf-r) - 0.5px), transparent var(--ot-perf-r)) left bottom / var(--ot-perf-gap) 100% repeat-x;
+  pointer-events: none;
+}
+
+.ot-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ot-ambient__layer {
+  position: absolute;
+  inset: -25%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  filter: blur(80px) saturate(1.6);
+  transform: translateZ(0);
+  transition: opacity 1.4s var(--ot-ease);
+}
+
+.ot-ambient__layer.is-on {
+  opacity: var(--ot-ambient-opacity);
+}
+
+/* Keeps every text zone on a dark base whatever the artwork: an even scrim plus a soft edge vignette */
+.ot-ambient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(110% 75% at 50% 0%, transparent 25%, rgba(18, 22, 33, 0.5) 100%),
+    linear-gradient(180deg, rgba(18, 22, 33, 0.55) 0%, rgba(18, 22, 33, 0.5) 45%, rgba(18, 22, 33, 0.8) 100%);
+}
+
+.ot-page-stage {
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2.5rem) 0 calc(clamp(2rem, 1.5rem + 2vw, 3.25rem) + var(--ot-perf-r));
+}
+
+.ot-stage .ot-page-hero__title {
+  color: var(--ot-on-dark);
+}
+
+.ot-stage .ot-page-hero__lead {
+  color: var(--ot-on-stage-muted);
+}
+
+.ot-stat-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-stat-list li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--ot-radius-pill);
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--ot-on-stage-muted);
+  font-size: 0.875rem;
+}
+
+.ot-stat-list strong {
+  color: var(--ot-on-dark);
+  font-family: var(--ot-font-display);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* 6. Featured hero ---------------------------------------------------- */
 .ot-hero-collapse {
   display: grid;
   grid-template-rows: 1fr;
@@ -570,11 +759,7 @@ a {
 }
 
 .ot-hero {
-  padding: clamp(1rem, 0.5rem + 1.5vw, 2rem) 0 clamp(1.25rem, 1rem + 1vw, 2rem);
-  color: var(--ot-on-dark-muted);
-  background:
-    radial-gradient(70% 90% at 50% 0%, rgba(78, 115, 223, 0.16), transparent 70%),
-    linear-gradient(180deg, var(--ot-navy-800) 0%, var(--ot-navy-900) 100%);
+  padding: clamp(1rem, 0.5rem + 1.5vw, 2rem) 0 calc(clamp(1.5rem, 1rem + 1.5vw, 2.5rem) + var(--ot-perf-r));
 }
 
 .ot-hero__viewport {
@@ -598,9 +783,9 @@ a {
 }
 
 .ot-hero__track {
+  position: relative;
   display: flex;
   gap: clamp(0.5rem, 0.25rem + 1vw, 1.25rem);
-  position: relative;
   margin: 0;
   padding: 0 var(--pad);
   list-style: none;
@@ -620,14 +805,19 @@ a {
   flex: 0 0 100%;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  opacity: 0.4;
-  transform: scale(0.97);
-  transition: opacity var(--ot-dur) var(--ot-ease), transform var(--ot-dur) var(--ot-ease);
+  opacity: 0.3;
+  filter: saturate(0.6);
+  transform: scale(0.955);
+  transition:
+    opacity 450ms var(--ot-ease),
+    transform 450ms var(--ot-ease),
+    filter 450ms var(--ot-ease);
 }
 
 .ot-hero__slide.is-active,
 .ot-hero:not(.is-ready) .ot-hero__slide:first-child {
   opacity: 1;
+  filter: none;
   transform: none;
 }
 
@@ -635,7 +825,7 @@ a {
   display: block;
   aspect-ratio: 1210 / 450;
   border-radius: var(--ot-radius-lg);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.75);
+  box-shadow: var(--ot-shadow-stage);
   -webkit-user-drag: none;
 }
 
@@ -644,16 +834,18 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 1.5rem;
-  padding: 1rem 0.25rem 0;
-  transition: opacity var(--ot-dur) var(--ot-ease);
+  padding: 1.25rem 0.25rem 0;
+  transition: opacity 450ms var(--ot-ease), transform 450ms var(--ot-ease);
 }
 
 .ot-hero__slide:not(.is-active) .ot-hero__caption {
   opacity: 0;
+  transform: translateY(0.5rem);
 }
 
 .ot-hero:not(.is-ready) .ot-hero__slide:first-child .ot-hero__caption {
   opacity: 1;
+  transform: none;
 }
 
 .ot-hero__caption-text {
@@ -664,11 +856,11 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  margin: 0 0 0.375rem;
+  margin: 0 0 0.5rem;
   color: var(--ot-gold-400);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -678,11 +870,27 @@ a {
   height: 1rem;
 }
 
+.ot-hero__count {
+  margin-left: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--ot-on-stage-muted);
+  font-family: var(--ot-font-display);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+.ot-hero__count span {
+  margin-inline: 0.2em;
+  opacity: 0.55;
+}
+
 .ot-hero__title {
-  margin: 0 0 0.375rem;
+  margin: 0 0 0.5rem;
   color: var(--ot-on-dark);
-  font-size: var(--ot-text-xl);
-  line-height: 1.25;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .ot-hero__title a {
@@ -693,6 +901,7 @@ a {
 .ot-hero__title a:hover {
   text-decoration: underline;
   text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .ot-hero__meta {
@@ -700,13 +909,13 @@ a {
   flex-wrap: wrap;
   gap: 0.25rem 1.25rem;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
 }
 
 .ot-hero__meta > span {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 0.4375rem;
 }
 
 .ot-hero__meta .ot-icon {
@@ -717,6 +926,8 @@ a {
 
 .ot-hero__cta {
   flex: 0 0 auto;
+  --bs-btn-padding-y: 0.8125rem;
+  --bs-btn-padding-x: 1.625rem;
 }
 
 .ot-hero__arrow {
@@ -734,18 +945,22 @@ a {
   background-color: rgba(18, 22, 33, 0.55);
   color: #fff;
   transform: translateY(-50%);
-  transition: background-color var(--ot-dur-fast) var(--ot-ease), color var(--ot-dur-fast) var(--ot-ease);
+  transition:
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    color var(--ot-dur-fast) var(--ot-ease),
+    transform var(--ot-dur-fast) var(--ot-ease);
 }
 
 @supports (backdrop-filter: blur(1px)) {
   .ot-hero__arrow {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
   }
 }
 
 .ot-hero__arrow:hover {
   background-color: #fff;
   color: var(--ot-navy-800);
+  transform: translateY(-50%) scale(1.06);
 }
 
 .ot-hero__arrow--prev {
@@ -761,7 +976,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   padding-inline: var(--ot-gutter);
 }
 
@@ -805,23 +1020,37 @@ a {
   list-style: none;
 }
 
+/* Dots: the active one stretches into a pill that fills up while autoplay runs */
 .ot-hero__dot {
   display: grid;
   place-items: center;
-  width: 1.5rem;
+  min-width: 1.5rem;
   height: 1.5rem;
-  padding: 0;
+  padding: 0 0.1875rem;
   border: 0;
   background: transparent;
 }
 
-.ot-hero__dot::before {
+.ot-hero__dot::before,
+.ot-hero__dot::after {
   content: "";
-  width: 0.5rem;
-  height: 0.5rem;
+  grid-area: 1 / 1;
+  height: 0.375rem;
   border-radius: var(--ot-radius-pill);
+}
+
+.ot-hero__dot::before {
+  width: 0.375rem;
   background-color: rgba(255, 255, 255, 0.35);
   transition: width var(--ot-dur) var(--ot-ease), background-color var(--ot-dur) var(--ot-ease);
+}
+
+.ot-hero__dot::after {
+  width: 100%;
+  opacity: 0;
+  background-color: var(--ot-primary-300);
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 .ot-hero__dot:hover::before {
@@ -829,8 +1058,22 @@ a {
 }
 
 .ot-hero__dot[aria-current="true"]::before {
-  width: 1.375rem;
+  width: 2rem;
   background-color: var(--ot-primary-300);
+}
+
+.ot-hero.is-playing .ot-hero__dot[aria-current="true"]::before {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.ot-hero.is-playing .ot-hero__dot[aria-current="true"]::after {
+  opacity: 1;
+  animation: ot-progress var(--ot-hero-interval, 6s) linear forwards;
+}
+
+@keyframes ot-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 @media (min-width: 768px) {
@@ -846,41 +1089,33 @@ a {
   }
 
   .ot-hero__title {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+  }
+
+  .ot-hero__meta {
+    font-size: 0.875rem;
   }
 }
 
-/* 6. Section + event card (ticket) ------------------------------------ */
+/* 7. Section + event card (ticket) ------------------------------------ */
 .ot-section {
-  padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  padding-block: clamp(2.25rem, 1.75rem + 2vw, 4rem);
 }
 
 .ot-section__header {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 0.25rem 1rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem 1.5rem;
+  margin-bottom: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
 }
 
 .ot-section__title {
-  position: relative;
   margin: 0;
-  padding-left: 0.875rem;
-  font-size: var(--ot-text-2xl);
-  line-height: 1.2;
-}
-
-.ot-section__title::before {
-  content: "";
-  position: absolute;
-  top: 0.18em;
-  bottom: 0.18em;
-  left: 0;
-  width: 4px;
-  border-radius: 2px;
-  background-color: var(--ot-accent-500);
+  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.625rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 .ot-section__meta {
@@ -896,14 +1131,14 @@ a {
   --bs-card-spacer-x: 0;
   --bs-card-spacer-y: 0;
   height: 100%;
-  filter: drop-shadow(0 1px 1px rgba(20, 26, 40, 0.06)) drop-shadow(0 10px 14px rgba(20, 26, 40, 0.09));
+  filter: var(--ot-ticket-shadow);
   transition: transform var(--ot-dur) var(--ot-ease), filter var(--ot-dur) var(--ot-ease);
 }
 
 .ot-card:hover,
 .ot-card:focus-within {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 2px 2px rgba(20, 26, 40, 0.06)) drop-shadow(0 18px 22px rgba(20, 26, 40, 0.16));
+  transform: translateY(-5px);
+  filter: var(--ot-ticket-shadow-hover);
 }
 
 .ot-card__link {
@@ -922,6 +1157,7 @@ a {
 .ot-card__cover {
   aspect-ratio: 1210 / 450;
   border-radius: var(--ot-radius-md) var(--ot-radius-md) 0 0;
+  background-color: #e6e9f0;
   -webkit-mask:
     radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
     radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
@@ -932,19 +1168,23 @@ a {
   mask-composite: intersect;
 }
 
+.ot-js .ot-card__cover:not(.is-loaded) {
+  background-image: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.65) 50%, transparent 70%);
+}
+
 .ot-card__cover > img {
   border-radius: 0;
-  transition: transform 600ms var(--ot-ease);
+  transition: transform 700ms var(--ot-ease);
 }
 
 .ot-card:hover .ot-card__cover > img {
-  transform: scale(1.03);
+  transform: scale(1.035);
 }
 
 .ot-card__body {
   display: grid;
   flex: 1 1 auto;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
+  grid-template-columns: 4.75rem minmax(0, 1fr);
   border-radius: 0 0 var(--ot-radius-md) var(--ot-radius-md);
   background-color: var(--ot-surface);
   -webkit-mask:
@@ -970,36 +1210,48 @@ a {
 .ot-card__day {
   color: var(--ot-accent-600);
   font-family: var(--ot-font-display);
-  font-size: 2.125rem;
+  font-size: 2.375rem;
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 0.9;
   font-variant-numeric: tabular-nums;
 }
 
 .ot-card__month {
-  margin-top: 0.25rem;
-  color: var(--ot-muted);
+  margin-top: 0.3125rem;
+  color: var(--ot-ink);
   font-family: var(--ot-font-display);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 0.16em;
+  line-height: 1;
   text-transform: uppercase;
 }
 
+.ot-card__year {
+  margin-top: 0.25rem;
+  color: var(--ot-muted);
+  font-family: var(--ot-font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
 .ot-card__info {
+  position: relative;
   min-width: 0;
-  padding: 1rem 1.125rem 1.125rem 1rem;
+  padding: 1.0625rem 1.125rem 1.125rem 1rem;
 }
 
 .ot-card__title {
   display: -webkit-box;
   min-height: calc(2 * 1.35em);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.625rem;
   overflow: hidden;
   color: var(--ot-ink);
-  font-size: 1rem;
+  font-size: 1.03125rem;
   font-weight: 600;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
   line-height: 1.35;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1014,15 +1266,16 @@ a {
 .ot-card__meta {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 0.4375rem;
   margin: 0;
   color: var(--ot-muted);
   font-size: 0.8125rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .ot-card__meta + .ot-card__meta {
   margin-top: 0.125rem;
+  padding-right: 2.5rem;
 }
 
 .ot-card__meta > span,
@@ -1039,13 +1292,45 @@ a {
   color: var(--ot-subtle);
 }
 
-/* Isotope keeps the row height; give it room for the hover lift */
-#events-grid {
-  margin-top: -0.25rem;
-  padding-top: 0.25rem;
+/* "Go" chip: a quiet affordance at rest, the booking colour on hover/focus */
+.ot-card__go {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--ot-line);
+  border-radius: 50%;
+  color: var(--ot-subtle);
+  transition:
+    background-color var(--ot-dur) var(--ot-ease),
+    border-color var(--ot-dur) var(--ot-ease),
+    color var(--ot-dur) var(--ot-ease),
+    transform var(--ot-dur) var(--ot-ease);
 }
 
-/* 7. Empty state ------------------------------------------------------ */
+.ot-card__go .ot-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ot-card:hover .ot-card__go,
+.ot-card__link:focus-visible .ot-card__go {
+  border-color: var(--ot-primary-600);
+  background-color: var(--ot-primary-600);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+/* Isotope keeps the row height; give it room for the hover lift */
+#events-grid {
+  margin-top: -0.375rem;
+  padding-top: 0.375rem;
+}
+
+/* 8. Empty state ------------------------------------------------------ */
 .ot-empty {
   max-width: 34rem;
   margin: 0 auto;
@@ -1060,17 +1345,18 @@ a {
 .ot-empty__icon {
   display: inline-grid;
   place-items: center;
-  width: 4rem;
-  height: 4rem;
-  margin-bottom: 1rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.25rem;
   border-radius: 50%;
   background-color: var(--ot-primary-50);
   color: var(--ot-primary-600);
+  box-shadow: 0 0 0 10px rgba(238, 242, 253, 0.55);
 }
 
 .ot-empty__icon .ot-icon {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.875rem;
+  height: 1.875rem;
 }
 
 .ot-empty__title {
@@ -1084,7 +1370,7 @@ a {
   color: var(--ot-muted);
 }
 
-/* 8. Buttons ---------------------------------------------------------- */
+/* 9. Buttons ---------------------------------------------------------- */
 .ot-btn {
   --bs-btn-padding-y: 0.6875rem;
   --bs-btn-padding-x: 1.375rem;
@@ -1096,7 +1382,14 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  letter-spacing: -0.005em;
   white-space: nowrap;
+  transition:
+    color var(--ot-dur-fast) var(--ot-ease),
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    border-color var(--ot-dur-fast) var(--ot-ease),
+    box-shadow var(--ot-dur-fast) var(--ot-ease),
+    transform var(--ot-dur-fast) var(--ot-ease);
 }
 
 .ot-btn .ot-icon {
@@ -1123,11 +1416,23 @@ a {
   --bs-btn-disabled-bg: var(--ot-line);
   --bs-btn-disabled-border-color: var(--ot-line);
   --bs-btn-disabled-opacity: 1;
-  box-shadow: 0 10px 20px -12px rgba(58, 95, 212, 0.8);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 65%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 24px -12px rgba(58, 95, 212, 0.85);
+}
+
+.ot-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 28px -12px rgba(58, 95, 212, 0.9);
+}
+
+.ot-btn--primary:active {
+  transform: none;
 }
 
 .ot-btn--primary:disabled {
+  background-image: none;
   box-shadow: none;
+  transform: none;
 }
 
 .ot-btn--ghost {
@@ -1146,47 +1451,26 @@ a {
   width: 100%;
 }
 
-/* 9. FAQ -------------------------------------------------------------- */
-.ot-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin: 0 0 0.75rem;
-  color: var(--ot-primary-600);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.ot-eyebrow::before {
-  content: "";
-  width: 1.5rem;
-  height: 2px;
-  border-radius: 1px;
-  background-color: var(--ot-accent-500);
-}
-
+/* 10. FAQ ------------------------------------------------------------- */
 .ot-page-hero__title {
   margin: 0 0 0.75rem;
   font-size: var(--ot-text-3xl);
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
   overflow-wrap: break-word;
 }
 
 .ot-page-hero__lead {
   max-width: 44ch;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   color: var(--ot-muted);
   font-size: var(--ot-text-lg);
 }
 
 .ot-faq-hero {
   display: grid;
-  gap: 1.5rem 3rem;
+  gap: 1.75rem 3.5rem;
   align-items: center;
-  padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) 0.5rem;
 }
 
 .ot-faq-hero__media {
@@ -1195,30 +1479,13 @@ a {
   aspect-ratio: 1210 / 450;
   overflow: hidden;
   border-radius: var(--ot-radius-lg);
-  box-shadow: var(--ot-shadow-lg);
+  box-shadow: var(--ot-shadow-stage);
 }
 
 .ot-faq-hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.ot-faq-hero__stat {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--ot-line);
-  border-radius: var(--ot-radius-pill);
-  background-color: var(--ot-surface);
-  color: var(--ot-muted);
-  font-size: 0.875rem;
-}
-
-.ot-faq-hero__stat strong {
-  color: var(--ot-ink);
 }
 
 @media (min-width: 992px) {
@@ -1231,54 +1498,71 @@ a {
   }
 }
 
-.ot-faq {
-  padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
-}
-
 .ot-faq__grid {
   margin-bottom: 0;
 }
 
+/* FAQ topic = a ticket: topic on the left, its question count on the stub */
+.ot-faq-item {
+  filter: var(--ot-ticket-shadow);
+  transition: filter var(--ot-dur) var(--ot-ease);
+}
+
+.ot-faq-item:hover,
+.ot-faq-item:focus-within {
+  filter: var(--ot-ticket-shadow-hover);
+}
+
 .ot-faq-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  --stub: 6.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--stub);
   height: 100%;
-  padding: 1.25rem;
-  border: 1px solid var(--ot-line);
+  min-height: 10rem;
   border-radius: var(--ot-radius-md);
   background-color: var(--ot-surface);
   color: inherit;
   text-decoration: none;
-  box-shadow: var(--ot-shadow-sm);
-  transition:
-    transform var(--ot-dur) var(--ot-ease),
-    box-shadow var(--ot-dur) var(--ot-ease),
-    border-color var(--ot-dur) var(--ot-ease);
+  transition: transform var(--ot-dur) var(--ot-ease);
+  -webkit-mask:
+    radial-gradient(circle var(--ot-notch) at calc(100% - var(--stub)) 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at calc(100% - var(--stub)) 100%, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--ot-notch) at calc(100% - var(--stub)) 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at calc(100% - var(--stub)) 100%, #0000 98%, #000);
+  mask-composite: intersect;
 }
 
 .ot-faq-card:hover,
 .ot-faq-card:focus-visible {
-  border-color: transparent;
-  box-shadow: var(--ot-shadow-md);
-  transform: translateY(-3px);
+  color: inherit;
+  transform: translateY(-4px);
+}
+
+.ot-faq-card__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.875rem;
+  min-width: 0;
+  padding: 1.375rem 1.25rem 1.25rem 1.5rem;
 }
 
 .ot-faq-card__icon {
   display: grid;
-  flex: 0 0 auto;
   place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
   background-color: var(--ot-primary-50);
   color: var(--ot-primary-600);
   transition: background-color var(--ot-dur) var(--ot-ease), color var(--ot-dur) var(--ot-ease);
 }
 
 .ot-faq-card__icon .ot-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 .ot-faq-card:hover .ot-faq-card__icon {
@@ -1286,40 +1570,68 @@ a {
   color: #fff;
 }
 
-.ot-faq-card__body {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-width: 0;
-}
-
 .ot-faq-card__title {
   color: var(--ot-ink);
   font-size: 1.0625rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1.3;
 }
 
-.ot-faq-card__count {
-  margin-top: 0.25rem;
-  color: var(--ot-muted);
-  font-size: 0.875rem;
-}
-
-.ot-faq-card__arrow {
-  color: var(--ot-subtle);
-  transition: transform var(--ot-dur) var(--ot-ease), color var(--ot-dur) var(--ot-ease);
-}
-
-.ot-faq-card:hover .ot-faq-card__arrow {
+.ot-faq-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: auto;
   color: var(--ot-primary-600);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.ot-faq-card__cta .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  transition: transform var(--ot-dur) var(--ot-ease);
+}
+
+.ot-faq-card:hover .ot-faq-card__cta .ot-icon {
   transform: translateX(4px);
 }
 
-@media (min-width: 992px) {
-  .ot-faq-card {
-    padding: 1.5rem;
-  }
+.ot-faq-card__stub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  background:
+    linear-gradient(var(--ot-line-strong) 55%, transparent 0) left top / 1.5px 8px repeat-y,
+    #f7f8fc;
+  text-align: center;
+}
+
+.ot-faq-card__count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.ot-faq-card__num {
+  color: var(--ot-primary-600);
+  font-family: var(--ot-font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.ot-faq-card__unit {
+  margin-top: 0.5rem;
+  color: var(--ot-muted);
+  font-family: var(--ot-font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .ot-help-band {
@@ -1354,11 +1666,14 @@ a {
 }
 
 .ot-help-band__cta {
+  position: relative;
+  overflow: hidden;
   padding: 1.75rem;
   border-radius: var(--ot-radius-lg);
   color: var(--ot-on-dark-muted);
   background:
-    radial-gradient(80% 120% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 60%),
+    radial-gradient(80% 120% at 100% 0%, rgba(78, 115, 223, 0.28), transparent 60%),
+    radial-gradient(60% 90% at 0% 100%, rgba(240, 181, 68, 0.1), transparent 60%),
     var(--ot-navy-800);
 }
 
@@ -1382,15 +1697,19 @@ a {
     align-self: stretch;
     align-items: center;
   }
+
+  .ot-help-band__cta {
+    padding: 2rem 2.25rem;
+  }
 }
 
-/* 10. Search ---------------------------------------------------------- */
+/* 11. Search ---------------------------------------------------------- */
 .ot-breadcrumb ol {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.375rem;
   min-width: 0;
-  margin: 1.5rem 0 0;
+  margin: 0 0 1.25rem;
   padding: 0;
   color: var(--ot-muted);
   font-size: 0.875rem;
@@ -1426,20 +1745,36 @@ a {
   text-decoration: underline;
 }
 
-.ot-search-head {
-  padding-top: clamp(1rem, 0.75rem + 1vw, 1.75rem);
+.ot-stage .ot-breadcrumb ol {
+  color: var(--ot-on-stage-muted);
+}
+
+.ot-stage .ot-breadcrumb li:last-child {
+  color: var(--ot-on-dark);
+}
+
+.ot-stage .ot-breadcrumb li + li::before {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.ot-stage .ot-breadcrumb a {
+  color: var(--ot-on-stage-muted);
+}
+
+.ot-stage .ot-breadcrumb a:hover {
+  color: var(--ot-on-dark);
 }
 
 .ot-search-head .ot-page-hero__title {
-  margin-bottom: 0.375rem;
+  margin-bottom: 1rem;
 }
 
 .ot-search-form {
   position: relative;
   display: flex;
   gap: 0.375rem;
-  max-width: 40rem;
-  margin-top: 1.25rem;
+  max-width: 42rem;
+  margin-top: 1.5rem;
   padding: 0.375rem;
   border: 1px solid var(--ot-line);
   border-radius: var(--ot-radius-pill);
@@ -1448,9 +1783,14 @@ a {
   transition: box-shadow var(--ot-dur-fast) var(--ot-ease), border-color var(--ot-dur-fast) var(--ot-ease);
 }
 
+.ot-stage .ot-search-form {
+  border-color: transparent;
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.7);
+}
+
 .ot-search-form:focus-within {
   border-color: var(--ot-primary-400);
-  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.3);
+  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.35);
 }
 
 .ot-search-form__icon {
@@ -1480,27 +1820,28 @@ a {
 }
 
 .ot-search-results {
-  padding-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  padding-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
 }
 
-/* 11. Event detail ---------------------------------------------------- */
+/* 12. Event detail ---------------------------------------------------- */
 .ot-event-banner {
-  margin: 1rem 0 0;
+  margin: 0;
   aspect-ratio: 1210 / 450;
   border-radius: var(--ot-radius-lg);
-  box-shadow: var(--ot-shadow-lg);
+  box-shadow: var(--ot-shadow-stage);
 }
 
+/* padding, not margin: .row needs its own negative margin-top to offset the gutter */
 .ot-event-layout {
-  margin-top: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+  padding-top: clamp(1.75rem, 1.25rem + 2vw, 3rem);
   padding-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
 }
 
 .ot-event-head__title {
   margin-bottom: 1.25rem;
   font-size: var(--ot-text-3xl);
-  letter-spacing: -0.025em;
-  line-height: 1.12;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   overflow-wrap: break-word;
 }
 
@@ -1526,6 +1867,7 @@ a {
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.35;
+  box-shadow: var(--ot-shadow-sm);
 }
 
 .ot-event-facts__icon {
@@ -1550,7 +1892,7 @@ a {
 }
 
 .ot-event-section {
-  margin-top: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  margin-top: clamp(2.25rem, 1.75rem + 1.5vw, 3rem);
 }
 
 .ot-event-section__head {
@@ -1595,6 +1937,7 @@ a {
   border-radius: var(--ot-radius-md);
   background-color: var(--ot-surface);
   list-style: none;
+  box-shadow: var(--ot-shadow-sm);
 }
 
 .ot-ticket-row {
@@ -1603,11 +1946,16 @@ a {
   grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 0.75rem 1.5rem;
-  padding: 1rem 1.25rem;
+  padding: 1.125rem 1.25rem;
+  transition: background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-ticket-row:hover {
+  background-color: #fafbfe;
 }
 
 .ot-ticket-row + .ot-ticket-row {
-  border-top: 1px solid var(--ot-line);
+  border-top: 1px dashed var(--ot-line-strong);
 }
 
 .ot-ticket-row__info {
@@ -1643,6 +1991,7 @@ a {
   padding: 0.25rem;
   border: 1px solid var(--ot-line);
   border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
 }
 
 .ot-qty__btn {
@@ -1685,7 +2034,9 @@ a {
   margin-top: 0.75rem;
   padding: 1rem 1.25rem;
   border-radius: var(--ot-radius-md);
-  background-color: var(--ot-navy-800);
+  background:
+    radial-gradient(80% 140% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 60%),
+    var(--ot-navy-800);
   color: var(--ot-on-dark-muted);
 }
 
@@ -1745,7 +2096,7 @@ a {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-  background-color: var(--ot-canvas);
+  background-color: var(--ot-primary-50);
   color: var(--ot-primary-600);
 }
 
@@ -1763,7 +2114,7 @@ a {
   }
 }
 
-/* 12. Booking card (ticket) + mobile booking bar ---------------------- */
+/* 13. Booking card (ticket) + mobile booking bar ---------------------- */
 .ot-booking-card {
   --stub: 5.75rem;
   position: sticky;
@@ -1773,7 +2124,8 @@ a {
   border-radius: var(--ot-radius-lg);
   color: var(--ot-on-dark-muted);
   background:
-    radial-gradient(90% 70% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 70%),
+    radial-gradient(90% 70% at 100% 0%, rgba(78, 115, 223, 0.26), transparent 70%),
+    radial-gradient(70% 60% at 0% 100%, rgba(240, 181, 68, 0.1), transparent 70%),
     var(--ot-navy-800);
   -webkit-mask:
     radial-gradient(circle 0.75rem at var(--stub) 0, #0000 98%, #000),
@@ -1786,7 +2138,7 @@ a {
 }
 
 .ot-booking-col {
-  filter: drop-shadow(0 22px 26px rgba(20, 26, 40, 0.22));
+  filter: drop-shadow(0 22px 26px rgba(20, 26, 40, 0.24));
 }
 
 .ot-booking-card__stub {
@@ -1816,7 +2168,7 @@ a {
   margin-block: 0.125rem;
   color: var(--ot-on-dark);
   font-family: var(--ot-font-display);
-  font-size: 3.25rem;
+  font-size: 3.5rem;
   font-weight: 700;
   line-height: 0.95;
 }
@@ -1893,6 +2245,13 @@ a {
   transition: transform var(--ot-dur) var(--ot-ease);
 }
 
+@supports (backdrop-filter: blur(1px)) {
+  .ot-mobile-cta {
+    background-color: rgba(23, 28, 40, 0.88);
+    backdrop-filter: saturate(150%) blur(16px);
+  }
+}
+
 .ot-mobile-cta.is-hidden {
   transform: translateY(110%);
 }
@@ -1934,18 +2293,33 @@ a {
   }
 }
 
-/* 13. Footer ---------------------------------------------------------- */
+/* 14. Footer ---------------------------------------------------------- */
 .ot-footer {
+  position: relative;
   margin-top: auto;
-  padding: clamp(2.5rem, 2rem + 2vw, 3.5rem) 0 1.5rem;
-  background-color: var(--ot-navy-800);
+  padding: clamp(3rem, 2.5rem + 2vw, 4rem) 0 1.5rem;
   color: var(--ot-on-dark-muted);
+  background:
+    radial-gradient(60% 80% at 100% 0%, rgba(78, 115, 223, 0.1), transparent 70%),
+    var(--ot-navy-800);
+}
+
+/* Perforated top edge: the footer is the stub torn from the page */
+.ot-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--ot-perf-r);
+  background: radial-gradient(circle at 50% 0, var(--ot-canvas) calc(var(--ot-perf-r) - 0.5px), transparent var(--ot-perf-r)) left top / var(--ot-perf-gap) 100% repeat-x;
+  pointer-events: none;
 }
 
 .ot-footer__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem 1.5rem;
+  gap: 2.25rem 1.5rem;
 }
 
 .ot-footer__brand {
@@ -1955,8 +2329,16 @@ a {
 .ot-footer__logo {
   display: block;
   width: auto;
-  height: 2.5rem;
-  margin-bottom: 1.5rem;
+  height: 2.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.ot-footer__about {
+  max-width: 34ch;
+  margin: 0 0 1.75rem;
+  color: var(--ot-on-dark-muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
 }
 
 .ot-footer__title {
@@ -2017,11 +2399,12 @@ a {
   color: var(--ot-on-dark-muted);
   font-size: 0.9375rem;
   text-decoration: none;
-  transition: color var(--ot-dur-fast) var(--ot-ease);
+  transition: color var(--ot-dur-fast) var(--ot-ease), transform var(--ot-dur-fast) var(--ot-ease);
 }
 
 .ot-footer__links a:hover {
   color: var(--ot-on-dark);
+  transform: translateX(2px);
 }
 
 .ot-footer__links .ot-icon {
@@ -2036,7 +2419,7 @@ a {
 }
 
 .ot-footer__legal {
-  margin: 2.5rem 0 0;
+  margin: 2.75rem 0 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--ot-navy-line);
   font-size: 0.875rem;
@@ -2055,7 +2438,7 @@ a {
 
 @media (min-width: 768px) {
   .ot-footer__grid {
-    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
   }
 
   .ot-footer__brand {
@@ -2063,7 +2446,7 @@ a {
   }
 }
 
-/* 14. Floating actions ------------------------------------------------ */
+/* 15. Floating actions ------------------------------------------------ */
 .ot-fab-stack {
   position: fixed;
   right: 1rem;
@@ -2071,7 +2454,7 @@ a {
   z-index: 1024;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.625rem;
   transition: bottom var(--ot-dur) var(--ot-ease);
 }
@@ -2096,17 +2479,45 @@ a {
   color: #fff;
 }
 
+/* Chat launcher: a round button that opens into a labelled pill on hover/focus */
 .ot-chat-launcher {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  min-width: 3.25rem;
+  padding-inline: 1rem;
+  border-radius: var(--ot-radius-pill);
   background-color: var(--ot-primary-600);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 65%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 30px -12px rgba(58, 95, 212, 0.75);
 }
 
 .ot-chat-launcher:hover {
   background-color: var(--ot-primary-700);
 }
 
+.ot-chat-launcher__label {
+  max-width: 0;
+  overflow: hidden;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 360ms var(--ot-ease), margin 360ms var(--ot-ease), opacity 200ms var(--ot-ease);
+}
+
+.ot-chat-launcher:hover .ot-chat-launcher__label,
+.ot-chat-launcher:focus-visible .ot-chat-launcher__label {
+  max-width: 12rem;
+  margin-left: 0.5rem;
+  opacity: 1;
+}
+
 .ot-fab--top {
   width: 2.75rem;
   height: 2.75rem;
+  margin-right: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background-color: rgba(31, 37, 51, 0.92);
   opacity: 0;
   visibility: hidden;
@@ -2123,9 +2534,28 @@ a {
   background-color: var(--ot-navy-950);
 }
 
-/* 15. Utilities + motion ---------------------------------------------- */
+/* 16. Reveal + motion ------------------------------------------------- */
+/* ot-core.js marks below-the-fold .ot-reveal elements as pending and reveals them as they scroll in */
+.ot-reveal.is-pending {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+.ot-reveal.is-revealing {
+  transition:
+    opacity 700ms var(--ot-ease) var(--ot-delay, 0ms),
+    transform 700ms var(--ot-ease) var(--ot-delay, 0ms) !important;
+}
+
 .hover-scale {
   will-change: transform;
+}
+
+@media print {
+  .ot-reveal.is-pending {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2141,9 +2571,15 @@ a {
     transition-duration: 0.01ms !important;
   }
 
+  .ot-reveal.is-pending {
+    opacity: 1;
+    transform: none;
+  }
+
   .ot-card:hover,
   .ot-card:focus-within,
   .ot-faq-card:hover,
+  .ot-btn--primary:hover,
   .ot-card:hover .ot-card__cover > img {
     transform: none;
   }

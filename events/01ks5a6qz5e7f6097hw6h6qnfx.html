@@ -184,19 +184,25 @@
 <div class="ot-shell" id="content-wrapper">
   <main id="main" class="ot-main" tabindex="-1">
 
+    <!-- EVENT STAGE — the organiser's 1210×450 banner, shown whole (never cropped), lit by its own colours -->
+    <section class="ot-stage ot-page-stage ot-event-stage" data-ot-ambient-from=".ot-event-banner img" aria-label="Event banner">
+      <div class="ot-ambient" aria-hidden="true">
+        <span class="ot-ambient__layer"></span>
+      </div>
+      <div class="ot-container">
+        <nav class="ot-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html">Events</a></li>
+            <li aria-current="page">The SA 4X4 and Outdoor Show SUN</li>
+          </ol>
+        </nav>
+        <figure class="ot-event-banner">
+          <img src="../assets/images/events/SA_4x4_OS_WK_25_Okt_1210x450px_2026_1.jpg" alt="The SA 4X4 and Outdoor Show SUN" width="1210" height="450" fetchpriority="high">
+        </figure>
+      </div>
+    </section>
+
     <div class="ot-container">
-      <nav class="ot-breadcrumb" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="../index.html">Events</a></li>
-          <li aria-current="page">The SA 4X4 and Outdoor Show SUN</li>
-        </ol>
-      </nav>
-
-      <!-- EVENT BANNER — the organiser's 1210×450 banner, shown whole (never cropped) -->
-      <figure class="ot-event-banner">
-        <img src="../assets/images/events/SA_4x4_OS_WK_25_Okt_1210x450px_2026_1.jpg" alt="The SA 4X4 and Outdoor Show SUN" width="1210" height="450" fetchpriority="high">
-      </figure>
-
       <div class="row g-4 g-xl-5 ot-event-layout">
         <div class="col-lg-8">
           <header class="ot-event-head">
@@ -341,6 +347,7 @@
     <div class="ot-footer__grid">
       <div class="ot-footer__col ot-footer__brand">
         <img class="ot-footer__logo" src="../assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150" loading="lazy">
+        <p class="ot-footer__about">Tickets for football, festivals, shows and school events across South Africa — straight to your phone.</p>
         <h2 class="ot-footer__title">Get in Touch</h2>
         <ul class="ot-footer__social">
 <li><a class="ot-social" href="https://www.instagram.com/opentickets.za/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ot-icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a></li>
@@ -400,8 +407,9 @@
   <a class="ot-fab ot-fab--top scroll-to-top" href="#page-top" data-ot-to-top aria-label="Back to top">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
   </a>
-  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support" aria-label="Chat with support">
+  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+    <span class="ot-chat-launcher__label">Chat with support</span>
   </a>
 </aside>
 

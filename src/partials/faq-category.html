@@ -1,10 +1,12 @@
-<li class="col-sm-6 col-xl-4">
+<li class="col-md-6 col-xl-4 ot-faq-item ot-reveal">
   <a class="ot-faq-card hover-scale" href="{{ href }}">
-    <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-{{ icon }}"></use></svg></span>
-    <span class="ot-faq-card__body">
+    <span class="ot-faq-card__main">
+      <span class="ot-faq-card__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-{{ icon }}"></use></svg></span>
       <span class="ot-faq-card__title">{{ title }}</span>
-      <span class="ot-faq-card__count">{{ countLabel }}</span>
+      <span class="ot-faq-card__cta" aria-hidden="true">View answers<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
     </span>
-    <svg class="ot-icon ot-faq-card__arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    <span class="ot-faq-card__stub">
+      <span class="ot-faq-card__count"><span class="ot-faq-card__num">{{ count }}</span> <span class="ot-faq-card__unit">{{ unitLabel }}</span></span>
+    </span>
   </a>
 </li>

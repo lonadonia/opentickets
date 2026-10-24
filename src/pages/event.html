@@ -1,18 +1,24 @@
 {{> layout-start }}
 
+    <!-- EVENT STAGE — the organiser's 1210×450 banner, shown whole (never cropped), lit by its own colours -->
+    <section class="ot-stage ot-page-stage ot-event-stage" data-ot-ambient-from=".ot-event-banner img" aria-label="Event banner">
+      <div class="ot-ambient" aria-hidden="true">
+        <span class="ot-ambient__layer"></span>
+      </div>
+      <div class="ot-container">
+        <nav class="ot-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="{{ routes.home }}">Events</a></li>
+            <li aria-current="page">{{ event.title }}</li>
+          </ol>
+        </nav>
+        <figure class="ot-event-banner">
+          <img src="{{ event.heroImage }}" alt="{{ event.alt }}" width="1210" height="450" fetchpriority="high">
+        </figure>
+      </div>
+    </section>
+
     <div class="ot-container">
-      <nav class="ot-breadcrumb" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="{{ routes.home }}">Events</a></li>
-          <li aria-current="page">{{ event.title }}</li>
-        </ol>
-      </nav>
-
-      <!-- EVENT BANNER — the organiser's 1210×450 banner, shown whole (never cropped) -->
-      <figure class="ot-event-banner">
-        <img src="{{ event.heroImage }}" alt="{{ event.alt }}" width="1210" height="450" fetchpriority="high">
-      </figure>
-
       <div class="row g-4 g-xl-5 ot-event-layout">
         <div class="col-lg-8">
           <header class="ot-event-head">

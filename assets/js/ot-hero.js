@@ -25,8 +25,12 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const INTERVAL = 6000;
   const count = slides.length;
+  const ambientLayers = Array.from(hero.querySelectorAll('[data-ot-ambient] .ot-ambient__layer'));
 
   if (!count) return;
+
+  // The active dot's progress bar runs for exactly one autoplay interval
+  hero.style.setProperty('--ot-hero-interval', `${INTERVAL}ms`);
 
   /* Looping: one decorative clone at each end so a neighbour always peeks; landing on a clone jumps to the real slide. */
   const makeClone = (slide) => {
@@ -54,10 +58,27 @@
   let collapsed = false;
   let visible = true;
 
+  /* Stage glow: cross-fade two blurred layers to the colours of the active banner */
+  let ambientIndex = -1;
+  let ambientTurn = 0;
+  const lightAmbient = (i) => {
+    if (!ambientLayers.length || i === ambientIndex) return;
+    const img = slides[i].querySelector('img');
+    if (!img) return;
+    ambientIndex = i;
+    const next = ambientLayers[ambientTurn % ambientLayers.length];
+    const prev = ambientLayers[(ambientTurn + 1) % ambientLayers.length];
+    ambientTurn += 1;
+    next.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+    next.classList.add('is-on');
+    if (prev !== next) prev.classList.remove('is-on');
+  };
+
   const setActive = (p) => {
     if (p === pos) return;
     pos = p;
     const active = realIndex(p);
+    lightAmbient(active);
     panels.forEach((panel, n) => panel.classList.toggle('is-active', n === p));
     slides.forEach((slide, n) => {
       const on = n === active;
@@ -122,10 +143,17 @@
   const stop = () => {
     clearInterval(timer);
     timer = null;
+    hero.classList.remove('is-playing');
   };
   const sync = () => {
     if (shouldPlay()) {
-      if (!timer) timer = setInterval(() => step(1), INTERVAL);
+      if (!timer) {
+        timer = setInterval(() => step(1), INTERVAL);
+        // Restart the progress animation in step with the new interval
+        hero.classList.remove('is-playing');
+        void hero.offsetWidth;
+        hero.classList.add('is-playing');
+      }
     } else {
       stop();
     }

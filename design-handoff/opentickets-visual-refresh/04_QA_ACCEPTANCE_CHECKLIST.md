@@ -1,13 +1,15 @@
 # 04 · QA & Acceptance Checklist — Open Tickets Visual Refresh
 
 **Environment:** headless Chromium (Playwright 1.63.0), Node 22.22.0, pages served over local HTTP by `tools/qa.cjs`.
-**Date:** 2026-10-23/24. **Command:** `npm run qa` → **49/49 passed** on two consecutive runs after the final fix.
+**Date:** 2026-10-23/24, re-run after the design refinement pass. **Command:** `npm run qa` → **49/49 passed**.
+The layout check now also fails if any displayed element is left hidden by the reveal-on-scroll.
 Statuses: `VERIFIED_PASS`, `FAILED`, `NOT_TESTED`, `BLOCKED_EXTERNAL`, `NOT_APPLICABLE`.
 
 ## 1. Layout: every screen at every target width (REQ-001…004, 029, 030)
 
 Check per page and width: `scrollWidth ≤ clientWidth` (no horizontal overflow), no console errors, no failed or 4xx
-requests, no broken images, with the whole page scrolled first so lazy images load. A full-page screenshot is saved for each.
+requests, no broken images and no displayed element left hidden by the reveal-on-scroll. The whole page is scrolled
+first (with `behavior: 'instant'`, since the pages use smooth scrolling) so lazy images load and reveals run. A full-page screenshot is saved for each.
 
 | Screen | 1440 | 1024 | 768 | 390 | 360 |
 |---|---|---|---|---|---|
@@ -19,7 +21,8 @@ requests, no broken images, with the whole page scrolled first so lazy images lo
 
 Visual review of the screenshots (manual) found and fixed: three cramped columns at 1024 px beside the rail (cards are
 now 2 columns until 1200 px), the mobile menu close button position, and a missing left peek on the first hero slide
-(the hero now loops). Evidence: `screenshots/01…12`.
+(the hero now loops). In the refinement pass it also fixed doubled spacing above the event title (a margin overriding
+the Bootstrap row offset) and made the perforation finer. Evidence: `screenshots/01…12` (regenerated).
 
 ## 2. Isotope: position, controls, filtering unchanged (REQ-013, 014, 022, 024, 031)
 
@@ -59,7 +62,8 @@ now 2 columns until 1200 px), the mobile menu close button position, and a missi
 
 | Check | Method | Result |
 |---|---|---|
-| axe-core 4.10.2 (WCAG 2 A/AA, 2.1 AA, best practice) on Home 1440/390, FAQ 1440, Event 1440/390, Search 1440 (results) and 390 (empty) | Injected into Playwright pages | **0 violations** after fixes (initial run flagged a colour-only footer link, missing `h1` on Home, chat launcher outside a landmark, and search heading order/landmark name; all fixed) |
+| axe-core 4.10.2 (WCAG 2 A/AA, 2.1 AA, best practice) on Home 1440/390, FAQ 1440/390, Event 1440/390, Search 1440 (results) and 390 (empty), after scrolling the page | Injected into Playwright pages | **0 violations** (the first pass flagged a colour-only footer link, a missing `h1` on Home, the chat launcher outside a landmark, and search heading order/landmark name; all fixed) |
+| Text contrast over the artwork glow (axe cannot measure text over images) | Hid each text element, captured the pixels behind it, and compared the element's computed colour with the 98th-percentile brightest pixel: breadcrumbs on all 27 event pages at 1440 and 390, meta/eyebrow/counter on all 11 hero slides, FAQ and Search stage text (95 samples) | **Min 6.79:1**. A first sweep found 2.0:1 on very bright banners; fixed with a stronger scrim and a brighter stage text tone (`--ot-on-stage-muted`) |
 | Duplicate ids | DOM scan, same pages | None |
 | Colour contrast of tokens | Computed WCAG ratios (see 02 §4) | Text ≥ 4.5:1; large date numerals ≥ 3:1 |
 | Keyboard: skip link, focus rings, carousel arrows/dots/pause, dropdowns, off-canvas | Implemented; dropdown/off-canvas/arrow behaviour covered by tests above | Partially automated |

@@ -71,12 +71,24 @@
   --ot-radius-md: 0.875rem;
   --ot-radius-lg: 1.25rem;
   --ot-radius-pill: 999px;
-  --ot-notch: 0.625rem;           /* ticket notch radius */
+  --ot-notch: 0.6875rem;          /* ticket notch radius (cards, booking card, FAQ tickets) */
+  --ot-perf-r: 0.25rem;           /* perforation hole radius on the stage / footer tear edges */
+  --ot-perf-gap: 0.875rem;       /* distance between perforation holes */
+
+  /* Stage — the dark, cinematic header band shared by all four screens */
+  --ot-stage-top: var(--ot-navy-800);
+  --ot-stage-bottom: var(--ot-navy-900);
+  --ot-stage-glow: rgba(78, 115, 223, 0.18);
+  --ot-ambient-opacity: 0.45;     /* strength of the artwork-coloured glow */
+  --ot-on-stage-muted: #c9d0dc;   /* secondary text on the stage; stays ≥ 4.5:1 over the brightest glow */
 
   /* Elevation */
   --ot-shadow-sm: 0 1px 2px rgba(20, 26, 40, 0.06), 0 2px 8px -4px rgba(20, 26, 40, 0.12);
   --ot-shadow-md: 0 2px 4px rgba(20, 26, 40, 0.05), 0 12px 28px -14px rgba(20, 26, 40, 0.28);
   --ot-shadow-lg: 0 4px 10px rgba(20, 26, 40, 0.06), 0 24px 48px -20px rgba(20, 26, 40, 0.38);
+  --ot-shadow-stage: 0 40px 80px -36px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --ot-ticket-shadow: drop-shadow(0 1px 1px rgba(20, 26, 40, 0.06)) drop-shadow(0 10px 14px rgba(20, 26, 40, 0.09));
+  --ot-ticket-shadow-hover: drop-shadow(0 2px 2px rgba(20, 26, 40, 0.06)) drop-shadow(0 20px 24px rgba(20, 26, 40, 0.17));
 
   /* Motion */
   --ot-ease: cubic-bezier(0.2, 0.7, 0.2, 1);

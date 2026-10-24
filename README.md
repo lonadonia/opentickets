@@ -95,6 +95,18 @@ Change the custom properties in `assets/css/ot-tokens.css`. Brand chrome `--ot-n
 `--ot-primary-*`, the red date accent `--ot-accent-*`, and neutrals, radii, shadows and motion all live there.
 Bootstrap's own variables (`--bs-primary`, links, borders, body colours) are mapped onto the same tokens.
 
+## Design system at a glance
+
+- **Stage + canvas.** Every screen opens on a dark *stage* (`.ot-stage`). An ambient layer (`.ot-ambient`) takes the
+  colours of the event artwork: on Home it follows the active banner, and on FAQ/Event it uses the page image. The
+  stage tears off into the light content canvas along a ticket perforation, and the footer repeats that edge.
+  A scrim keeps every stage text at ≥ 6.8:1 contrast, whatever the artwork.
+- **Ticket shapes.** Event cards, FAQ topics and the booking panel share the logo's notched, perforated stub.
+  The card stub shows day, month and year; the FAQ stub shows the question count.
+- **Motion.** Header shrink, hero crossfade with an autoplay progress bar, card lift with a booking arrow, and a light
+  reveal for content entering from below the fold. Everything is disabled under `prefers-reduced-motion`; content
+  that starts on screen is never hidden, and nothing stays hidden if JavaScript fails.
+
 ## Behaviour changes worth knowing
 
 - The topbar search icon button now submits the search (live it was `type="button"` and did nothing). Enter still submits.
@@ -102,8 +114,10 @@ Bootstrap's own variables (`--bs-primary`, links, borders, body colours) are map
   arrows, dots, keyboard and a pause control. Autoplay is off for reduced-motion users.
 - Card layout: two columns from 768px and three from 1200px (live: three from 768px, which truncates text next to
   the rail). The whole card is still one link, and images are shown whole on a soft fill instead of cropped.
-- Card dates read `Sat, 31 Oct 2026 · 20:15` (live: `2026-10-31, 20:15`); the stub still shows day and month.
-- The chat launcher and back-to-top button are stacked instead of overlapping.
+- Card dates: the stub shows `31 / OCT / 2026` and the meta line `Saturday · 20:15` (live: `2026-10-31, 20:15`
+  under a day/month badge). Screen readers still hear the full date.
+- The chat launcher and back-to-top button are stacked instead of overlapping; the chat button opens into a
+  "Chat with support" label on hover/focus.
 - Added: a result count and empty state for the filter, a "no results" state on search, breadcrumbs, and a sticky
   booking card plus mobile booking bar on the event page.
 

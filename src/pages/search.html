@@ -1,29 +1,35 @@
 {{> layout-start }}
 
-    <div class="ot-container">
-      <nav class="ot-breadcrumb" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="{{ routes.home }}">Events</a></li>
-          <li aria-current="page">Search</li>
-        </ol>
-      </nav>
-
-      <!-- SEARCH HEADER — GET {{ routes.search }}?q= (same contract as the topbar search) -->
-      <section class="ot-search-head" aria-labelledby="search-heading">
+    <!-- SEARCH STAGE — GET {{ routes.search }}?q= (same contract as the topbar search) -->
+    <section class="ot-stage ot-page-stage ot-search-head" aria-labelledby="search-heading">
+      <div class="ot-container">
+        <nav class="ot-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="{{ routes.home }}">Events</a></li>
+            <li aria-current="page">Search</li>
+          </ol>
+        </nav>
+        <p class="ot-eyebrow ot-eyebrow--on-dark">Search</p>
         <h1 class="ot-page-hero__title" id="search-heading">
           <span data-ot-search-title-all>All events</span>
           <span data-ot-search-title-query hidden>Results for “<span data-ot-query></span>”</span>
         </h1>
-        <p class="ot-section__meta" data-ot-search-count
-           data-label-one="1 event found" data-label-many="{n} events found" data-label-all="{n} upcoming events"
-           aria-live="polite">{{ eventCount }} upcoming events</p>
+        <p class="ot-count-pill ot-count-pill--on-dark">
+          <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>
+          <span data-ot-search-count
+                data-label-one="1 event found" data-label-many="{n} events found" data-label-all="{n} upcoming events"
+                aria-live="polite">{{ eventCount }} upcoming events</span>
+        </p>
         <form class="ot-search-form" action="{{ routes.search }}" method="GET" role="search">
           <label class="visually-hidden" for="search-page-input">Search events or venues</label>
           <svg class="ot-icon ot-search-form__icon" aria-hidden="true"><use href="#i-search"></use></svg>
           <input class="form-control" type="text" name="q" id="search-page-input" value="{{ query }}" placeholder="Search events or venues…" autocomplete="off">
           <button class="btn ot-btn ot-btn--primary" type="submit">Search</button>
         </form>
-      </section>
+      </div>
+    </section>
+
+    <div class="ot-container">
 
       <!--
         RESULTS — same event-card partial as the home page.

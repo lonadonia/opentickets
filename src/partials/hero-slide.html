@@ -4,7 +4,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">{{ indexLabel }}<span>/</span>{{ totalLabel }}</span>
+      </p>
       <h2 class="ot-hero__title"><a href="{{ url }}">{{ title }}</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="{{ isoDateTime }}">{{ shortDate }} · {{ time }}</time></span>

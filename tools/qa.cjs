@@ -69,12 +69,20 @@ async function openPage(browser, base, url, width, opts = {}) {
   for (const [name, url] of PAGES) {
     for (const width of WIDTHS) {
       const { context, page, problems } = await openPage(browser, base, url, width);
-      // Scroll through the page so lazy images load, then return to the top
+      // Scroll through the page so lazy images load and scroll-reveals run, then return to the top.
+      // `instant` because the pages use `scroll-behavior: smooth`, which would turn each jump into an animation.
       await page.evaluate(async () => {
-        for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); }
-        window.scrollTo(0, 0);
+        for (let y = 0; y < document.body.scrollHeight; y += 500) {
+          window.scrollTo({ top: y, behavior: 'instant' });
+          await new Promise((r) => setTimeout(r, 90));
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
       });
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(1200);
+      // Only displayed elements count: cards hidden by a filter legitimately wait until they are shown
+      const pendingReveals = await page.evaluate(() => Array.from(document.querySelectorAll('.ot-reveal.is-pending'))
+        .filter((el) => el.getClientRects().length > 0).length);
+      if (pendingReveals) problems.push(`${pendingReveals} elements still hidden by reveal-on-scroll`);
       const m = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth,
         cw: document.documentElement.clientWidth,
@@ -162,12 +170,12 @@ async function openPage(browser, base, url, width, opts = {}) {
   {
     const { context, page } = await openPage(browser, base, 'index.html', 1440);
     const h0 = await page.evaluate(() => document.querySelector('.ot-header').getBoundingClientRect().height);
-    await page.evaluate(() => window.scrollTo(0, 600));
+    await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
     await page.waitForTimeout(600);
     const h1 = await page.evaluate(() => ({ h: document.querySelector('.ot-header').getBoundingClientRect().height, top: document.querySelector('.ot-header').getBoundingClientRect().top }));
     await page.screenshot({ path: path.join(outDir, 'home-1440-scrolled.png') });
     record('NAV-001', 'Top navigation stays fixed and shrinks on scroll', h1.top === 0 && h1.h < h0, `${h0}px → ${h1.h}px`);
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     await page.waitForTimeout(400);
 
     const before = await page.getAttribute('[data-ot-hero-dot][aria-current="true"]', 'data-ot-hero-dot');

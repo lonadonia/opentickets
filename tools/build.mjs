@@ -48,6 +48,7 @@ function eventCtx(e, base) {
   return {
     ...e,
     shortDate,
+    year: e.date.slice(0, 4),
     monthLabel: MONTHS[d.getUTCMonth()],
     weekdayShort: DAYS[d.getUTCDay()],
     isoDateTime: `${e.date}T${e.time}`,
@@ -100,7 +101,14 @@ function write(file, html) {
   const base = '';
   const byId = Object.fromEntries(events.map((e) => [e.id, e]));
   const slides = featured
-    .map((id, i) => render('hero-slide', { ...eventCtx(byId[id], base), index: i + 1, total: featured.length, loading: i < 2 ? 'eager' : 'lazy' }))
+    .map((id, i) => render('hero-slide', {
+      ...eventCtx(byId[id], base),
+      index: i + 1,
+      total: featured.length,
+      indexLabel: String(i + 1).padStart(2, '0'),
+      totalLabel: String(featured.length).padStart(2, '0'),
+      loading: i < 2 ? 'eager' : 'lazy',
+    }))
     .join('\n');
   const dots = featured
     .map((id, i) => `<li><button class="ot-hero__dot" type="button" data-ot-hero-dot="${i}" aria-label="Show featured event ${i + 1}: ${escape(byId[id].title)}"${i === 0 ? ' aria-current="true"' : ''}></button></li>`)
@@ -117,7 +125,7 @@ function write(file, html) {
   const base = '';
   const total = site.faqCategories.reduce((n, c) => n + c.count, 0);
   const categories = site.faqCategories
-    .map((c) => render('faq-category', { ...c, href: site.faqCategoryBase + c.slug, countLabel: `${c.count} ${c.count === 1 ? 'question' : 'questions'}` }))
+    .map((c) => render('faq-category', { ...c, href: site.faqCategoryBase + c.slug, unitLabel: c.count === 1 ? 'question' : 'questions' }))
     .join('\n');
   const ctx = {
     ...pageCtx({ base, active: 'faq', title: 'Frequently Asked Questions — Open Tickets', description: 'Answers about buying tickets, ticket delivery, your account and football events on Open Tickets.', bodyClass: 'ot-page-faq' }),

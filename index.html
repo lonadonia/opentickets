@@ -189,10 +189,15 @@
     <!--
       FEATURED HERO — collapses while the Isotope filter is active (query >= 3 chars), as the live slider does.
       Replaces the Slick slider with a dependency-free, swipeable carousel (ot-hero.js). Keep the slide order from the CMS.
+      The ambient layers pick up the colours of the active banner (set by ot-hero.js).
     -->
     <div class="ot-hero-collapse" data-ot-hero-collapse>
       <div class="ot-hero-collapse__inner">
-        <section class="ot-hero" data-ot-hero aria-roledescription="carousel" aria-label="Featured events">
+        <section class="ot-stage ot-hero" data-ot-hero aria-roledescription="carousel" aria-label="Featured events">
+          <div class="ot-ambient" data-ot-ambient aria-hidden="true">
+            <span class="ot-ambient__layer"></span>
+            <span class="ot-ambient__layer"></span>
+          </div>
           <div class="ot-hero__viewport">
             <ul class="ot-hero__track" data-ot-hero-track aria-live="off">
 <li class="ot-hero__slide osahan-slider-item" data-ot-hero-slide aria-roledescription="slide" aria-label="1 of 11">
@@ -201,7 +206,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">01<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01ktvcz2dxv10rs7cvq0q9tc0v.html">Appel in PE</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-11-06T21:00">Fri, 6 Nov 2026 · 21:00</time></span>
@@ -220,7 +228,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">02<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01kva9y2phdzcq6p7p12s0r5vy.html">Going Back West</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-11-07T13:00">Sat, 7 Nov 2026 · 13:00</time></span>
@@ -239,7 +250,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">03<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59m15y2xeeevjy8fk41xcx2.html">Sekhukhune United FC vs Richards Bay FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-25T18:00">Sun, 25 Oct 2026 · 18:00</time></span>
@@ -258,7 +272,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">04<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59rxwvshnt4y1aesye8pg4p.html">Kruger United FC vs Amazulu FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-25T15:00">Sun, 25 Oct 2026 · 15:00</time></span>
@@ -277,7 +294,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">05<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59shh3w510d0rz51zsktzhk.html">Kaizer Chiefs vs TS Galaxy FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time></span>
@@ -296,7 +316,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">06<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59sxq87e20kc33ykxz9ztkr.html">Polokwane City FC vs Siwelele FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-24T18:00">Sat, 24 Oct 2026 · 18:00</time></span>
@@ -315,7 +338,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">07<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59t7hbq4v6rsera8x5zzpaz.html">Durban City FC vs Stellenbosch FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-28T19:00">Wed, 28 Oct 2026 · 19:00</time></span>
@@ -334,7 +360,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">08<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m59thwermysbwat20bst9g8r.html">Lamontville Golden Arrows vs Chippa United (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-24T15:00">Sat, 24 Oct 2026 · 15:00</time></span>
@@ -353,7 +382,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">09<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m5cf9ptpd5rqp9pp12ahqehm.html">Mamelodi Sundowns vs Marumo Gallants (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time></span>
@@ -372,7 +404,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">10<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="events/01m5cfmp8rgz7h5v31fhaae677.html">Orlando Pirates vs Milford FC (CKC)</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time></span>
@@ -391,7 +426,10 @@
   </a>
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
-      <p class="ot-hero__eyebrow"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</p>
+      <p class="ot-hero__eyebrow">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-hero__count" aria-hidden="true">11<span>/</span>11</span>
+      </p>
       <h2 class="ot-hero__title"><a href="event.html">Mamelodi Sundowns vs Durban City</a></h2>
       <p class="ot-hero__meta">
         <span><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="2026-10-31T20:15">Sat, 31 Oct 2026 · 20:15</time></span>
@@ -439,17 +477,23 @@
     <!-- EVENTS — Isotope grid. Selectors, data attributes and configuration are unchanged from the live site. -->
     <section class="ot-section ot-events" aria-labelledby="events-heading">
       <div class="ot-container">
-        <header class="ot-section__header">
-          <h2 class="ot-section__title" id="events-heading">Events</h2>
-          <p class="ot-section__meta" data-ot-grid-count
-             data-label-all="{n} upcoming events"
-             data-label-filtered="{shown} of {n} events match “{q}”"
-             aria-live="polite">27 upcoming events</p>
+        <header class="ot-section__header ot-reveal">
+          <div>
+            <p class="ot-eyebrow">What’s on</p>
+            <h2 class="ot-section__title" id="events-heading">Events</h2>
+          </div>
+          <p class="ot-count-pill">
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>
+            <span data-ot-grid-count
+                  data-label-all="{n} upcoming events"
+                  data-label-filtered="{shown} of {n} events match “{q}”"
+                  aria-live="polite">27 upcoming events</span>
+          </p>
         </header>
 
         <div class="row" id="events-grid">
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="klub 600 2026 - lede aansluiting / hernuwing" data-venue="klub 600">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kvda8devwky6hkh6qbhpbh8p.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/image-287-29.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -458,6 +502,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">01</span>
           <span class="ot-card__month">Jan</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Klub 600 2026 - Lede Aansluiting / Hernuwing</h3>
@@ -465,8 +510,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Klub 600</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-01-01T08:00">Thu, 1 Jan 2026 · 08:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-01-01T08:00">Thursday · 08:00<span class="visually-hidden">, Thu, 1 Jan 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -474,7 +520,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="orlando pirates fc 2026/27 season ticket" data-venue="orlando amstel arena">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kyhhbd2pg75gq5jc4xxmwef1.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/OPFC-TICKET-281210x450-29.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -483,6 +529,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">02</span>
           <span class="ot-card__month">Aug</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Orlando Pirates FC 2026/27 Season Ticket</h3>
@@ -490,8 +537,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Orlando Amstel Arena</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-08-02T08:00">Sun, 2 Aug 2026 · 08:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-08-02T08:00">Sunday · 08:00<span class="visually-hidden">, Sun, 2 Aug 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -499,7 +547,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="the sa 4x4 and outdoor show fri" data-venue="sandringham farm">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kryb1vz1sn1mbxh744p7j0x2.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/SA_4x4_OS_WK_23_Okt_1210x450px_2026_1.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -508,6 +556,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">23</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">The SA 4X4 and Outdoor Show FRI</h3>
@@ -515,8 +564,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Sandringham Farm</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T12:00">Fri, 23 Oct 2026 · 12:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T12:00">Friday · 12:00<span class="visually-hidden">, Fri, 23 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -524,7 +574,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="the sa 4x4 and outdoor show weekend" data-venue="sandringham farm">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01ks5adb4h3kew3mgyxaed3bjs.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/SA_4x4_OS_WK_Weekend_1210x450px_2026_1.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -533,6 +583,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">23</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">The SA 4X4 and Outdoor Show WEEKEND</h3>
@@ -540,8 +591,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Sandringham Farm</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T12:00">Fri, 23 Oct 2026 · 12:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T12:00">Friday · 12:00<span class="visually-hidden">, Fri, 23 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -549,7 +601,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="midlands wanderers fc vs upington city fc" data-venue="sugar ray xulu stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59frj4q093htw5tsqd084gv.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/Screenshot-2026-10-19-094304.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -558,6 +610,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">23</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Midlands Wanderers FC vs Upington City FC</h3>
@@ -565,8 +618,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Sugar Ray Xulu Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T15:30">Fri, 23 Oct 2026 · 15:30</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T15:30">Friday · 15:30<span class="visually-hidden">, Fri, 23 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -574,7 +628,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="orlando pirates fc vs african stars fc" data-venue="orlando amstel arena">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m48r1ybg485zz56wz535xsbr.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/CAF_Tickets.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -583,6 +637,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">23</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Orlando Pirates FC vs African Stars FC</h3>
@@ -590,8 +645,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Orlando Amstel Arena</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T20:00">Fri, 23 Oct 2026 · 20:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T20:00">Friday · 20:00<span class="visually-hidden">, Fri, 23 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -599,7 +655,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="mamelodi sundowns vs. wiliete sport club (angola)" data-venue="loftus versfeld stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m462r15hn4cy495d6r2yb7nw.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/CAF-MSCFC-v-Wiliet-SC.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -608,6 +664,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">23</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Mamelodi Sundowns vs. Wiliete Sport Club (Angola)</h3>
@@ -615,8 +672,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Loftus Versfeld Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T20:00">Fri, 23 Oct 2026 · 20:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-23T20:00">Friday · 20:00<span class="visually-hidden">, Fri, 23 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -624,7 +682,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="the sa 4x4 and outdoor show sat" data-venue="sandringham farm">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01ks5610v79ydtk00tcr95wkq9.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/SA_4x4_OS_WK_24_Okt_1210x450px_2026_1.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -633,6 +691,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">24</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">The SA 4X4 and Outdoor Show SAT</h3>
@@ -640,8 +699,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Sandringham Farm</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T09:00">Sat, 24 Oct 2026 · 09:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T09:00">Saturday · 09:00<span class="visually-hidden">, Sat, 24 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -649,7 +709,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="lamontville golden arrows vs chippa united (ckc)" data-venue="king zwelithini stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59thwermysbwat20bst9g8r.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-King-Zwelithini.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -658,6 +718,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">24</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Lamontville Golden Arrows vs Chippa United (CKC)</h3>
@@ -665,8 +726,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>King Zwelithini Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T15:00">Sat, 24 Oct 2026 · 15:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T15:00">Saturday · 15:00<span class="visually-hidden">, Sat, 24 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -674,7 +736,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="polokwane city fc vs siwelele fc (ckc)" data-venue="old peter mokaba stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59sxq87e20kc33ykxz9ztkr.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-Old-Peter-Mokaba.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -683,6 +745,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">24</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Polokwane City FC vs Siwelele FC (CKC)</h3>
@@ -690,8 +753,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Old Peter Mokaba Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T18:00">Sat, 24 Oct 2026 · 18:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T18:00">Saturday · 18:00<span class="visually-hidden">, Sat, 24 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -699,7 +763,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="nelson mandela university fashion show" data-venue="tramways building">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kpqjesg1cy7j5cb583ss50qt.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/NMU_Banner-2026.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -708,6 +772,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">24</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Nelson Mandela University Fashion Show</h3>
@@ -715,8 +780,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Tramways Building</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T19:00">Sat, 24 Oct 2026 · 19:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-24T19:00">Saturday · 19:00<span class="visually-hidden">, Sat, 24 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -724,7 +790,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="the sa 4x4 and outdoor show sun" data-venue="sandringham farm">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01ks5a6qz5e7f6097hw6h6qnfx.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/SA_4x4_OS_WK_25_Okt_1210x450px_2026_1.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -733,6 +799,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">25</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">The SA 4X4 and Outdoor Show SUN</h3>
@@ -740,8 +807,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Sandringham Farm</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T09:00">Sun, 25 Oct 2026 · 09:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T09:00">Sunday · 09:00<span class="visually-hidden">, Sun, 25 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -749,7 +817,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="kruger united fc vs amazulu fc (ckc)" data-venue="mbombela stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59rxwvshnt4y1aesye8pg4p.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-Mbombela.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -758,6 +826,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">25</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Kruger United FC vs Amazulu FC (CKC)</h3>
@@ -765,8 +834,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Mbombela Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T15:00">Sun, 25 Oct 2026 · 15:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T15:00">Sunday · 15:00<span class="visually-hidden">, Sun, 25 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -774,7 +844,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="sekhukhune united fc vs richards bay fc (ckc)" data-venue="new peter mokaba stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59m15y2xeeevjy8fk41xcx2.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-New-Peter-Mokaba.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -783,6 +853,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">25</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Sekhukhune United FC vs Richards Bay FC (CKC)</h3>
@@ -790,8 +861,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>New Peter Mokaba Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T18:00">Sun, 25 Oct 2026 · 18:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-25T18:00">Sunday · 18:00<span class="visually-hidden">, Sun, 25 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -799,7 +871,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="isr massa aflos" data-venue="hoërskool zwartkop">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m4t1p82pp12z29mwq95jbm7m.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/ISR-2026-TICKET-BANNER-1210X450-MASSA-AFLOS-450.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -808,6 +880,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">27</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">ISR Massa Aflos</h3>
@@ -815,8 +888,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Hoërskool Zwartkop</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T18:30">Tue, 27 Oct 2026 · 18:30</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T18:30">Tuesday · 18:30<span class="visually-hidden">, Tue, 27 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -824,7 +898,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="kaizer chiefs vs ts galaxy fc (ckc)" data-venue="fnb stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59shh3w510d0rz51zsktzhk.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-FNB.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -833,6 +907,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">27</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Kaizer Chiefs vs TS Galaxy FC (CKC)</h3>
@@ -840,8 +915,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>FNB Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tuesday · 19:00<span class="visually-hidden">, Tue, 27 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -849,7 +925,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="mamelodi sundowns vs marumo gallants (ckc)" data-venue="loftus versfeld stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m5cf9ptpd5rqp9pp12ahqehm.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-Loftus-28Mamelodi-vs-Marumo-29.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -858,6 +934,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">27</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Mamelodi Sundowns vs Marumo Gallants (CKC)</h3>
@@ -865,8 +942,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Loftus Versfeld Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tuesday · 19:00<span class="visually-hidden">, Tue, 27 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -874,7 +952,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="orlando pirates vs milford fc (ckc)" data-venue="orlando amstel arena">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m5cfmp8rgz7h5v31fhaae677.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-Orlando-Amstel-Arena.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -883,6 +961,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">27</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Orlando Pirates vs Milford FC (CKC)</h3>
@@ -890,8 +969,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Orlando Amstel Arena</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tue, 27 Oct 2026 · 19:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-27T19:00">Tuesday · 19:00<span class="visually-hidden">, Tue, 27 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -899,7 +979,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="durban city fc vs stellenbosch fc (ckc)" data-venue="chatsworth stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m59t7hbq4v6rsera8x5zzpaz.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/1210-X-450-Chatsworth.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -908,6 +988,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">28</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Durban City FC vs Stellenbosch FC (CKC)</h3>
@@ -915,8 +996,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Chatsworth Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-28T19:00">Wed, 28 Oct 2026 · 19:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-28T19:00">Wednesday · 19:00<span class="visually-hidden">, Wed, 28 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -924,7 +1006,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="isr sewes en hoops" data-venue="hoërskool hartebeespoort">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m5h7c18yer4wrqhjsyxrneeg.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/ISR-2026-TICKET-BANNER-Landloop-1370-x-550.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -933,6 +1015,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">31</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">ISR Sewes en Hoops</h3>
@@ -940,8 +1023,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Hoërskool Hartebeespoor</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T07:00">Sat, 31 Oct 2026 · 07:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T07:00">Saturday · 07:00<span class="visually-hidden">, Sat, 31 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -949,7 +1033,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="kempiefees 2026" data-venue="hoërskool kempton park">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kn3tnh35b7mnm7zgfxs5tnkt.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/KempieFees-Banner-2026-05-22-Factory.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -958,6 +1042,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">31</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">KempieFees 2026</h3>
@@ -965,8 +1050,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Hoërskool Kempton Park</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T12:00">Sat, 31 Oct 2026 · 12:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T12:00">Saturday · 12:00<span class="visually-hidden">, Sat, 31 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -974,7 +1060,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="mamelodi sundowns vs durban city" data-venue="royal bafokeng stadium">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="event.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/MSFC-v-DCFC-31-Oct-2026-Banner.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -983,6 +1069,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">31</span>
           <span class="ot-card__month">Oct</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Mamelodi Sundowns vs Durban City</h3>
@@ -990,8 +1077,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Royal Bafokeng Stadium</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T20:15">Sat, 31 Oct 2026 · 20:15</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-10-31T20:15">Saturday · 20:15<span class="visually-hidden">, Sat, 31 Oct 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -999,7 +1087,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="appel in pe" data-venue="boardwalk hotel and casino">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01ktvcz2dxv10rs7cvq0q9tc0v.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/AOT-OPEN-TICKETS-BANNER-281210-x-450-px-29.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -1008,6 +1096,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">06</span>
           <span class="ot-card__month">Nov</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Appel in PE</h3>
@@ -1015,8 +1104,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Boardwalk Hotel and Casino</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-06T21:00">Fri, 6 Nov 2026 · 21:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-06T21:00">Friday · 21:00<span class="visually-hidden">, Fri, 6 Nov 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -1024,7 +1114,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="going back west" data-venue="tarlton international raceway">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01kva9y2phdzcq6p7p12s0r5vy.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/Ticket-Banner-2.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -1033,6 +1123,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">07</span>
           <span class="ot-card__month">Nov</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Going Back West</h3>
@@ -1040,8 +1131,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Tarlton International Raceway</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-07T13:00">Sat, 7 Nov 2026 · 13:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-07T13:00">Saturday · 13:00<span class="visually-hidden">, Sat, 7 Nov 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -1049,7 +1141,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="black swan africa extravaganza" data-venue="twin trees">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m0g6gb95z51sc7m9hbtjkqxj.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/Black-Swan-Banner-1210-x-450.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -1058,6 +1150,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">07</span>
           <span class="ot-card__month">Nov</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Black Swan Africa Extravaganza</h3>
@@ -1065,8 +1158,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Twin Trees</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-07T17:00">Sat, 7 Nov 2026 · 17:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-07T17:00">Saturday · 17:00<span class="visually-hidden">, Sat, 7 Nov 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -1074,7 +1168,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="prg senior old boys ete / lunch 2026" data-venue="markötter sports complex">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m5h6y8j0qjmrxd26sytm2jvp.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/Senior-Old-Boys-Lunch-Header.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -1083,6 +1177,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">13</span>
           <span class="ot-card__month">Nov</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">PRG Senior Old Boys Ete / Lunch 2026</h3>
@@ -1090,8 +1185,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Markötter Long Room</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-13T12:00">Fri, 13 Nov 2026 · 12:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-13T12:00">Friday · 12:00<span class="visually-hidden">, Fri, 13 Nov 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -1099,7 +1195,7 @@
 </div>
 
 <div class="col-md-6 col-xl-4 mb-4 grid-item" data-name="help24 somer fees" data-venue="hoërskool florida">
-  <article class="card e-card ot-card">
+  <article class="card e-card ot-card ot-reveal">
     <a class="ot-card__link" href="events/01m3vvwks8fnsc3f7qv9fbxpxk.html" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="assets/images/events/card/Help24-Banner.jpg" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
@@ -1108,6 +1204,7 @@
         <div class="ot-card__stub" aria-hidden="true">
           <span class="ot-card__day">21</span>
           <span class="ot-card__month">Nov</span>
+          <span class="ot-card__year">2026</span>
         </div>
         <div class="ot-card__info">
           <h3 class="card-text ot-card__title">Help24 Somer Fees</h3>
@@ -1115,8 +1212,9 @@
             <svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Hoërskool Florida</span>
           </p>
           <p class="ot-card__meta">
-            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-21T12:00">Sat, 21 Nov 2026 · 12:00</time>
+            <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="2026-11-21T12:00">Saturday · 12:00<span class="visually-hidden">, Sat, 21 Nov 2026</span></time>
           </p>
+          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>
@@ -1140,6 +1238,7 @@
     <div class="ot-footer__grid">
       <div class="ot-footer__col ot-footer__brand">
         <img class="ot-footer__logo" src="assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150" loading="lazy">
+        <p class="ot-footer__about">Tickets for football, festivals, shows and school events across South Africa — straight to your phone.</p>
         <h2 class="ot-footer__title">Get in Touch</h2>
         <ul class="ot-footer__social">
 <li><a class="ot-social" href="https://www.instagram.com/opentickets.za/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ot-icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a></li>
@@ -1199,8 +1298,9 @@
   <a class="ot-fab ot-fab--top scroll-to-top" href="#page-top" data-ot-to-top aria-label="Back to top">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
   </a>
-  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support" aria-label="Chat with support">
+  <a class="ot-fab ot-chat-launcher" href="https://opentickets.co.za/support">
     <svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+    <span class="ot-chat-launcher__label">Chat with support</span>
   </a>
 </aside>
 
