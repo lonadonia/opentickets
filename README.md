@@ -120,10 +120,13 @@ Results from this delivery are recorded in `design-handoff/opentickets-visual-re
 
 `npm run build` regenerates every HTML file from `src/`. No dependencies are needed (Node 18+).
 
-## Deploying a static preview (optional)
+## Hosted preview
 
-The repository root is a static site with no build step, so any static host works. On Vercel: import the repo,
-framework preset **Other**, leave the build command empty, output directory `.`. No environment variables are needed.
+https://opentickets-visual-refresh.vercel.app (Vercel project `opentickets-visual-refresh`; details and status in
+`design-handoff/opentickets-visual-refresh/05_GITHUB_VERCEL_HANDOFF.md`).
+
+The repository root is a static site with no build step, so any static host works. On Vercel: framework preset
+**Other**, build command `node tools/build.mjs` (or none), output directory `.`. No environment variables are needed.
 
 ## Out of scope
 
