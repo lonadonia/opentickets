@@ -7,26 +7,28 @@ Stack:              Static HTML + Bootstrap 5.3.8 + custom CSS + vanilla JS + Is
 Package manager:    npm (no runtime or build dependencies; Playwright needed only for `npm run qa`)
 Local path:         /home/user/opentickets
 Local build:        PASS (`node tools/build.mjs`, exit 0)
-QA:                 PASS (`node tools/qa.cjs` → 49/49; axe-core 0 violations on 8 page/width combinations;
-                    stage text contrast sweep: 95 samples, minimum 6.79:1)
+QA:                 PASS (`node tools/qa.cjs` → 51/51; axe-core 0 violations on 8 page/width combinations;
+                    stage text contrast sweep: 128 samples, minimum 5.2:1)
 GitHub status:      PUSHED
 GitHub repo URL:    https://github.com/lonadonia/opentickets
 Visibility:         PUBLIC (verified via GitHub API). The repository was supplied for this session; switch it to
                     private in GitHub settings if the client work should not be public
-Branches:           main (created from the refined version at the owner's request) and
+Branches:           main (holds the newest version at the owner's request; fast-forwarded, never force-pushed) and
                     claude/optimistic-mendel-e0pjrn (working branch); both carry the same history
-Commits:            ea2896e (first build) → 25e0db7 (handoff) → af79153 (design refinement pass) →
-                    16543d7 (QA/deploy notes) → this file's update (docs only)
+Commits:            ea2896e (first build) → af79153 (design refinement pass) → 78ef0c1 (presentation) →
+                    e33ea1d ("Golden Ticket" redesign) → this file's update (docs only)
 
 Vercel readiness:   VERIFIED_READY (static output at repo root, no env vars, no vercel.json needed)
 Vercel project:     opentickets-visual-refresh (team "hakim's projects"), created by this delivery
 
-Main link (refined design, from main)
-  Deployment:       dpl_8v3XcTsppighdYapXYZUYboVrkJ7, target PRODUCTION of this demo project, state READY,
-                    built from main @ 16543d7 (later commits only touch docs)
+Main link ("Golden Ticket" design, from main)
+  Deployment:       dpl_EC9sz1n8pV7uLDhURS3gthBUVFeK, target PRODUCTION of this demo project,
+                    built from main @ e33ea1d (later commits only touch docs)
   URL:              https://opentickets-visual-refresh.vercel.app
-  Verified:         DEPLOYED_VERIFIED: refined ot-tokens.css served (200) via Vercel's authenticated fetch
-  Rollback:         the first build (dpl_72eDwetZgrW23NmPa1yxB6M6fwk7) stays available for Instant Rollback
+  Verified:         DEPLOYED_VERIFIED: state READY; the "Golden Ticket" ot-tokens.css is served (200) at the
+                    production URL via Vercel's authenticated fetch (2026-10-29)
+  Rollback:         the previous design (dpl_8v3XcTsppighdYapXYZUYboVrkJ7, main @ 16543d7) and the first build
+                    (dpl_72eDwetZgrW23NmPa1yxB6M6fwk7) stay available for Instant Rollback
 
 Other links
   main branch:      https://opentickets-visual-refresh-git-main-hakims-projects-8cc34b62.vercel.app
