@@ -1,100 +1,114 @@
 /*
- * Open Tickets — design tokens
+ * Open Tickets — design tokens ("Golden Ticket")
  * ---------------------------------------------------------------
  * Retheme the whole refresh from this file. Every colour, radius, shadow and
  * motion value used by ot-theme.css is a custom property defined here, and the
  * Bootstrap 5 variables the pages rely on are mapped onto the same tokens.
  *
- * Contrast (WCAG 2.x, measured): ink on surface 16:1 · muted on surface 5.9:1 ·
- * white on primary-600 5.6:1 · accent-600 on surface 4.8:1 · on-dark-muted on navy 7.3:1.
+ * Palette: warm ochre gold for every action, charcoal navy chrome carried over from the
+ * live theme, warm off-white canvas. Contrast (WCAG 2.x, measured):
+ * ink on gold button 7.7:1 · gold-700 text on white 5.4:1, on canvas 4.9:1 · gold-300 on navy-900 10.0:1 ·
+ * muted on canvas 5.3:1 · stage-muted on navy-900 11.2:1.
  */
 :root {
-  /* Brand chrome — carried over from the live theme (#1f2533 sidebar, #333545 topbar) */
-  --ot-navy-950: #121621;
-  --ot-navy-900: #171c28;
+  /* Charcoal navy — the live sidebar (#1f2533) and its deeper steps */
+  --ot-navy-950: #10141f;
+  --ot-navy-900: #141a28;
   --ot-navy-800: #1f2533;
   --ot-navy-700: #2a3142;
   --ot-navy-600: #333545;
-  --ot-navy-line: rgba(255, 255, 255, 0.08);
+  --ot-navy-line: rgba(255, 255, 255, 0.09);
 
-  /* Primary — live brand blue #4e73df, plus a deeper step for text-on-colour */
-  --ot-primary-300: #a9bbf4;
-  --ot-primary-400: #7f98ec;
-  --ot-primary-500: #4e73df;
-  --ot-primary-600: #3a5fd4;
-  --ot-primary-700: #2f4fb6;
-  --ot-primary-50: #eef2fd;
+  /* Gold — the action colour ("golden ticket") */
+  --ot-gold-50: #fbf3e0;
+  --ot-gold-100: #f5e4bd;
+  --ot-gold-300: #e7bf63;   /* gold text and details on dark */
+  --ot-gold-400: #e3b75a;
+  --ot-gold-500: #d6a547;   /* buttons (with ink text) */
+  --ot-gold-600: #b8862a;   /* hover, borders, icons on light */
+  --ot-gold-700: #8a6417;   /* gold text on light */
+  --ot-gold-800: #7d5a12;
+  --ot-gold-rgb: 214, 165, 71;        /* gold-500 as r, g, b — glows, focus rings */
+  --ot-gold-deep-rgb: 184, 134, 42;   /* gold-600 as r, g, b — button shadows */
 
-  /* Accent — the red used for event dates on the live cards */
-  --ot-accent-500: #e74a3b;
-  --ot-accent-600: #d23b2d;
-  --ot-accent-50: #fdf0ee;
+  /* Legacy accents kept for reference — the live blue and date red */
+  --ot-blue-500: #4e73df;
+  --ot-red-500: #e74a3b;
 
-  /* Highlight — featured label on dark */
-  --ot-gold-400: #f0b544;
-
-  /* Neutrals */
-  --ot-ink: #1b2130;
-  --ot-text: #3b4254;
-  --ot-muted: #5d6475;
-  --ot-subtle: #8a91a2;
-  --ot-line: #e3e6ee;
-  --ot-line-strong: #cfd4e0;
-  --ot-canvas: #f5f6fa;
+  /* Neutrals (warm) */
+  --ot-ink: #141a28;
+  --ot-text: #343a4a;
+  --ot-muted: #5f6676;
+  --ot-subtle: #8b91a0;
+  --ot-line: #e9e5dc;
+  --ot-line-strong: #d8d2c4;
+  --ot-canvas: #f7f5f0;
+  --ot-canvas-deep: #f1ede4;
+  --ot-field: #f6f3ec;              /* search fields, hover tints */
+  --ot-tint: #faf6ec;               /* ticket stubs, row hover */
   --ot-surface: #ffffff;
+  --ot-ink-rgb: 20, 26, 40;         /* ink / navy-900 as r, g, b — shadows, scrims */
+  --ot-night-rgb: 16, 20, 31;       /* navy-950 as r, g, b — stage scrim, glass */
+  --ot-blue-rgb: 78, 115, 223;      /* the live blue, kept as a cool counter-glow */
   --ot-on-dark: #ffffff;
   --ot-on-dark-muted: #aab3c5;
+  --ot-on-stage-muted: #c9d0dc;   /* secondary text on the stage; stays ≥ 4.5:1 over the brightest glow */
 
   --ot-success: #1f8a5b;
-  --ot-focus: #7f98ec;
+  --ot-focus: var(--ot-gold-700);
+  --ot-focus-on-dark: var(--ot-gold-300);
 
   /* Typography */
   --ot-font-sans: 'Be Vietnam Pro', 'Be Vietnam', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --ot-font-display: 'Barlow Condensed', 'Be Vietnam Pro', 'Arial Narrow', sans-serif;
+  --ot-font-serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;   /* italic accent words only */
   --ot-text-xs: 0.75rem;
   --ot-text-sm: 0.875rem;
   --ot-text-md: 1rem;
   --ot-text-lg: 1.125rem;
   --ot-text-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  --ot-text-2xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
-  --ot-text-3xl: clamp(1.75rem, 1.25rem + 1.75vw, 2.625rem);
+  --ot-text-2xl: clamp(1.625rem, 1.25rem + 1.2vw, 2.25rem);
+  --ot-text-3xl: clamp(1.875rem, 1.3rem + 1.9vw, 2.75rem);
+  --ot-text-hero: clamp(2.125rem, 1.35rem + 2.9vw, 3.875rem);
 
   /* Layout */
-  --ot-header-h: 4.5rem;          /* expanded header */
-  --ot-header-h-condensed: 3.625rem;
-  --ot-rail-w: 6.5rem;            /* same width as the live collapsed sidebar */
+  --ot-header-h: 4.75rem;          /* expanded header */
+  --ot-header-h-condensed: 3.875rem;
+  --ot-rail-w: 6.5rem;             /* same width as the live collapsed sidebar */
   --ot-container: 84rem;
   --ot-gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
 
   /* Shape */
   --ot-radius-sm: 0.5rem;
-  --ot-radius-md: 0.875rem;
-  --ot-radius-lg: 1.25rem;
+  --ot-radius-md: 1rem;
+  --ot-radius-lg: 1.375rem;
   --ot-radius-pill: 999px;
-  --ot-notch: 0.6875rem;          /* ticket notch radius (cards, booking card, FAQ tickets) */
-  --ot-perf-r: 0.25rem;           /* perforation hole radius on the stage / footer tear edges */
-  --ot-perf-gap: 0.875rem;       /* distance between perforation holes */
+  --ot-notch: 0.6875rem;           /* ticket notch radius (cards, booking panel, FAQ tickets) */
+  --ot-perf-r: 0.25rem;            /* perforation hole radius on the stage / footer tear edges */
+  --ot-perf-gap: 0.875rem;         /* distance between perforation holes */
 
-  /* Stage — the dark, cinematic header band shared by all four screens */
+  /* Stage — the dark, cinematic band that opens every screen */
   --ot-stage-top: var(--ot-navy-800);
-  --ot-stage-bottom: var(--ot-navy-900);
-  --ot-stage-glow: rgba(78, 115, 223, 0.18);
-  --ot-ambient-opacity: 0.45;     /* strength of the artwork-coloured glow */
-  --ot-on-stage-muted: #c9d0dc;   /* secondary text on the stage; stays ≥ 4.5:1 over the brightest glow */
+  --ot-stage-bottom: var(--ot-navy-950);
+  --ot-stage-glow: rgba(214, 165, 71, 0.16);
+  --ot-ambient-opacity: 0.45;      /* strength of the artwork-coloured glow */
+  /* Fine film grain over the stage (inline SVG noise, no request) */
+  --ot-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
 
   /* Elevation */
-  --ot-shadow-sm: 0 1px 2px rgba(20, 26, 40, 0.06), 0 2px 8px -4px rgba(20, 26, 40, 0.12);
-  --ot-shadow-md: 0 2px 4px rgba(20, 26, 40, 0.05), 0 12px 28px -14px rgba(20, 26, 40, 0.28);
-  --ot-shadow-lg: 0 4px 10px rgba(20, 26, 40, 0.06), 0 24px 48px -20px rgba(20, 26, 40, 0.38);
+  --ot-shadow-sm: 0 1px 2px rgba(20, 26, 40, 0.05), 0 2px 8px -4px rgba(20, 26, 40, 0.1);
+  --ot-shadow-md: 0 2px 4px rgba(20, 26, 40, 0.04), 0 14px 30px -16px rgba(20, 26, 40, 0.26);
+  --ot-shadow-lg: 0 4px 10px rgba(20, 26, 40, 0.05), 0 26px 50px -22px rgba(20, 26, 40, 0.36);
+  --ot-shadow-gold: 0 12px 26px -12px rgba(184, 134, 42, 0.75);
   --ot-shadow-stage: 0 40px 80px -36px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --ot-ticket-shadow: drop-shadow(0 1px 1px rgba(20, 26, 40, 0.06)) drop-shadow(0 10px 14px rgba(20, 26, 40, 0.09));
-  --ot-ticket-shadow-hover: drop-shadow(0 2px 2px rgba(20, 26, 40, 0.06)) drop-shadow(0 20px 24px rgba(20, 26, 40, 0.17));
+  --ot-ticket-shadow: drop-shadow(0 1px 1px rgba(20, 26, 40, 0.05)) drop-shadow(0 12px 16px rgba(20, 26, 40, 0.08));
+  --ot-ticket-shadow-hover: drop-shadow(0 2px 2px rgba(20, 26, 40, 0.06)) drop-shadow(0 22px 26px rgba(20, 26, 40, 0.16));
 
   /* Motion */
   --ot-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --ot-dur-fast: 160ms;
   --ot-dur: 280ms;
-  --ot-dur-slow: 800ms;           /* matches the live slider collapse (x-collapse.duration.800ms) */
+  --ot-dur-slow: 800ms;            /* matches the live slider collapse (x-collapse.duration.800ms) */
 
   /* Bootstrap 5 bridge */
   --bs-body-font-family: var(--ot-font-sans);
@@ -102,16 +116,15 @@
   --bs-body-bg: var(--ot-canvas);
   --bs-emphasis-color: var(--ot-ink);
   --bs-heading-color: var(--ot-ink);
-  --bs-primary: var(--ot-primary-500);
-  --bs-primary-rgb: 78, 115, 223;
-  --bs-danger: var(--ot-accent-500);
-  --bs-link-color: var(--ot-primary-600);
-  --bs-link-color-rgb: 58, 95, 212;
-  --bs-link-hover-color: var(--ot-primary-700);
-  --bs-link-hover-color-rgb: 47, 79, 182;
+  --bs-primary: var(--ot-gold-500);
+  --bs-primary-rgb: 214, 165, 71;
+  --bs-link-color: var(--ot-gold-700);
+  --bs-link-color-rgb: 138, 100, 23;
+  --bs-link-hover-color: var(--ot-gold-800);
+  --bs-link-hover-color-rgb: 125, 90, 18;
   --bs-border-color: var(--ot-line);
   --bs-border-radius: var(--ot-radius-sm);
-  --bs-focus-ring-color: rgba(78, 115, 223, 0.35);
+  --bs-focus-ring-color: rgba(214, 165, 71, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {

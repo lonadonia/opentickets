@@ -110,3 +110,7 @@ squeezing three columns at tablet widths; CMYK JPEG banners (≈ 700 KB each).
 
 Proceed with direction **"Stub & Spotlight"** (see 02): keep every structural landmark, refine the type and colour
 system, and add one brand-derived motif, the ticket stub from the Open Tickets logo, across cards and the booking card.
+
+**Update (third pass):** after the client shared two reference concepts, the finish moved to **"Golden Ticket"**
+(02 §2.2): gold actions on a white frame around the dark stage, serif accent words, category badges and the ticket
+panel. Structure, Isotope contract and every requirement above are unchanged.

@@ -239,12 +239,28 @@ async function openPage(browser, base, url, width, opts = {}) {
     const total = await page.textContent('[data-ot-total]');
     record('EVT-002', 'Preview quantity stepper updates the total', total.trim() === 'R 120.00', total);
     await context.close();
-    const desk = await openPage(browser, base, 'event.html', 1440);
+    const desk = await openPage(browser, base, 'event.html', 1440, { permissions: ['clipboard-read', 'clipboard-write'] });
     const cta = await desk.page.evaluate(() => {
-      const a = document.querySelector('.ot-booking-card [data-ot-book]');
+      const a = document.querySelector('.ot-event-actions [data-ot-book]');
       return a && a.offsetParent !== null ? a.getAttribute('href') : null;
     });
-    record('EVT-003', 'Desktop booking card shows the Buy tickets entry point', cta === '#tickets', String(cta));
+    record('EVT-003', 'Desktop event header shows the Get tickets entry point', cta === '#tickets', String(cta));
+    const [download] = await Promise.all([
+      desk.page.waitForEvent('download', { timeout: 5000 }),
+      desk.page.click('[data-ot-calendar]'),
+    ]);
+    const ics = require('fs').readFileSync(await download.path(), 'utf8');
+    record('EVT-004', 'Add to calendar downloads an .ics with the event start in UTC',
+      download.suggestedFilename().endsWith('.ics') && /DTSTART:\d{8}T\d{6}Z/.test(ics) && /SUMMARY:/.test(ics), download.suggestedFilename());
+    const shared = await desk.page.evaluate(async () => {
+      delete Navigator.prototype.share; // exercise the clipboard fallback
+      document.querySelector('[data-ot-share]').click();
+      await new Promise((r) => setTimeout(r, 300));
+      const toast = document.querySelector('[data-ot-toast]');
+      return { shown: !toast.hidden, text: toast.textContent, clip: await navigator.clipboard.readText() };
+    });
+    record('EVT-005', 'Share falls back to copying the link and confirms it',
+      shared.shown && shared.clip.endsWith('/event.html'), `${shared.text} | ${shared.clip}`);
     await desk.context.close();
   }
 

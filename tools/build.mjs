@@ -41,13 +41,24 @@ function render(name, ctx, kind = 'partials') {
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const repId = site.representativeEvent;
+// Icon (from the sprite) shown with each event category
+const CATEGORY_ICONS = {
+  Football: 'trophy', Festival: 'tent', Music: 'music', Expo: 'caravan', Gala: 'gala', Fashion: 'shirt',
+  'School sport': 'medal', Membership: 'badge', Reunion: 'customers',
+};
 
 function eventCtx(e, base) {
   const d = new Date(`${e.date}T00:00:00Z`);
   const shortDate = `${DAYS[d.getUTCDay()]}, ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  // South Africa is UTC+2 all year (no daylight saving), so the calendar file can use plain UTC
+  const startUtc = new Date(Date.parse(`${e.date}T${e.time}:00+02:00`)).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   return {
     ...e,
     shortDate,
+    categoryIcon: CATEGORY_ICONS[e.category] || 'ticket',
+    slug: e.title.toLowerCase().normalize('NFKD').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60),
+    mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${e.venue}, South Africa`)}`,
+    icsStartUtc: startUtc,
     year: e.date.slice(0, 4),
     monthLabel: MONTHS[d.getUTCMonth()],
     weekdayShort: DAYS[d.getUTCDay()],

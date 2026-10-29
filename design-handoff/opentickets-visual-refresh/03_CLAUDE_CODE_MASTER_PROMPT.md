@@ -13,7 +13,7 @@ committed and pushed to the working branch, and the static site still deployable
 ## Source of truth (read first)
 1. `README.md`: structure, integration guide, Isotope contract, behaviour changes.
 2. `design-handoff/opentickets-visual-refresh/01_CLIENT_BRIEF_ANALYSIS.md`: REQ-001…034 and assumptions A-01…08.
-3. `design-handoff/opentickets-visual-refresh/02_CREATIVE_DESIGN_BLUEPRINT.md`: the chosen "Stub & Spotlight" system.
+3. `design-handoff/opentickets-visual-refresh/02_CREATIVE_DESIGN_BLUEPRINT.md`: the chosen system ("Stub & Spotlight" structure, "Golden Ticket" finish, §2.2).
 4. `src/` (templates, partials, data), `assets/css/ot-tokens.css`, `assets/css/ot-theme.css`, `assets/js/*.js`.
 5. `tools/build.mjs` (page generator), `tools/qa.cjs` (Playwright QA), `tools/serve.mjs` (preview server).
 

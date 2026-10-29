@@ -34,11 +34,11 @@ assets/
   js/   ot-core.js          header shrink, back-to-top, nav search → `filter-grid`, artwork fill
         ot-hero.js          featured carousel (replaces Slick + jQuery)
         ot-events-grid.js   Isotope grid (vanilla port of the live Alpine component)
-        ot-event.js         event page: mobile booking bar, preview ticket steppers
+        ot-event.js         event page: mobile booking bar, add to calendar / share, preview ticket steppers
         ot-search-preview.js  STATIC PREVIEW ONLY: filters cards by ?q= (server does this live)
-  fonts/   be-vietnam-pro/  barlow-condensed/   (woff2 + OFL licences)
+  fonts/   be-vietnam-pro/  barlow-condensed/  instrument-serif/   (woff2 + OFL licences)
   icons/   ot-icons.svg  (SVG sprite, Lucide + Simple Icons) + LICENSES.md
-  images/  brand/   logo-icon.png (current logo, unchanged)
+  images/  brand/   logo-icon.png (current logo, unchanged), logo-icon-dark.png (same logo in charcoal, white header)
            events/  the organisers' banners (CMYK files converted to sRGB, recompressed)
            events/card/  720px-wide versions for the cards
            pages/   hero-faqs.jpg
@@ -46,7 +46,7 @@ assets/
 src/
   partials/  header, sidebar, footer, event-card, hero-slide, faq-category, ticket-row, layout-start/end, icons
   pages/     home, faq, event, search templates
-  data/      events.json (captured live events, exact data-name/data-venue), site.json (copy, routes, languages)
+  data/      events.json (captured live events, exact data-name/data-venue, category labels), site.json (copy, routes, languages)
 tools/  build.mjs (regenerates the pages), serve.mjs, qa.cjs (Playwright QA)
 design-handoff/opentickets-visual-refresh/  analysis, design blueprint, QA evidence, delivery notes
 ```
@@ -67,8 +67,9 @@ strings that JS fills in (result counts) are templates in `data-label-*` attribu
 4. **Translations**: the capture was taken in Portuguese. Wrap the English UI strings in `__()` with the existing
    keys (Eventos → Events, Suporte → Support, A minha conta → My account, Conteúdo → Content, Páginas → Pages, …).
 5. **Livewire components** keep their markup and bindings. Wrap them in the new containers:
-   chatbot launcher → `.ot-fab.ot-chat-launcher` inside `.ot-fab-stack`; the ticket selector goes in `#tickets` on
-   the event page (style hooks: `.ot-ticket-list`, `.ot-ticket-row`, `.ot-qty`, `.ot-tickets__footer`).
+   chatbot launcher → `.ot-fab.ot-chat-launcher` inside `.ot-fab-stack`; the ticket selector goes in
+   `.ot-ticket-panel__body` inside `#tickets` on the event page (style hooks: `.ot-ticket-list`, `.ot-ticket-row`,
+   `.ot-qty`, `.ot-ticket-panel__total`).
 
 ### Isotope: what must stay as-is
 
@@ -91,18 +92,24 @@ Vite bundle (Isotope then filters through jQuery). `ot-events-grid.js` takes the
 
 ### Retheming
 
-Change the custom properties in `assets/css/ot-tokens.css`. Brand chrome `--ot-navy-*`, actions
-`--ot-primary-*`, the red date accent `--ot-accent-*`, and neutrals, radii, shadows and motion all live there.
+Change the custom properties in `assets/css/ot-tokens.css`. The stage and dark tickets `--ot-navy-*`, the gold action
+colour `--ot-gold-*` (with `--ot-gold-rgb` for glows), neutrals, radii, shadows and motion all live there.
 Bootstrap's own variables (`--bs-primary`, links, borders, body colours) are mapped onto the same tokens.
 
 ## Design system at a glance
 
-- **Stage + canvas.** Every screen opens on a dark *stage* (`.ot-stage`). An ambient layer (`.ot-ambient`) takes the
-  colours of the event artwork: on Home it follows the active banner, and on FAQ/Event it uses the page image. The
-  stage tears off into the light content canvas along a ticket perforation, and the footer repeats that edge.
-  A scrim keeps every stage text at ≥ 6.8:1 contrast, whatever the artwork.
-- **Ticket shapes.** Event cards, FAQ topics and the booking panel share the logo's notched, perforated stub.
-  The card stub shows day, month and year; the FAQ stub shows the question count.
+Direction **"Golden Ticket"**, inspired by the client's two reference concepts without copying them (details and
+what was deliberately left out: `02_CREATIVE_DESIGN_BLUEPRINT.md` §2.2).
+
+- **Frame + stage.** A clean white header and rail frame a dark, cinematic *stage* (`.ot-stage`) that opens every
+  screen. An ambient layer (`.ot-ambient`) takes the colours of the event artwork: on Home it follows the active
+  banner, and on FAQ/Event it uses the page image. The stage tears off into the warm canvas along a ticket
+  perforation, and the footer repeats that edge. A scrim keeps every stage text at ≥ 5.2:1 contrast, whatever the artwork.
+- **Gold for action.** Every action (Get tickets, search, checkout, chat) is ochre gold with ink text (7.7:1).
+  One italic serif accent word per headline (Instrument Serif) carries the same gold.
+- **Ticket shapes.** Event cards, FAQ topics, the event-page ticket panel and the home info band share the logo's
+  notched, perforated stub. The card stub shows day, month and year; the FAQ stub shows the question count; the
+  ticket panel stub shows the date above its tear line.
 - **Motion.** Header shrink, hero crossfade with an autoplay progress bar, card lift with a booking arrow, and a light
   reveal for content entering from below the fold. Everything is disabled under `prefers-reduced-motion`; content
   that starts on screen is never hidden, and nothing stays hidden if JavaScript fails.
@@ -119,13 +126,20 @@ Bootstrap's own variables (`--bs-primary`, links, borders, body colours) are map
 - The chat launcher and back-to-top button are stacked instead of overlapping; the chat button opens into a
   "Chat with support" label on hover/focus.
 - Added: a result count and empty state for the filter, a "no results" state on search, breadcrumbs, and a sticky
-  booking card plus mobile booking bar on the event page.
+  ticket panel plus mobile booking bar on the event page.
+- Added in the Golden Ticket pass: a hero headline above the carousel; a "My account" button in the header (≥ 992 px,
+  same link as the rail item); a category badge and a "Get tickets" pill on every card; a "Good to know" band on
+  Home (copy from the live Support page); and on the event page, quick actions (Add to calendar builds an `.ics` in
+  the browser, Share uses the native share sheet or copies the link, Directions opens Google Maps) and a venue card.
+  Booking buttons read "Get tickets" throughout.
+- Card categories (`category` in `events.json`) are editorial labels derived from each title and banner. Map them to
+  the CMS categories, or remove the badge, when integrating.
 
 ## Quality checks
 
 ```bash
 npm i -D playwright && npx playwright install chromium   # once
-npm run qa                                               # 49 checks; screenshots in qa-output/
+npm run qa                                               # 51 checks; screenshots in qa-output/
 ```
 
 Results from this delivery are recorded in `design-handoff/opentickets-visual-refresh/04_QA_ACCEPTANCE_CHECKLIST.md`.

@@ -6,22 +6,22 @@
  * #events-grid, .grid-item, .e-card, .m-card-cover, .navbar-search, #nav-search-input,
  * #sidebarToggleTop, #accordionSidebar, .scroll-to-top, .osahan-slider-item.
  *
- * Design language "Stub & Spotlight": every screen opens on a dark Stage lit by the colours of the
- * event artwork, which tears off along a ticket perforation into the light content canvas. Cards,
- * FAQ topics and the booking panel share the notched ticket-stub shape of the Open Tickets logo.
+ * Design language "Golden Ticket": a clean white frame (header + rail) around a dark, cinematic
+ * stage lit by the colours of the event artwork; gold marks every action; cards, FAQ topics, the
+ * booking panel and the info band share the notched, perforated shape of the Open Tickets logo.
  *
- *  1. Base              7. Section + event card (ticket)   13. Booking card + mobile bar
- *  2. Header            8. Empty state                     14. Footer
- *  3. Rail / menu       9. Buttons                         15. Floating actions
- *  4. Shell + media    10. FAQ                             16. Reveal + motion
- *  5. Stage            11. Search
- *  6. Featured hero    12. Event detail
+ *  1. Base + shared bits      7. Section + event card     13. Ticket panel + mobile bar
+ *  2. Header                  8. Info band ("perks")      14. Footer
+ *  3. Rail / menu             9. Empty state              15. Floating actions
+ *  4. Shell + artwork        10. Buttons                  16. Reveal + motion
+ *  5. Stage                  11. FAQ
+ *  6. Home hero              12. Search + event detail
  */
 
-/* 1. Base ------------------------------------------------------------- */
+/* 1. Base + shared bits ----------------------------------------------- */
 html {
   scroll-padding-top: calc(var(--ot-header-h) + 1rem);
-  scrollbar-color: #c3c9d6 transparent;
+  scrollbar-color: var(--ot-line-strong) transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -43,7 +43,8 @@ body {
 }
 
 ::selection {
-  background-color: rgba(78, 115, 223, 0.22);
+  background-color: var(--ot-gold-100);
+  color: var(--ot-ink);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,13 +59,26 @@ p {
 }
 
 a {
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-700);
   text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--ot-gold-800);
 }
 
 :focus-visible {
   outline: 3px solid var(--ot-focus);
   outline-offset: 2px;
+}
+
+.ot-stage :focus-visible,
+.ot-footer :focus-visible,
+.ot-mobile-cta :focus-visible,
+.ot-perks :focus-visible,
+.ot-help-band__cta :focus-visible,
+.ot-ticket-panel__stub :focus-visible {
+  outline-color: var(--ot-focus-on-dark);
 }
 
 .ot-icon {
@@ -81,8 +95,8 @@ a {
   z-index: 2000;
   padding: 0.75rem 1rem;
   border-radius: var(--ot-radius-sm);
-  background: var(--ot-surface);
-  color: var(--ot-ink);
+  background: var(--ot-navy-900);
+  color: #fff;
   font-weight: 600;
   box-shadow: var(--ot-shadow-lg);
   transition: top var(--ot-dur-fast) var(--ot-ease);
@@ -90,6 +104,25 @@ a {
 
 .ot-skip-link:focus {
   top: 1rem;
+  color: #fff;
+}
+
+/* Italic serif accent for one or two words in a headline */
+.ot-serif {
+  padding-right: 0.06em;
+  color: var(--ot-gold-700);
+  font-family: var(--ot-font-serif);
+  font-size: 1.12em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+}
+
+.ot-stage .ot-serif,
+.ot-perks .ot-serif,
+.ot-help-band__cta .ot-serif {
+  color: var(--ot-gold-300);
 }
 
 .ot-eyebrow {
@@ -97,7 +130,7 @@ a {
   align-items: center;
   gap: 0.625rem;
   margin: 0 0 0.625rem;
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-700);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -110,11 +143,57 @@ a {
   width: 1.5rem;
   height: 2px;
   border-radius: 1px;
-  background-color: var(--ot-accent-500);
+  background-color: var(--ot-gold-500);
 }
 
 .ot-eyebrow--on-dark {
-  color: var(--ot-gold-400);
+  color: var(--ot-gold-300);
+}
+
+.ot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.6875rem;
+  border-radius: var(--ot-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ot-badge .ot-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.ot-badge--glass {
+  background-color: rgba(var(--ot-night-rgb), 0.74);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .ot-badge--glass {
+    background-color: rgba(var(--ot-night-rgb), 0.6);
+    backdrop-filter: blur(10px) saturate(140%);
+  }
+}
+
+.ot-badge--glass .ot-icon {
+  color: var(--ot-gold-300);
+}
+
+.ot-badge--gold {
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
+}
+
+.ot-badge--soft {
+  background-color: var(--ot-gold-50);
+  box-shadow: inset 0 0 0 1px var(--ot-gold-100);
+  color: var(--ot-gold-800);
 }
 
 .ot-count-pill {
@@ -134,28 +213,28 @@ a {
 .ot-count-pill .ot-icon {
   width: 1rem;
   height: 1rem;
-  color: var(--ot-accent-600);
+  color: var(--ot-gold-600);
 }
 
 .ot-count-pill--on-dark {
-  border-color: rgba(255, 255, 255, 0.12);
-  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.13);
+  background-color: rgba(255, 255, 255, 0.07);
   color: var(--ot-on-stage-muted);
   box-shadow: none;
 }
 
 .ot-count-pill--on-dark .ot-icon {
-  color: var(--ot-gold-400);
+  color: var(--ot-gold-300);
 }
 
-/* 2. Header (fixed, shrinks on scroll) -------------------------------- */
+/* 2. Header (white, fixed, shrinks on scroll) ------------------------- */
 .ot-header {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 1030;
   height: var(--ot-header-h);
-  background-color: var(--ot-navy-800);
-  border-bottom: 1px solid var(--ot-navy-line);
+  background-color: var(--ot-surface);
+  border-bottom: 1px solid var(--ot-line);
   transition:
     height var(--ot-dur) var(--ot-ease),
     background-color var(--ot-dur) var(--ot-ease),
@@ -164,14 +243,13 @@ a {
 
 .ot-header.is-condensed {
   height: var(--ot-header-h-condensed);
-  background-color: rgba(23, 28, 40, 0.94);
-  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 12px 30px -22px rgba(var(--ot-ink-rgb), 0.45);
 }
 
 @supports (backdrop-filter: blur(1px)) {
   .ot-header.is-condensed {
-    background-color: rgba(23, 28, 40, 0.84);
-    backdrop-filter: saturate(150%) blur(16px);
+    background-color: rgba(255, 255, 255, 0.86);
+    backdrop-filter: saturate(160%) blur(16px);
   }
 }
 
@@ -195,12 +273,12 @@ a {
 .ot-brand__logo {
   display: block;
   width: auto;
-  height: 2.25rem;
+  height: 2.375rem;
   transition: height var(--ot-dur) var(--ot-ease);
 }
 
 .ot-header.is-condensed .ot-brand__logo {
-  height: 1.875rem;
+  height: 2rem;
 }
 
 .ot-icon-btn {
@@ -212,13 +290,13 @@ a {
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--ot-on-dark);
+  color: var(--ot-ink);
   transition: background-color var(--ot-dur-fast) var(--ot-ease);
 }
 
 .ot-icon-btn:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--ot-on-dark);
+  background-color: var(--ot-field);
+  color: var(--ot-ink);
 }
 
 /* Topbar search — the Isotope filter control */
@@ -226,33 +304,41 @@ a {
   position: relative;
   flex: 1 1 auto;
   align-items: center;
-  max-width: 30rem;
+  max-width: 32rem;
   margin: 0;
 }
 
 .ot-nav-search .form-control {
-  height: 2.75rem;
-  padding: 0 3.25rem 0 1.125rem;
-  border: 1px solid transparent;
+  height: 2.875rem;
+  padding: 0 3.25rem 0 1.25rem;
+  border: 1px solid var(--ot-line);
   border-radius: var(--ot-radius-pill);
-  background-color: var(--ot-surface);
+  background-color: var(--ot-field);
   color: var(--ot-ink);
   font-size: 0.9375rem;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 1px 2px rgba(20, 26, 40, 0.08);
-  transition: height var(--ot-dur) var(--ot-ease), box-shadow var(--ot-dur-fast) var(--ot-ease);
+  transition:
+    height var(--ot-dur) var(--ot-ease),
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    border-color var(--ot-dur-fast) var(--ot-ease),
+    box-shadow var(--ot-dur-fast) var(--ot-ease);
 }
 
 .ot-nav-search .form-control::placeholder {
   color: var(--ot-muted);
 }
 
+.ot-nav-search .form-control:hover {
+  border-color: var(--ot-line-strong);
+}
+
 .ot-nav-search .form-control:focus {
-  border-color: var(--ot-primary-400);
-  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.35);
+  border-color: var(--ot-gold-600);
+  background-color: var(--ot-surface);
+  box-shadow: 0 0 0 4px rgba(var(--ot-gold-rgb), 0.25);
 }
 
 .ot-header.is-condensed .ot-nav-search .form-control {
-  height: 2.375rem;
+  height: 2.5rem;
 }
 
 .ot-nav-search__btn {
@@ -261,15 +347,17 @@ a {
   right: 0.3125rem;
   display: grid;
   place-items: center;
-  width: 2.125rem;
-  height: 2.125rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border: 0;
   border-radius: 50%;
-  background-color: var(--ot-primary-600);
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
-  color: #fff;
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
   transform: translateY(-50%);
-  transition: background-color var(--ot-dur-fast) var(--ot-ease), width var(--ot-dur) var(--ot-ease), height var(--ot-dur) var(--ot-ease);
+  transition:
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    width var(--ot-dur) var(--ot-ease),
+    height var(--ot-dur) var(--ot-ease);
 }
 
 .ot-nav-search__btn .ot-icon {
@@ -278,7 +366,7 @@ a {
 }
 
 .ot-nav-search__btn:hover {
-  background-color: var(--ot-primary-700);
+  background-color: var(--ot-gold-400);
 }
 
 .ot-header.is-condensed .ot-nav-search__btn {
@@ -289,7 +377,7 @@ a {
 .ot-header__actions {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.375rem;
   margin-left: auto;
 }
 
@@ -302,7 +390,7 @@ a {
   border: 0;
   border-radius: var(--ot-radius-pill);
   background: transparent;
-  color: var(--ot-on-dark-muted);
+  color: var(--ot-muted);
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
@@ -311,13 +399,19 @@ a {
 
 .ot-lang-btn:hover,
 .ot-lang-btn[aria-expanded="true"] {
-  color: var(--ot-on-dark);
-  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--ot-ink);
+  background-color: var(--ot-field);
 }
 
 .ot-lang-btn .ot-icon {
   width: 1.125rem;
   height: 1.125rem;
+}
+
+.ot-header__account {
+  --bs-btn-padding-y: 0.5rem;
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-font-size: 0.875rem;
 }
 
 .ot-dropdown {
@@ -329,8 +423,10 @@ a {
   --bs-dropdown-inner-border-radius: var(--ot-radius-sm);
   --bs-dropdown-box-shadow: var(--ot-shadow-lg);
   --bs-dropdown-link-color: var(--ot-text);
-  --bs-dropdown-link-hover-bg: var(--ot-canvas);
-  --bs-dropdown-link-active-bg: var(--ot-primary-600);
+  --bs-dropdown-link-hover-color: var(--ot-ink);
+  --bs-dropdown-link-hover-bg: var(--ot-field);
+  --bs-dropdown-link-active-color: var(--ot-ink);
+  --bs-dropdown-link-active-bg: var(--ot-gold-100);
   --bs-dropdown-item-padding-y: 0.5rem;
   --bs-dropdown-item-border-radius: var(--ot-radius-sm);
   min-width: 11rem;
@@ -378,7 +474,7 @@ a {
   width: 100%;
   border: 0;
   background: transparent;
-  color: var(--ot-on-dark-muted);
+  color: var(--ot-muted);
   font-weight: 500;
   text-decoration: none;
   transition: color var(--ot-dur-fast) var(--ot-ease), background-color var(--ot-dur-fast) var(--ot-ease);
@@ -386,18 +482,18 @@ a {
 
 .ot-rail__link:hover,
 .ot-rail__link:focus-visible {
-  color: var(--ot-on-dark);
-  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--ot-ink);
+  background-color: var(--ot-field);
 }
 
 .ot-rail__link.active {
-  color: var(--ot-on-dark);
-  background-image: linear-gradient(180deg, rgba(78, 115, 223, 0.3), rgba(78, 115, 223, 0.14));
-  box-shadow: inset 0 0 0 1px rgba(127, 152, 236, 0.22);
+  color: var(--ot-ink);
+  background-color: var(--ot-gold-50);
+  box-shadow: inset 0 0 0 1px var(--ot-gold-100);
 }
 
 .ot-rail__link.active .ot-icon {
-  color: var(--ot-primary-300);
+  color: var(--ot-gold-700);
 }
 
 .ot-rail__link.active::before {
@@ -408,15 +504,14 @@ a {
   left: -0.5rem;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background-color: var(--ot-primary-500);
-  box-shadow: 0 0 12px rgba(78, 115, 223, 0.8);
+  background-color: var(--ot-gold-500);
 }
 
 .ot-rail__heading {
   margin: 1rem 0 0.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--ot-navy-line);
-  color: var(--ot-on-dark-muted);
+  border-top: 1px solid var(--ot-line);
+  color: var(--ot-muted);
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -443,13 +538,13 @@ a {
 .ot-rail__sub a {
   display: block;
   border-radius: var(--ot-radius-sm);
-  color: var(--ot-on-dark-muted);
+  color: var(--ot-muted);
   text-decoration: none;
 }
 
 .ot-rail__sub a:hover {
-  color: var(--ot-on-dark);
-  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--ot-ink);
+  background-color: var(--ot-field);
 }
 
 @media (min-width: 768px) {
@@ -470,8 +565,8 @@ a {
     height: 100%;
     padding: calc(var(--ot-header-h) + 0.75rem) 0.5rem 1rem;
     overflow-y: auto;
-    background-color: var(--ot-navy-800);
-    border-right: 1px solid var(--ot-navy-line);
+    background-color: var(--ot-surface);
+    border-right: 1px solid var(--ot-line);
     scrollbar-width: none;
   }
 
@@ -509,15 +604,15 @@ a {
 @media (max-width: 767.98px) {
   .ot-rail {
     --bs-offcanvas-width: min(20rem, 86vw);
-    --bs-offcanvas-bg: var(--ot-navy-800);
-    --bs-offcanvas-color: var(--ot-on-dark);
+    --bs-offcanvas-bg: var(--ot-surface);
+    --bs-offcanvas-color: var(--ot-ink);
     --bs-offcanvas-border-width: 0;
   }
 
   .ot-rail__offcanvas-header {
     justify-content: space-between;
     padding: 1rem 0.75rem 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--ot-navy-line);
+    border-bottom: 1px solid var(--ot-line);
   }
 
   .ot-rail__offcanvas-header .ot-brand__logo {
@@ -648,6 +743,7 @@ a {
   overflow: hidden;
   color: var(--ot-on-stage-muted);
   background:
+    var(--ot-grain),
     radial-gradient(70% 90% at 50% 0%, var(--ot-stage-glow), transparent 70%),
     linear-gradient(180deg, var(--ot-stage-top) 0%, var(--ot-stage-bottom) 100%);
 }
@@ -672,15 +768,24 @@ a {
   pointer-events: none;
 }
 
+/*
+ * The glow is painted at 1/8 size and scaled up 8×: blur(10px) × 8 looks the same as an 80px blur over
+ * the full stage but costs a fraction to render, so slide changes stay smooth on low-end phones.
+ * Box = 150% of the stage, centred (top/left -25%), divided by 8.
+ */
 .ot-ambient__layer {
   position: absolute;
-  inset: -25%;
+  top: -25%;
+  left: -25%;
+  width: 18.75%;
+  height: 18.75%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0;
-  filter: blur(80px) saturate(1.6);
-  transform: translateZ(0);
+  filter: blur(10px) saturate(1.6);
+  transform: scale(8);
+  transform-origin: 0 0;
   transition: opacity 1.4s var(--ot-ease);
 }
 
@@ -688,14 +793,15 @@ a {
   opacity: var(--ot-ambient-opacity);
 }
 
-/* Keeps every text zone on a dark base whatever the artwork: an even scrim plus a soft edge vignette */
+/* Keeps every text zone on a dark base whatever the artwork: an even scrim, a soft edge vignette and fine grain */
 .ot-ambient::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(110% 75% at 50% 0%, transparent 25%, rgba(18, 22, 33, 0.5) 100%),
-    linear-gradient(180deg, rgba(18, 22, 33, 0.55) 0%, rgba(18, 22, 33, 0.5) 45%, rgba(18, 22, 33, 0.8) 100%);
+    var(--ot-grain),
+    radial-gradient(110% 75% at 50% 0%, transparent 25%, rgba(var(--ot-night-rgb), 0.5) 100%),
+    linear-gradient(180deg, rgba(var(--ot-night-rgb), 0.62) 0%, rgba(var(--ot-night-rgb), 0.5) 45%, rgba(var(--ot-night-rgb), 0.8) 100%);
 }
 
 .ot-page-stage {
@@ -710,7 +816,8 @@ a {
   color: var(--ot-on-stage-muted);
 }
 
-.ot-stat-list {
+.ot-stat-list,
+.ot-glass-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -719,26 +826,34 @@ a {
   list-style: none;
 }
 
-.ot-stat-list li {
+.ot-stat-list li,
+.ot-glass-list li {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.375rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9375rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: var(--ot-radius-pill);
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(255, 255, 255, 0.07);
   color: var(--ot-on-stage-muted);
   font-size: 0.875rem;
 }
 
-.ot-stat-list strong {
+.ot-stat-list strong,
+.ot-glass-list strong {
   color: var(--ot-on-dark);
   font-family: var(--ot-font-display);
   font-size: 1.25rem;
   line-height: 1;
 }
 
-/* 6. Featured hero ---------------------------------------------------- */
+.ot-glass-list .ot-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: var(--ot-gold-300);
+}
+
+/* 6. Home hero -------------------------------------------------------- */
 .ot-hero-collapse {
   display: grid;
   grid-template-rows: 1fr;
@@ -758,13 +873,78 @@ a {
   overflow: hidden;
 }
 
-.ot-hero {
-  padding: clamp(1rem, 0.5rem + 1.5vw, 2rem) 0 calc(clamp(1.5rem, 1rem + 1.5vw, 2.5rem) + var(--ot-perf-r));
+.ot-hero-stage {
+  --ot-ambient-opacity: 0.55;
+  padding: clamp(1.75rem, 1rem + 2.4vw, 3.25rem) 0 calc(clamp(1.5rem, 1rem + 1.5vw, 2.5rem) + var(--ot-perf-r));
+}
+
+.ot-hero-intro {
+  display: grid;
+  gap: 1.25rem 3rem;
+  align-items: end;
+  margin-bottom: clamp(1.5rem, 1rem + 1.6vw, 2.5rem);
+}
+
+.ot-hero-intro__title {
+  max-width: 16ch;
+  margin: 0.25rem 0 1rem;
+  color: var(--ot-on-dark);
+  font-size: var(--ot-text-hero);
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.ot-hero-intro__lead {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ot-on-stage-muted);
+  font-size: var(--ot-text-lg);
+}
+
+.ot-hero-intro__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.ot-hero-intro__aside .ot-btn:hover .ot-icon {
+  transform: translateY(2px);
+}
+
+@media (min-width: 992px) {
+  .ot-hero-intro {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ot-hero-intro__aside {
+    align-items: flex-end;
+  }
+
+  .ot-hero-intro__aside .ot-glass-list {
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ot-hero-intro__text > *,
+  .ot-hero-intro__aside {
+    animation: ot-rise 900ms var(--ot-ease) both;
+  }
+
+  .ot-hero-intro__text > :nth-child(2) { animation-delay: 80ms; }
+  .ot-hero-intro__text > :nth-child(3) { animation-delay: 160ms; }
+  .ot-hero-intro__aside { animation-delay: 240ms; }
+}
+
+@keyframes ot-rise {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
 }
 
 .ot-hero__viewport {
   --peek: clamp(1rem, 7vw, 7.5rem);
-  --slide-max: 78rem;
+  --slide-max: 76rem;
   position: relative;
   container-type: inline-size;
 }
@@ -853,11 +1033,12 @@ a {
 }
 
 .ot-hero__eyebrow {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.375rem;
-  margin: 0 0 0.5rem;
-  color: var(--ot-gold-400);
+  gap: 0.5rem 0.75rem;
+  margin: 0 0 0.625rem;
+  color: var(--ot-gold-300);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -865,13 +1046,23 @@ a {
   text-transform: uppercase;
 }
 
-.ot-hero__eyebrow .ot-icon {
+.ot-hero__eyebrow .ot-badge {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.ot-hero__featured {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ot-hero__featured .ot-icon {
   width: 1rem;
   height: 1rem;
 }
 
 .ot-hero__count {
-  margin-left: 0.5rem;
   padding-left: 0.75rem;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--ot-on-stage-muted);
@@ -889,7 +1080,7 @@ a {
   margin: 0 0 0.5rem;
   color: var(--ot-on-dark);
   font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   line-height: 1.2;
 }
 
@@ -899,6 +1090,7 @@ a {
 }
 
 .ot-hero__title a:hover {
+  color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
@@ -921,7 +1113,7 @@ a {
 .ot-hero__meta .ot-icon {
   width: 1rem;
   height: 1rem;
-  color: var(--ot-primary-300);
+  color: var(--ot-gold-300);
 }
 
 .ot-hero__cta {
@@ -942,11 +1134,12 @@ a {
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 50%;
-  background-color: rgba(18, 22, 33, 0.55);
+  background-color: rgba(var(--ot-night-rgb), 0.55);
   color: #fff;
   transform: translateY(-50%);
   transition:
     background-color var(--ot-dur-fast) var(--ot-ease),
+    border-color var(--ot-dur-fast) var(--ot-ease),
     color var(--ot-dur-fast) var(--ot-ease),
     transform var(--ot-dur-fast) var(--ot-ease);
 }
@@ -958,8 +1151,9 @@ a {
 }
 
 .ot-hero__arrow:hover {
-  background-color: #fff;
-  color: var(--ot-navy-800);
+  border-color: var(--ot-gold-500);
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
   transform: translateY(-50%) scale(1.06);
 }
 
@@ -989,7 +1183,7 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   background: transparent;
-  color: var(--ot-on-dark-muted);
+  color: var(--ot-on-stage-muted);
 }
 
 .ot-hero__toggle:hover {
@@ -1048,7 +1242,7 @@ a {
 .ot-hero__dot::after {
   width: 100%;
   opacity: 0;
-  background-color: var(--ot-primary-300);
+  background-color: var(--ot-gold-400);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -1059,7 +1253,7 @@ a {
 
 .ot-hero__dot[aria-current="true"]::before {
   width: 2rem;
-  background-color: var(--ot-primary-300);
+  background-color: var(--ot-gold-400);
 }
 
 .ot-hero.is-playing .ot-hero__dot[aria-current="true"]::before {
@@ -1095,11 +1289,15 @@ a {
   .ot-hero__meta {
     font-size: 0.875rem;
   }
+
+  .ot-hero-intro__lead {
+    font-size: 1rem;
+  }
 }
 
 /* 7. Section + event card (ticket) ------------------------------------ */
 .ot-section {
-  padding-block: clamp(2.25rem, 1.75rem + 2vw, 4rem);
+  padding-block: clamp(2.5rem, 1.75rem + 2.5vw, 4.5rem);
 }
 
 .ot-section__header {
@@ -1113,8 +1311,8 @@ a {
 
 .ot-section__title {
   margin: 0;
-  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.625rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 1.45rem + 1.8vw, 2.875rem);
+  letter-spacing: -0.035em;
   line-height: 1.05;
 }
 
@@ -1127,7 +1325,7 @@ a {
 .ot-card {
   --bs-card-bg: transparent;
   --bs-card-border-width: 0;
-  --bs-card-border-radius: var(--ot-radius-md);
+  --bs-card-border-radius: var(--ot-radius-lg);
   --bs-card-spacer-x: 0;
   --bs-card-spacer-y: 0;
   height: 100%;
@@ -1137,7 +1335,7 @@ a {
 
 .ot-card:hover,
 .ot-card:focus-within {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   filter: var(--ot-ticket-shadow-hover);
 }
 
@@ -1145,9 +1343,13 @@ a {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: var(--ot-radius-md);
+  border-radius: var(--ot-radius-lg);
   color: inherit;
   text-decoration: none;
+}
+
+.ot-card__link:hover {
+  color: inherit;
 }
 
 .ot-card__link:focus-visible {
@@ -1156,8 +1358,8 @@ a {
 
 .ot-card__cover {
   aspect-ratio: 1210 / 450;
-  border-radius: var(--ot-radius-md) var(--ot-radius-md) 0 0;
-  background-color: #e6e9f0;
+  border-radius: var(--ot-radius-lg) var(--ot-radius-lg) 0 0;
+  background-color: var(--ot-line);
   -webkit-mask:
     radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
     radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
@@ -1178,14 +1380,25 @@ a {
 }
 
 .ot-card:hover .ot-card__cover > img {
-  transform: scale(1.035);
+  transform: scale(1.04);
+}
+
+.ot-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
 }
 
 .ot-card__body {
   display: grid;
   flex: 1 1 auto;
+  grid-template-areas:
+    "stub info"
+    "foot foot";
   grid-template-columns: 4.75rem minmax(0, 1fr);
-  border-radius: 0 0 var(--ot-radius-md) var(--ot-radius-md);
+  grid-template-rows: 1fr auto;
+  border-radius: 0 0 var(--ot-radius-lg) var(--ot-radius-lg);
   background-color: var(--ot-surface);
   -webkit-mask:
     radial-gradient(circle var(--ot-notch) at 0 0, #0000 98%, #000),
@@ -1199,18 +1412,19 @@ a {
 
 .ot-card__stub {
   display: flex;
+  grid-area: stub;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0.25rem;
+  padding: 1rem 0.25rem 0.75rem;
   background: linear-gradient(var(--ot-line-strong) 55%, transparent 0) right top / 1.5px 8px repeat-y;
   text-align: center;
 }
 
 .ot-card__day {
-  color: var(--ot-accent-600);
+  color: var(--ot-ink);
   font-family: var(--ot-font-display);
-  font-size: 2.375rem;
+  font-size: 2.5rem;
   font-weight: 700;
   line-height: 0.9;
   font-variant-numeric: tabular-nums;
@@ -1218,10 +1432,10 @@ a {
 
 .ot-card__month {
   margin-top: 0.3125rem;
-  color: var(--ot-ink);
+  color: var(--ot-gold-700);
   font-family: var(--ot-font-display);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.16em;
   line-height: 1;
   text-transform: uppercase;
@@ -1238,9 +1452,9 @@ a {
 }
 
 .ot-card__info {
-  position: relative;
+  grid-area: info;
   min-width: 0;
-  padding: 1.0625rem 1.125rem 1.125rem 1rem;
+  padding: 1.0625rem 1.125rem 0.875rem 1rem;
 }
 
 .ot-card__title {
@@ -1251,7 +1465,7 @@ a {
   color: var(--ot-ink);
   font-size: 1.03125rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
   line-height: 1.35;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1260,7 +1474,7 @@ a {
 }
 
 .ot-card:hover .ot-card__title {
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-800);
 }
 
 .ot-card__meta {
@@ -1275,7 +1489,6 @@ a {
 
 .ot-card__meta + .ot-card__meta {
   margin-top: 0.125rem;
-  padding-right: 2.5rem;
 }
 
 .ot-card__meta > span,
@@ -1289,48 +1502,170 @@ a {
 .ot-card__meta .ot-icon {
   width: 0.9375rem;
   height: 0.9375rem;
-  color: var(--ot-subtle);
+  color: var(--ot-gold-600);
 }
 
-/* "Go" chip: a quiet affordance at rest, the booking colour on hover/focus */
-.ot-card__go {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--ot-line);
-  border-radius: 50%;
-  color: var(--ot-subtle);
-  transition:
-    background-color var(--ot-dur) var(--ot-ease),
-    border-color var(--ot-dur) var(--ot-ease),
-    color var(--ot-dur) var(--ot-ease),
-    transform var(--ot-dur) var(--ot-ease);
+/* Card foot: the tear-off strip with the booking cue */
+.ot-card__foot {
+  display: flex;
+  grid-area: foot;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem 0.875rem 1.125rem;
+  background: linear-gradient(90deg, var(--ot-line-strong) 55%, transparent 0) left top / 9px 1.5px repeat-x;
 }
 
-.ot-card__go .ot-icon {
-  width: 1rem;
-  height: 1rem;
+.ot-card__perk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--ot-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-.ot-card:hover .ot-card__go,
-.ot-card__link:focus-visible .ot-card__go {
-  border-color: var(--ot-primary-600);
-  background-color: var(--ot-primary-600);
-  color: #fff;
-  transform: translateX(2px);
+.ot-card__perk .ot-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--ot-gold-600);
+}
+
+.ot-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.9375rem;
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-gold-500);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 70%);
+  color: var(--ot-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 16px -10px rgba(var(--ot-gold-deep-rgb), 0.9);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-card__cta .ot-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  transition: transform var(--ot-dur) var(--ot-ease);
+}
+
+.ot-card:hover .ot-card__cta {
+  background-color: var(--ot-gold-400);
+}
+
+.ot-card:hover .ot-card__cta .ot-icon {
+  transform: translateX(3px);
 }
 
 /* Isotope keeps the row height; give it room for the hover lift */
 #events-grid {
-  margin-top: -0.375rem;
-  padding-top: 0.375rem;
+  margin-top: -0.5rem;
+  padding-top: 0.5rem;
 }
 
-/* 8. Empty state ------------------------------------------------------ */
+/* 8. Info band ("Good to know") — one big ticket ---------------------- */
+.ot-perks-wrap {
+  padding-bottom: clamp(3rem, 2rem + 3vw, 5rem);
+  filter: drop-shadow(0 30px 40px rgba(var(--ot-ink-rgb), 0.18));
+}
+
+.ot-perks {
+  position: relative;
+  display: grid;
+  gap: 1.75rem 3rem;
+  padding: clamp(1.75rem, 1.25rem + 2vw, 3rem) clamp(1.5rem, 1rem + 2.5vw, 3.25rem);
+  border-radius: var(--ot-radius-lg);
+  color: var(--ot-on-stage-muted);
+  background:
+    var(--ot-grain),
+    radial-gradient(60% 130% at 0% 0%, rgba(var(--ot-gold-rgb), 0.24), transparent 60%),
+    radial-gradient(50% 110% at 100% 100%, rgba(var(--ot-blue-rgb), 0.14), transparent 60%),
+    var(--ot-navy-900);
+  -webkit-mask:
+    radial-gradient(circle 1rem at 0 50%, #0000 98%, #000),
+    radial-gradient(circle 1rem at 100% 50%, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle 1rem at 0 50%, #0000 98%, #000),
+    radial-gradient(circle 1rem at 100% 50%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+.ot-perks__title {
+  margin: 0;
+  color: var(--ot-on-dark);
+  font-size: var(--ot-text-2xl);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.ot-perks__list {
+  display: grid;
+  gap: 1.5rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot-perks__list h3 {
+  margin: 0.875rem 0 0.375rem;
+  color: var(--ot-on-dark);
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.ot-perks__list p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.ot-perks__list a {
+  color: var(--ot-gold-300);
+  white-space: nowrap;
+}
+
+.ot-perks__list a:hover {
+  color: var(--ot-gold-100);
+}
+
+.ot-perks__icon {
+  display: grid;
+  place-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border: 1px solid rgba(var(--ot-gold-rgb), 0.36);
+  border-radius: 50%;
+  background-color: rgba(var(--ot-gold-rgb), 0.14);
+  color: var(--ot-gold-300);
+}
+
+@media (min-width: 768px) {
+  .ot-perks__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .ot-perks {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 2.6fr);
+    align-items: center;
+  }
+
+  .ot-perks__intro {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: center;
+    padding-right: 2.5rem;
+    background: linear-gradient(rgba(255, 255, 255, 0.2) 55%, transparent 0) right top / 1.5px 9px repeat-y;
+  }
+}
+
+/* 9. Empty state ------------------------------------------------------ */
 .ot-empty {
   max-width: 34rem;
   margin: 0 auto;
@@ -1349,9 +1684,9 @@ a {
   height: 4.5rem;
   margin-bottom: 1.25rem;
   border-radius: 50%;
-  background-color: var(--ot-primary-50);
-  color: var(--ot-primary-600);
-  box-shadow: 0 0 0 10px rgba(238, 242, 253, 0.55);
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-700);
+  box-shadow: 0 0 0 10px rgba(var(--ot-gold-rgb), 0.08);
 }
 
 .ot-empty__icon .ot-icon {
@@ -1370,14 +1705,14 @@ a {
   color: var(--ot-muted);
 }
 
-/* 9. Buttons ---------------------------------------------------------- */
+/* 10. Buttons --------------------------------------------------------- */
 .ot-btn {
   --bs-btn-padding-y: 0.6875rem;
   --bs-btn-padding-x: 1.375rem;
   --bs-btn-font-size: 0.9375rem;
   --bs-btn-font-weight: 600;
   --bs-btn-border-radius: var(--ot-radius-pill);
-  --bs-btn-focus-shadow-rgb: 78, 115, 223;
+  --bs-btn-focus-shadow-rgb: var(--ot-gold-rgb);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1403,26 +1738,26 @@ a {
 }
 
 .ot-btn--primary {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: var(--ot-primary-600);
-  --bs-btn-border-color: var(--ot-primary-600);
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--ot-primary-700);
-  --bs-btn-hover-border-color: var(--ot-primary-700);
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: var(--ot-primary-700);
-  --bs-btn-active-border-color: var(--ot-primary-700);
+  --bs-btn-color: var(--ot-ink);
+  --bs-btn-bg: var(--ot-gold-500);
+  --bs-btn-border-color: var(--ot-gold-500);
+  --bs-btn-hover-color: var(--ot-ink);
+  --bs-btn-hover-bg: var(--ot-gold-400);
+  --bs-btn-hover-border-color: var(--ot-gold-400);
+  --bs-btn-active-color: var(--ot-ink);
+  --bs-btn-active-bg: var(--ot-gold-600);
+  --bs-btn-active-border-color: var(--ot-gold-600);
   --bs-btn-disabled-color: var(--ot-muted);
-  --bs-btn-disabled-bg: var(--ot-line);
+  --bs-btn-disabled-bg: var(--ot-canvas-deep);
   --bs-btn-disabled-border-color: var(--ot-line);
   --bs-btn-disabled-opacity: 1;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 65%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 24px -12px rgba(58, 95, 212, 0.85);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 70%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), var(--ot-shadow-gold);
 }
 
 .ot-btn--primary:hover {
   transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 28px -12px rgba(58, 95, 212, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 16px 30px -12px rgba(var(--ot-gold-deep-rgb), 0.85);
 }
 
 .ot-btn--primary:active {
@@ -1435,28 +1770,44 @@ a {
   transform: none;
 }
 
+.ot-btn--outline {
+  --bs-btn-color: var(--ot-ink);
+  --bs-btn-bg: var(--ot-surface);
+  --bs-btn-border-color: var(--ot-line-strong);
+  --bs-btn-hover-color: var(--ot-ink);
+  --bs-btn-hover-bg: var(--ot-gold-50);
+  --bs-btn-hover-border-color: var(--ot-gold-600);
+  --bs-btn-active-color: var(--ot-ink);
+  --bs-btn-active-bg: var(--ot-gold-100);
+  --bs-btn-active-border-color: var(--ot-gold-600);
+}
+
+.ot-btn--outline .ot-icon {
+  color: var(--ot-gold-700);
+}
+
 .ot-btn--ghost {
-  --bs-btn-color: var(--ot-primary-600);
+  --bs-btn-color: var(--ot-gold-800);
   --bs-btn-bg: transparent;
   --bs-btn-border-color: var(--ot-line-strong);
-  --bs-btn-hover-color: var(--ot-primary-700);
-  --bs-btn-hover-bg: var(--ot-primary-50);
-  --bs-btn-hover-border-color: var(--ot-primary-400);
-  --bs-btn-active-color: var(--ot-primary-700);
-  --bs-btn-active-bg: var(--ot-primary-50);
-  --bs-btn-active-border-color: var(--ot-primary-400);
+  --bs-btn-hover-color: var(--ot-ink);
+  --bs-btn-hover-bg: var(--ot-gold-50);
+  --bs-btn-hover-border-color: var(--ot-gold-600);
+  --bs-btn-active-color: var(--ot-ink);
+  --bs-btn-active-bg: var(--ot-gold-100);
+  --bs-btn-active-border-color: var(--ot-gold-600);
 }
 
 .ot-btn--block {
   width: 100%;
 }
 
-/* 10. FAQ ------------------------------------------------------------- */
+/* 11. FAQ ------------------------------------------------------------- */
 .ot-page-hero__title {
   margin: 0 0 0.75rem;
   font-size: var(--ot-text-3xl);
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
   overflow-wrap: break-word;
 }
 
@@ -1519,7 +1870,7 @@ a {
   grid-template-columns: minmax(0, 1fr) var(--stub);
   height: 100%;
   min-height: 10rem;
-  border-radius: var(--ot-radius-md);
+  border-radius: var(--ot-radius-lg);
   background-color: var(--ot-surface);
   color: inherit;
   text-decoration: none;
@@ -1555,8 +1906,8 @@ a {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 0.875rem;
-  background-color: var(--ot-primary-50);
-  color: var(--ot-primary-600);
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-700);
   transition: background-color var(--ot-dur) var(--ot-ease), color var(--ot-dur) var(--ot-ease);
 }
 
@@ -1566,8 +1917,8 @@ a {
 }
 
 .ot-faq-card:hover .ot-faq-card__icon {
-  background-color: var(--ot-primary-600);
-  color: #fff;
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
 }
 
 .ot-faq-card__title {
@@ -1583,7 +1934,7 @@ a {
   align-items: center;
   gap: 0.375rem;
   margin-top: auto;
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-700);
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -1605,7 +1956,7 @@ a {
   padding: 1rem 0.5rem;
   background:
     linear-gradient(var(--ot-line-strong) 55%, transparent 0) left top / 1.5px 8px repeat-y,
-    #f7f8fc;
+    var(--ot-tint);
   text-align: center;
 }
 
@@ -1617,7 +1968,7 @@ a {
 }
 
 .ot-faq-card__num {
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-700);
   font-family: var(--ot-font-display);
   font-size: 3rem;
   font-weight: 700;
@@ -1661,8 +2012,8 @@ a {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
-  background-color: var(--ot-accent-50);
-  color: var(--ot-accent-600);
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-700);
 }
 
 .ot-help-band__cta {
@@ -1670,11 +2021,12 @@ a {
   overflow: hidden;
   padding: 1.75rem;
   border-radius: var(--ot-radius-lg);
-  color: var(--ot-on-dark-muted);
+  color: var(--ot-on-stage-muted);
   background:
-    radial-gradient(80% 120% at 100% 0%, rgba(78, 115, 223, 0.28), transparent 60%),
-    radial-gradient(60% 90% at 0% 100%, rgba(240, 181, 68, 0.1), transparent 60%),
-    var(--ot-navy-800);
+    var(--ot-grain),
+    radial-gradient(80% 120% at 100% 0%, rgba(var(--ot-gold-rgb), 0.26), transparent 60%),
+    radial-gradient(60% 90% at 0% 100%, rgba(var(--ot-blue-rgb), 0.12), transparent 60%),
+    var(--ot-navy-900);
 }
 
 .ot-help-band__title {
@@ -1703,7 +2055,7 @@ a {
   }
 }
 
-/* 11. Search ---------------------------------------------------------- */
+/* 12. Search + event detail ------------------------------------------- */
 .ot-breadcrumb ol {
   display: flex;
   flex-wrap: nowrap;
@@ -1741,7 +2093,7 @@ a {
 }
 
 .ot-breadcrumb a:hover {
-  color: var(--ot-primary-600);
+  color: var(--ot-gold-700);
   text-decoration: underline;
 }
 
@@ -1762,7 +2114,7 @@ a {
 }
 
 .ot-stage .ot-breadcrumb a:hover {
-  color: var(--ot-on-dark);
+  color: var(--ot-gold-300);
 }
 
 .ot-search-head .ot-page-hero__title {
@@ -1789,15 +2141,15 @@ a {
 }
 
 .ot-search-form:focus-within {
-  border-color: var(--ot-primary-400);
-  box-shadow: 0 0 0 4px rgba(127, 152, 236, 0.35);
+  border-color: var(--ot-gold-600);
+  box-shadow: 0 0 0 4px rgba(var(--ot-gold-rgb), 0.35);
 }
 
 .ot-search-form__icon {
   position: absolute;
   top: 50%;
   left: 1.125rem;
-  color: var(--ot-subtle);
+  color: var(--ot-gold-600);
   transform: translateY(-50%);
 }
 
@@ -1819,11 +2171,14 @@ a {
   outline: none;
 }
 
+.ot-search-form .ot-btn:focus-visible {
+  outline-color: var(--ot-focus);
+}
+
 .ot-search-results {
   padding-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
 }
 
-/* 12. Event detail ---------------------------------------------------- */
 .ot-event-banner {
   margin: 0;
   aspect-ratio: 1210 / 450;
@@ -1838,20 +2193,25 @@ a {
 }
 
 .ot-event-head__title {
-  margin-bottom: 1.25rem;
+  margin: 0.875rem 0 1.25rem;
   font-size: var(--ot-text-3xl);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
   overflow-wrap: break-word;
 }
 
+/* Facts: one card, three columns split by hairlines */
 .ot-event-facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-lg);
+  background-color: var(--ot-surface);
   list-style: none;
+  box-shadow: var(--ot-shadow-sm);
 }
 
 .ot-event-facts li {
@@ -1859,15 +2219,15 @@ a {
   align-items: center;
   gap: 0.875rem;
   min-width: 0;
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--ot-line);
-  border-radius: var(--ot-radius-md);
-  background-color: var(--ot-surface);
+  padding: 1rem 1.125rem;
   color: var(--ot-ink);
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.35;
-  box-shadow: var(--ot-shadow-sm);
+}
+
+.ot-event-facts li + li {
+  border-left: 1px solid var(--ot-line);
 }
 
 .ot-event-facts__icon {
@@ -1877,8 +2237,8 @@ a {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.75rem;
-  background-color: var(--ot-primary-50);
-  color: var(--ot-primary-600);
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-700);
 }
 
 .ot-event-facts__label {
@@ -1889,6 +2249,50 @@ a {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+@media (max-width: 767.98px) {
+  .ot-event-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .ot-event-facts li + li {
+    border-top: 1px solid var(--ot-line);
+    border-left: 0;
+  }
+}
+
+.ot-event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+}
+
+.ot-event-actions .ot-btn--outline {
+  --bs-btn-padding-x: 1.125rem;
+}
+
+.ot-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  z-index: 1100;
+  max-width: calc(100vw - 2rem);
+  margin: 0;
+  padding: 0.75rem 1.125rem;
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-navy-900);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  box-shadow: var(--ot-shadow-lg);
+  transform: translateX(-50%);
+}
+
+.ot-toast[hidden] {
+  display: none;
 }
 
 .ot-event-section {
@@ -1910,10 +2314,10 @@ a {
 
 .ot-sample-badge {
   padding: 0.25rem 0.625rem;
-  border: 1px dashed #e2bf62;
+  border: 1px dashed var(--ot-gold-600);
   border-radius: var(--ot-radius-pill);
-  background-color: #fff7e2;
-  color: #7a4f00;
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-800);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1929,142 +2333,63 @@ a {
   margin-bottom: 0;
 }
 
-.ot-ticket-list {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid var(--ot-line);
-  border-radius: var(--ot-radius-md);
-  background-color: var(--ot-surface);
-  list-style: none;
-  box-shadow: var(--ot-shadow-sm);
-}
-
-.ot-ticket-row {
-  display: grid;
-  grid-template-areas: "info price qty";
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  align-items: center;
-  gap: 0.75rem 1.5rem;
-  padding: 1.125rem 1.25rem;
-  transition: background-color var(--ot-dur-fast) var(--ot-ease);
-}
-
-.ot-ticket-row:hover {
-  background-color: #fafbfe;
-}
-
-.ot-ticket-row + .ot-ticket-row {
-  border-top: 1px dashed var(--ot-line-strong);
-}
-
-.ot-ticket-row__info {
-  grid-area: info;
-  min-width: 0;
-}
-
-.ot-ticket-row__name {
-  margin: 0;
-  color: var(--ot-ink);
-  font-weight: 600;
-}
-
-.ot-ticket-row__note {
-  margin: 0;
-  color: var(--ot-muted);
-  font-size: 0.8125rem;
-}
-
-.ot-ticket-row__price {
-  grid-area: price;
-  margin: 0;
-  color: var(--ot-ink);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.ot-qty {
-  display: inline-flex;
-  grid-area: qty;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  border: 1px solid var(--ot-line);
-  border-radius: var(--ot-radius-pill);
-  background-color: var(--ot-surface);
-}
-
-.ot-qty__btn {
-  display: grid;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background-color: var(--ot-primary-50);
-  color: var(--ot-primary-600);
-  transition: background-color var(--ot-dur-fast) var(--ot-ease), color var(--ot-dur-fast) var(--ot-ease);
-}
-
-.ot-qty__btn:hover:not(:disabled) {
-  background-color: var(--ot-primary-600);
-  color: #fff;
-}
-
-.ot-qty__btn:disabled {
-  background-color: var(--ot-canvas);
-  color: var(--ot-subtle);
-}
-
-.ot-qty__value {
-  min-width: 1.75rem;
-  color: var(--ot-ink);
-  font-weight: 600;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-
-.ot-tickets__footer {
+.ot-venue {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1rem;
-  margin-top: 0.75rem;
-  padding: 1rem 1.25rem;
-  border-radius: var(--ot-radius-md);
-  background:
-    radial-gradient(80% 140% at 100% 0%, rgba(78, 115, 223, 0.22), transparent 60%),
-    var(--ot-navy-800);
-  color: var(--ot-on-dark-muted);
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-lg);
+  background-color: var(--ot-surface);
+  box-shadow: var(--ot-shadow-sm);
 }
 
-.ot-tickets__total {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+.ot-venue__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--ot-navy-900);
+  color: var(--ot-gold-300);
+}
+
+.ot-venue__text {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.ot-venue__name {
   margin: 0;
+  color: var(--ot-ink);
+  font-weight: 600;
+}
+
+.ot-venue__meta {
+  margin: 0;
+  color: var(--ot-muted);
   font-size: 0.875rem;
 }
 
-.ot-tickets__total output {
-  color: var(--ot-on-dark);
-  font-size: 1.375rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+.ot-venue__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.ot-tickets__footer .ot-btn:disabled {
-  --bs-btn-disabled-bg: var(--ot-navy-700);
-  --bs-btn-disabled-border-color: var(--ot-navy-700);
-  --bs-btn-disabled-color: var(--ot-on-dark-muted);
+.ot-venue__link .ot-icon {
+  width: 1rem;
+  height: 1rem;
+  transition: transform var(--ot-dur) var(--ot-ease);
 }
 
-.ot-tickets__note {
-  margin: 0.75rem 0 0;
-  color: var(--ot-muted);
-  font-size: 0.8125rem;
+.ot-venue__link:hover .ot-icon {
+  transform: translateX(3px);
 }
 
 .ot-info-list {
@@ -2096,135 +2421,284 @@ a {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-  background-color: var(--ot-primary-50);
-  color: var(--ot-primary-600);
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-700);
 }
 
-@media (max-width: 575.98px) {
-  .ot-ticket-row {
-    grid-template-areas:
-      "info qty"
-      "price qty";
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.25rem 1rem;
-  }
-
-  .ot-tickets__footer .ot-btn {
-    width: 100%;
-  }
+/* Ticket rows + quantity stepper (styles the existing booking component in the live theme) */
+.ot-ticket-list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-md);
+  background-color: var(--ot-surface);
+  list-style: none;
 }
 
-/* 13. Booking card (ticket) + mobile booking bar ---------------------- */
-.ot-booking-card {
-  --stub: 5.75rem;
-  position: sticky;
-  top: calc(var(--ot-header-h) + 1.25rem);
-  display: none;
+.ot-ticket-row {
+  display: grid;
+  grid-template-areas:
+    "info qty"
+    "price qty";
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.125rem 1rem;
+  padding: 0.875rem 1rem;
+  transition: background-color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-ticket-row:hover {
+  background-color: var(--ot-tint);
+}
+
+.ot-ticket-row + .ot-ticket-row {
+  border-top: 1px dashed var(--ot-line-strong);
+}
+
+.ot-ticket-row__info {
+  grid-area: info;
+  min-width: 0;
+}
+
+.ot-ticket-row__name {
+  margin: 0;
+  color: var(--ot-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.ot-ticket-row__note {
+  margin: 0;
+  color: var(--ot-muted);
+  font-size: 0.8125rem;
+}
+
+.ot-ticket-row__price {
+  grid-area: price;
+  margin: 0;
+  color: var(--ot-gold-800);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-qty {
+  display: inline-flex;
+  grid-area: qty;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--ot-line);
+  border-radius: var(--ot-radius-pill);
+  background-color: var(--ot-surface);
+}
+
+.ot-qty__btn {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--ot-gold-50);
+  color: var(--ot-gold-800);
+  transition: background-color var(--ot-dur-fast) var(--ot-ease), color var(--ot-dur-fast) var(--ot-ease);
+}
+
+.ot-qty__btn .ot-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ot-qty__btn:hover:not(:disabled) {
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
+}
+
+.ot-qty__btn:disabled {
+  background-color: var(--ot-canvas);
+  color: var(--ot-subtle);
+}
+
+.ot-qty__value {
+  min-width: 1.75rem;
+  color: var(--ot-ink);
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 13. Ticket panel (booking) + mobile bar ----------------------------- */
+.ot-booking-col {
+  filter: drop-shadow(0 24px 30px rgba(var(--ot-ink-rgb), 0.16)) drop-shadow(0 2px 3px rgba(var(--ot-ink-rgb), 0.06));
+}
+
+.ot-ticket-panel {
+  --stub: 5.25rem;
+}
+
+.ot-ticket-panel__stub {
+  display: grid;
   grid-template-columns: var(--stub) minmax(0, 1fr);
-  border-radius: var(--ot-radius-lg);
-  color: var(--ot-on-dark-muted);
+  border-radius: var(--ot-radius-lg) var(--ot-radius-lg) 0 0;
+  color: var(--ot-on-stage-muted);
   background:
-    radial-gradient(90% 70% at 100% 0%, rgba(78, 115, 223, 0.26), transparent 70%),
-    radial-gradient(70% 60% at 0% 100%, rgba(240, 181, 68, 0.1), transparent 70%),
-    var(--ot-navy-800);
+    var(--ot-grain),
+    radial-gradient(90% 90% at 100% 0%, rgba(var(--ot-gold-rgb), 0.28), transparent 70%),
+    radial-gradient(70% 80% at 0% 100%, rgba(var(--ot-blue-rgb), 0.14), transparent 70%),
+    var(--ot-navy-900);
   -webkit-mask:
-    radial-gradient(circle 0.75rem at var(--stub) 0, #0000 98%, #000),
-    radial-gradient(circle 0.75rem at var(--stub) 100%, #0000 98%, #000);
+    radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
   -webkit-mask-composite: source-in;
   mask:
-    radial-gradient(circle 0.75rem at var(--stub) 0, #0000 98%, #000),
-    radial-gradient(circle 0.75rem at var(--stub) 100%, #0000 98%, #000);
+    radial-gradient(circle var(--ot-notch) at 0 100%, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 100%, #0000 98%, #000);
   mask-composite: intersect;
 }
 
-.ot-booking-col {
-  filter: drop-shadow(0 22px 26px rgba(20, 26, 40, 0.24));
-}
-
-.ot-booking-card__stub {
+.ot-ticket-panel__date {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 0.5rem;
-  background: linear-gradient(rgba(255, 255, 255, 0.28) 55%, transparent 0) right top / 1.5px 9px repeat-y;
+  padding: 1.25rem 0.25rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.26) 55%, transparent 0) right top / 1.5px 9px repeat-y;
   text-align: center;
 }
 
-.ot-booking-card__weekday,
-.ot-booking-card__month {
+.ot-ticket-panel__weekday,
+.ot-ticket-panel__month {
   font-family: var(--ot-font-display);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.16em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
-.ot-booking-card__month {
-  color: var(--ot-gold-400);
+.ot-ticket-panel__month {
+  color: var(--ot-gold-300);
 }
 
-.ot-booking-card__day {
+.ot-ticket-panel__day {
   margin-block: 0.125rem;
   color: var(--ot-on-dark);
   font-family: var(--ot-font-display);
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 0.95;
 }
 
-.ot-booking-card__body {
+.ot-ticket-panel__event {
   min-width: 0;
-  padding: 1.5rem 1.5rem 1.375rem 1.375rem;
+  padding: 1.25rem 1.375rem 1.25rem 1.125rem;
 }
 
-.ot-booking-card__title {
-  margin-bottom: 0.75rem;
+.ot-ticket-panel__title {
+  margin: 0 0 0.5rem;
   color: var(--ot-on-dark);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.ot-booking-card__facts {
-  display: grid;
-  gap: 0.375rem;
-  margin: 0 0 1.25rem;
-  padding: 0;
-  font-size: 0.875rem;
-  list-style: none;
-}
-
-.ot-booking-card__facts li {
+.ot-ticket-panel__meta {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 0.4375rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
 }
 
-.ot-booking-card__facts .ot-icon {
-  width: 1rem;
-  height: 1rem;
+.ot-ticket-panel__meta + .ot-ticket-panel__meta {
+  margin-top: 0.125rem;
+}
+
+.ot-ticket-panel__meta .ot-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
   margin-top: 0.15rem;
-  color: var(--ot-primary-300);
+  color: var(--ot-gold-300);
 }
 
-.ot-booking-card__note {
+.ot-ticket-panel__body {
+  padding: 1.375rem 1.375rem 1.25rem;
+  border-radius: 0 0 var(--ot-radius-lg) var(--ot-radius-lg);
+  background:
+    linear-gradient(90deg, var(--ot-line-strong) 55%, transparent 0) left top / 10px 1.5px repeat-x,
+    var(--ot-surface);
+  -webkit-mask:
+    radial-gradient(circle var(--ot-notch) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 0, #0000 98%, #000);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--ot-notch) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--ot-notch) at 100% 0, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+.ot-ticket-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.ot-ticket-panel__heading {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.ot-ticket-panel__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 1rem 0;
+  color: var(--ot-muted);
+  font-size: 0.875rem;
+}
+
+.ot-ticket-panel__total output {
+  color: var(--ot-ink);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ot-ticket-panel__note {
+  margin: 0.75rem 0 0;
+  color: var(--ot-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.ot-ticket-panel__perk {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0.875rem 0 0;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--ot-line);
+  color: var(--ot-text);
   font-size: 0.8125rem;
 }
 
-.ot-booking-card__note .ot-icon {
-  width: 1rem;
-  height: 1rem;
-  color: var(--ot-gold-400);
+.ot-ticket-panel__perk .ot-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: var(--ot-gold-600);
 }
 
 @media (min-width: 992px) {
-  .ot-booking-card {
-    display: grid;
+  .ot-ticket-panel {
+    position: sticky;
+    top: calc(var(--ot-header-h-condensed) + 1.25rem);
   }
 }
 
@@ -2239,15 +2713,15 @@ a {
   gap: 0.75rem;
   padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
   border-top: 1px solid var(--ot-navy-line);
-  background-color: rgba(23, 28, 40, 0.97);
-  color: var(--ot-on-dark-muted);
+  background-color: rgba(var(--ot-ink-rgb), 0.97);
+  color: var(--ot-on-stage-muted);
   transform: translateY(0);
   transition: transform var(--ot-dur) var(--ot-ease);
 }
 
 @supports (backdrop-filter: blur(1px)) {
   .ot-mobile-cta {
-    background-color: rgba(23, 28, 40, 0.88);
+    background-color: rgba(var(--ot-ink-rgb), 0.88);
     backdrop-filter: saturate(150%) blur(16px);
   }
 }
@@ -2291,6 +2765,10 @@ a {
   .ot-page-event .ot-fab-stack {
     bottom: 5.25rem;
   }
+
+  .ot-page-event .ot-toast {
+    bottom: 5.5rem;
+  }
 }
 
 /* 14. Footer ---------------------------------------------------------- */
@@ -2300,8 +2778,9 @@ a {
   padding: clamp(3rem, 2.5rem + 2vw, 4rem) 0 1.5rem;
   color: var(--ot-on-dark-muted);
   background:
-    radial-gradient(60% 80% at 100% 0%, rgba(78, 115, 223, 0.1), transparent 70%),
-    var(--ot-navy-800);
+    var(--ot-grain),
+    radial-gradient(60% 80% at 100% 0%, rgba(var(--ot-gold-rgb), 0.12), transparent 70%),
+    var(--ot-navy-900);
 }
 
 /* Perforated top edge: the footer is the stub torn from the page */
@@ -2368,13 +2847,17 @@ a {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--ot-on-dark);
-  transition: background-color var(--ot-dur-fast) var(--ot-ease), border-color var(--ot-dur-fast) var(--ot-ease), transform var(--ot-dur-fast) var(--ot-ease);
+  transition:
+    background-color var(--ot-dur-fast) var(--ot-ease),
+    border-color var(--ot-dur-fast) var(--ot-ease),
+    color var(--ot-dur-fast) var(--ot-ease),
+    transform var(--ot-dur-fast) var(--ot-ease);
 }
 
 .ot-social:hover {
-  border-color: var(--ot-primary-600);
-  background-color: var(--ot-primary-600);
-  color: #fff;
+  border-color: var(--ot-gold-500);
+  background-color: var(--ot-gold-500);
+  color: var(--ot-ink);
   transform: translateY(-2px);
 }
 
@@ -2403,19 +2886,26 @@ a {
 }
 
 .ot-footer__links a:hover {
-  color: var(--ot-on-dark);
+  color: var(--ot-gold-300);
   transform: translateX(2px);
 }
 
 .ot-footer__links .ot-icon {
   width: 1rem;
   height: 1rem;
-  color: var(--ot-primary-300);
+  color: var(--ot-gold-300);
 }
 
 .ot-lang-btn--footer {
   padding-inline: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--ot-on-dark-muted);
+}
+
+.ot-lang-btn--footer:hover,
+.ot-lang-btn--footer[aria-expanded="true"] {
+  color: var(--ot-on-dark);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .ot-footer__legal {
@@ -2433,6 +2923,7 @@ a {
 }
 
 .ot-footer__legal a:hover {
+  color: var(--ot-gold-300);
   text-decoration-color: currentColor;
 }
 
@@ -2479,7 +2970,7 @@ a {
   color: #fff;
 }
 
-/* Chat launcher: a round button that opens into a labelled pill on hover/focus */
+/* Chat launcher: a round gold button that opens into a labelled pill on hover/focus */
 .ot-chat-launcher {
   display: inline-flex;
   align-items: center;
@@ -2487,13 +2978,15 @@ a {
   min-width: 3.25rem;
   padding-inline: 1rem;
   border-radius: var(--ot-radius-pill);
-  background-color: var(--ot-primary-600);
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 65%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 30px -12px rgba(58, 95, 212, 0.75);
+  background-color: var(--ot-gold-500);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 70%);
+  color: var(--ot-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 16px 30px -12px rgba(var(--ot-gold-deep-rgb), 0.8);
 }
 
 .ot-chat-launcher:hover {
-  background-color: var(--ot-primary-700);
+  background-color: var(--ot-gold-400);
+  color: var(--ot-ink);
 }
 
 .ot-chat-launcher__label {
@@ -2518,7 +3011,7 @@ a {
   height: 2.75rem;
   margin-right: 0.25rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: rgba(31, 37, 51, 0.92);
+  background-color: rgba(var(--ot-ink-rgb), 0.92);
   opacity: 0;
   visibility: hidden;
   transform: translateY(0.5rem);

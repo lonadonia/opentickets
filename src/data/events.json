@@ -1,5 +1,5 @@
 {
-  "_note": "Captured from the live home page (Open Tickets, 2026-10-23). Order = live order. dataName/dataVenue are the exact Isotope data-name/data-venue values from the live markup.",
+  "_note": "Captured from the live home page (Open Tickets, 2026-10-23). Order = live order. dataName/dataVenue are the exact Isotope data-name/data-venue values from the live markup. category = editorial label derived from each event title/banner for the preview; map to the CMS category in the theme.",
   "featured": [
     "01ktvcz2dxv10rs7cvq0q9tc0v",
     "01kva9y2phdzcq6p7p12s0r5vy",
@@ -27,7 +27,8 @@
       "weekday": "Thursday",
       "longDate": "Thursday, 1 January 2026",
       "image": "image-287-29.jpg",
-      "alt": "Klub 600 2026 - Lede Aansluiting / Hernuwing"
+      "alt": "Klub 600 2026 - Lede Aansluiting / Hernuwing",
+      "category": "Membership"
     },
     {
       "id": "01kyhhbd2pg75gq5jc4xxmwef1",
@@ -42,7 +43,8 @@
       "weekday": "Sunday",
       "longDate": "Sunday, 2 August 2026",
       "image": "OPFC-TICKET-281210x450-29.jpg",
-      "alt": "Orlando Pirates FC 2026/27 Season Ticket"
+      "alt": "Orlando Pirates FC 2026/27 Season Ticket",
+      "category": "Football"
     },
     {
       "id": "01kryb1vz1sn1mbxh744p7j0x2",
@@ -57,7 +59,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 23 October 2026",
       "image": "SA_4x4_OS_WK_23_Okt_1210x450px_2026_1.jpg",
-      "alt": "The SA 4X4 and Outdoor Show FRI"
+      "alt": "The SA 4X4 and Outdoor Show FRI",
+      "category": "Expo"
     },
     {
       "id": "01ks5adb4h3kew3mgyxaed3bjs",
@@ -72,7 +75,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 23 October 2026",
       "image": "SA_4x4_OS_WK_Weekend_1210x450px_2026_1.jpg",
-      "alt": "The SA 4X4 and Outdoor Show WEEKEND"
+      "alt": "The SA 4X4 and Outdoor Show WEEKEND",
+      "category": "Expo"
     },
     {
       "id": "01m59frj4q093htw5tsqd084gv",
@@ -87,7 +91,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 23 October 2026",
       "image": "Screenshot-2026-10-19-094304.jpg",
-      "alt": "Midlands Wanderers FC vs Upington City FC"
+      "alt": "Midlands Wanderers FC vs Upington City FC",
+      "category": "Football"
     },
     {
       "id": "01m48r1ybg485zz56wz535xsbr",
@@ -102,7 +107,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 23 October 2026",
       "image": "CAF_Tickets.jpg",
-      "alt": "Orlando Pirates FC vs African Stars FC"
+      "alt": "Orlando Pirates FC vs African Stars FC",
+      "category": "Football"
     },
     {
       "id": "01m462r15hn4cy495d6r2yb7nw",
@@ -117,7 +123,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 23 October 2026",
       "image": "CAF-MSCFC-v-Wiliet-SC.jpg",
-      "alt": "Mamelodi Sundowns vs. Wiliete Sport Club (Angola)"
+      "alt": "Mamelodi Sundowns vs. Wiliete Sport Club (Angola)",
+      "category": "Football"
     },
     {
       "id": "01ks5610v79ydtk00tcr95wkq9",
@@ -132,7 +139,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 24 October 2026",
       "image": "SA_4x4_OS_WK_24_Okt_1210x450px_2026_1.jpg",
-      "alt": "The SA 4X4 and Outdoor Show SAT"
+      "alt": "The SA 4X4 and Outdoor Show SAT",
+      "category": "Expo"
     },
     {
       "id": "01m59thwermysbwat20bst9g8r",
@@ -147,7 +155,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 24 October 2026",
       "image": "1210-X-450-King-Zwelithini.jpg",
-      "alt": "Lamontville Golden Arrows vs Chippa United (CKC)"
+      "alt": "Lamontville Golden Arrows vs Chippa United (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m59sxq87e20kc33ykxz9ztkr",
@@ -162,7 +171,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 24 October 2026",
       "image": "1210-X-450-Old-Peter-Mokaba.jpg",
-      "alt": "Polokwane City FC vs Siwelele FC (CKC)"
+      "alt": "Polokwane City FC vs Siwelele FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01kpqjesg1cy7j5cb583ss50qt",
@@ -177,7 +187,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 24 October 2026",
       "image": "NMU_Banner-2026.jpg",
-      "alt": "Nelson Mandela University Fashion Show"
+      "alt": "Nelson Mandela University Fashion Show",
+      "category": "Fashion"
     },
     {
       "id": "01ks5a6qz5e7f6097hw6h6qnfx",
@@ -192,7 +203,8 @@
       "weekday": "Sunday",
       "longDate": "Sunday, 25 October 2026",
       "image": "SA_4x4_OS_WK_25_Okt_1210x450px_2026_1.jpg",
-      "alt": "The SA 4X4 and Outdoor Show SUN"
+      "alt": "The SA 4X4 and Outdoor Show SUN",
+      "category": "Expo"
     },
     {
       "id": "01m59rxwvshnt4y1aesye8pg4p",
@@ -207,7 +219,8 @@
       "weekday": "Sunday",
       "longDate": "Sunday, 25 October 2026",
       "image": "1210-X-450-Mbombela.jpg",
-      "alt": "Kruger United FC vs Amazulu FC (CKC)"
+      "alt": "Kruger United FC vs Amazulu FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m59m15y2xeeevjy8fk41xcx2",
@@ -222,7 +235,8 @@
       "weekday": "Sunday",
       "longDate": "Sunday, 25 October 2026",
       "image": "1210-X-450-New-Peter-Mokaba.jpg",
-      "alt": "Sekhukhune United FC vs Richards Bay FC (CKC)"
+      "alt": "Sekhukhune United FC vs Richards Bay FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m4t1p82pp12z29mwq95jbm7m",
@@ -237,7 +251,8 @@
       "weekday": "Tuesday",
       "longDate": "Tuesday, 27 October 2026",
       "image": "ISR-2026-TICKET-BANNER-1210X450-MASSA-AFLOS-450.jpg",
-      "alt": "ISR Massa Aflos"
+      "alt": "ISR Massa Aflos",
+      "category": "School sport"
     },
     {
       "id": "01m59shh3w510d0rz51zsktzhk",
@@ -252,7 +267,8 @@
       "weekday": "Tuesday",
       "longDate": "Tuesday, 27 October 2026",
       "image": "1210-X-450-FNB.jpg",
-      "alt": "Kaizer Chiefs vs TS Galaxy FC (CKC)"
+      "alt": "Kaizer Chiefs vs TS Galaxy FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m5cf9ptpd5rqp9pp12ahqehm",
@@ -267,7 +283,8 @@
       "weekday": "Tuesday",
       "longDate": "Tuesday, 27 October 2026",
       "image": "1210-X-450-Loftus-28Mamelodi-vs-Marumo-29.jpg",
-      "alt": "Mamelodi Sundowns vs Marumo Gallants (CKC)"
+      "alt": "Mamelodi Sundowns vs Marumo Gallants (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m5cfmp8rgz7h5v31fhaae677",
@@ -282,7 +299,8 @@
       "weekday": "Tuesday",
       "longDate": "Tuesday, 27 October 2026",
       "image": "1210-X-450-Orlando-Amstel-Arena.jpg",
-      "alt": "Orlando Pirates vs Milford FC (CKC)"
+      "alt": "Orlando Pirates vs Milford FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m59t7hbq4v6rsera8x5zzpaz",
@@ -297,7 +315,8 @@
       "weekday": "Wednesday",
       "longDate": "Wednesday, 28 October 2026",
       "image": "1210-X-450-Chatsworth.jpg",
-      "alt": "Durban City FC vs Stellenbosch FC (CKC)"
+      "alt": "Durban City FC vs Stellenbosch FC (CKC)",
+      "category": "Football"
     },
     {
       "id": "01m5h7c18yer4wrqhjsyxrneeg",
@@ -312,7 +331,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 31 October 2026",
       "image": "ISR-2026-TICKET-BANNER-Landloop-1370-x-550.jpg",
-      "alt": "ISR Sewes en Hoops"
+      "alt": "ISR Sewes en Hoops",
+      "category": "School sport"
     },
     {
       "id": "01kn3tnh35b7mnm7zgfxs5tnkt",
@@ -327,7 +347,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 31 October 2026",
       "image": "KempieFees-Banner-2026-05-22-Factory.jpg",
-      "alt": "KempieFees 2026"
+      "alt": "KempieFees 2026",
+      "category": "Festival"
     },
     {
       "id": "01m5ena2smd0hden3vqrxdks07",
@@ -342,7 +363,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 31 October 2026",
       "image": "MSFC-v-DCFC-31-Oct-2026-Banner.jpg",
-      "alt": "Mamelodi Sundowns vs Durban City"
+      "alt": "Mamelodi Sundowns vs Durban City",
+      "category": "Football"
     },
     {
       "id": "01ktvcz2dxv10rs7cvq0q9tc0v",
@@ -357,7 +379,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 6 November 2026",
       "image": "AOT-OPEN-TICKETS-BANNER-281210-x-450-px-29.jpg",
-      "alt": "Appel in PE"
+      "alt": "Appel in PE",
+      "category": "Music"
     },
     {
       "id": "01kva9y2phdzcq6p7p12s0r5vy",
@@ -372,7 +395,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 7 November 2026",
       "image": "Ticket-Banner-2.jpg",
-      "alt": "Going Back West"
+      "alt": "Going Back West",
+      "category": "Festival"
     },
     {
       "id": "01m0g6gb95z51sc7m9hbtjkqxj",
@@ -387,7 +411,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 7 November 2026",
       "image": "Black-Swan-Banner-1210-x-450.jpg",
-      "alt": "Black Swan Africa Extravaganza"
+      "alt": "Black Swan Africa Extravaganza",
+      "category": "Gala"
     },
     {
       "id": "01m5h6y8j0qjmrxd26sytm2jvp",
@@ -402,7 +427,8 @@
       "weekday": "Friday",
       "longDate": "Friday, 13 November 2026",
       "image": "Senior-Old-Boys-Lunch-Header.jpg",
-      "alt": "PRG Senior Old Boys Ete / Lunch 2026"
+      "alt": "PRG Senior Old Boys Ete / Lunch 2026",
+      "category": "Reunion"
     },
     {
       "id": "01m3vvwks8fnsc3f7qv9fbxpxk",
@@ -417,7 +443,8 @@
       "weekday": "Saturday",
       "longDate": "Saturday, 21 November 2026",
       "image": "Help24-Banner.jpg",
-      "alt": "Help24 Somer Fees"
+      "alt": "Help24 Somer Fees",
+      "category": "Festival"
     }
   ]
 }

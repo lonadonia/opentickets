@@ -25,7 +25,9 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const INTERVAL = 6000;
   const count = slides.length;
-  const ambientLayers = Array.from(hero.querySelectorAll('[data-ot-ambient] .ot-ambient__layer'));
+  // The glow layers live on the surrounding stage (the carousel sits inside it, under the headline)
+  const stage = hero.closest('.ot-stage') || hero;
+  const ambientLayers = Array.from(stage.querySelectorAll('[data-ot-ambient] .ot-ambient__layer'));
 
   if (!count) return;
 

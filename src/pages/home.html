@@ -1,57 +1,74 @@
 {{> layout-start }}
-    <h1 class="visually-hidden">Open Tickets — events and tickets</h1>
 
     <!--
-      FEATURED HERO — collapses while the Isotope filter is active (query >= 3 chars), as the live slider does.
-      Replaces the Slick slider with a dependency-free, swipeable carousel (ot-hero.js). Keep the slide order from the CMS.
-      The ambient layers pick up the colours of the active banner (set by ot-hero.js).
+      FEATURED HERO — the whole stage collapses while the Isotope filter is active (query >= 3 chars), as the live
+      slider does. The carousel replaces the Slick slider with a dependency-free, swipeable one (ot-hero.js);
+      keep the slide order from the CMS. The ambient layers pick up the colours of the active banner.
     -->
     <div class="ot-hero-collapse" data-ot-hero-collapse>
       <div class="ot-hero-collapse__inner">
-        <section class="ot-stage ot-hero" data-ot-hero aria-roledescription="carousel" aria-label="Featured events">
+        <section class="ot-stage ot-hero-stage" aria-labelledby="hero-heading">
           <div class="ot-ambient" data-ot-ambient aria-hidden="true">
             <span class="ot-ambient__layer"></span>
             <span class="ot-ambient__layer"></span>
           </div>
-          <div class="ot-hero__viewport">
-            <ul class="ot-hero__track" data-ot-hero-track aria-live="off">
-{{{ slides }}}
-            </ul>
-            <button class="ot-hero__arrow ot-hero__arrow--prev" type="button" data-ot-hero-prev aria-label="Previous featured event">
-              <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
-            </button>
-            <button class="ot-hero__arrow ot-hero__arrow--next" type="button" data-ot-hero-next aria-label="Next featured event">
-              <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
-            </button>
+
+          <div class="ot-container ot-hero-intro">
+            <div class="ot-hero-intro__text">
+              <p class="ot-eyebrow ot-eyebrow--on-dark">Live events · Real experiences</p>
+              <h1 class="ot-hero-intro__title" id="hero-heading">Your next great <em class="ot-serif">event</em> is waiting.</h1>
+              <p class="ot-hero-intro__lead">Football, festivals, shows and school events across South Africa, with tickets that go straight to your phone.</p>
+            </div>
+            <div class="ot-hero-intro__aside">
+              <ul class="ot-glass-list">
+                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg><span><strong>{{ eventCount }}</strong> upcoming events</span></li>
+                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-wallet"></use></svg><span>Apple &amp; Google Wallet tickets</span></li>
+              </ul>
+              <a class="btn ot-btn ot-btn--primary" href="#events">Browse all events<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-down"></use></svg></a>
+            </div>
           </div>
-          <div class="ot-hero__controls">
-            <button class="ot-hero__toggle" type="button" data-ot-hero-toggle aria-pressed="false">
-              <svg class="ot-icon ot-hero__toggle-pause" aria-hidden="true"><use href="#i-pause"></use></svg>
-              <svg class="ot-icon ot-hero__toggle-play" aria-hidden="true"><use href="#i-play"></use></svg>
-              <span class="visually-hidden">Pause automatic slide show</span>
-            </button>
-            <ol class="ot-hero__dots">
+
+          <div class="ot-hero" data-ot-hero aria-roledescription="carousel" aria-label="Featured events">
+            <div class="ot-hero__viewport">
+              <ul class="ot-hero__track" data-ot-hero-track aria-live="off">
+{{{ slides }}}
+              </ul>
+              <button class="ot-hero__arrow ot-hero__arrow--prev" type="button" data-ot-hero-prev aria-label="Previous featured event">
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+              </button>
+              <button class="ot-hero__arrow ot-hero__arrow--next" type="button" data-ot-hero-next aria-label="Next featured event">
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+              </button>
+            </div>
+            <div class="ot-hero__controls">
+              <button class="ot-hero__toggle" type="button" data-ot-hero-toggle aria-pressed="false">
+                <svg class="ot-icon ot-hero__toggle-pause" aria-hidden="true"><use href="#i-pause"></use></svg>
+                <svg class="ot-icon ot-hero__toggle-play" aria-hidden="true"><use href="#i-play"></use></svg>
+                <span class="visually-hidden">Pause automatic slide show</span>
+              </button>
+              <ol class="ot-hero__dots">
 {{{ dots }}}
-            </ol>
+              </ol>
+            </div>
           </div>
         </section>
       </div>
     </div>
 
     <!-- EVENTS — Isotope grid. Selectors, data attributes and configuration are unchanged from the live site. -->
-    <section class="ot-section ot-events" aria-labelledby="events-heading">
+    <section class="ot-section ot-events" id="events" aria-labelledby="events-heading">
       <div class="ot-container">
         <header class="ot-section__header ot-reveal">
           <div>
             <p class="ot-eyebrow">What’s on</p>
-            <h2 class="ot-section__title" id="events-heading">Events</h2>
+            <h2 class="ot-section__title" id="events-heading">Upcoming <em class="ot-serif">events</em></h2>
           </div>
           <p class="ot-count-pill">
             <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>
             <span data-ot-grid-count
-                  data-label-all="{n} upcoming events"
+                  data-label-all="{n} events listed"
                   data-label-filtered="{shown} of {n} events match “{q}”"
-                  aria-live="polite">{{ eventCount }} upcoming events</span>
+                  aria-live="polite">{{ eventCount }} events listed</span>
           </p>
         </header>
 
@@ -64,6 +81,33 @@
           <h3 class="ot-empty__title">No events match “<span data-ot-query></span>”</h3>
           <p class="ot-empty__text">Check the spelling, or try a team, artist or venue name. Press Enter to search all listings.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- GOOD TO KNOW — a ticket-shaped band; copy from the live Support page -->
+    <section class="ot-container ot-perks-wrap" aria-labelledby="perks-heading">
+      <div class="ot-perks ot-reveal">
+        <div class="ot-perks__intro">
+          <p class="ot-eyebrow ot-eyebrow--on-dark">Good to know</p>
+          <h2 class="ot-perks__title" id="perks-heading">Tickets made <em class="ot-serif">simple.</em></h2>
+        </div>
+        <ul class="ot-perks__list">
+          <li>
+            <span class="ot-perks__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg></span>
+            <h3>No printing needed</h3>
+            <p>Download your tickets to your Apple or Google wallet, or as an HTML file.</p>
+          </li>
+          <li>
+            <span class="ot-perks__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg></span>
+            <h3>Football to festivals</h3>
+            <p>Matches, music, expos, galas and school events, all in one place.</p>
+          </li>
+          <li>
+            <span class="ot-perks__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-chat"></use></svg></span>
+            <h3>Help when you need it</h3>
+            <p>Our assistant answers FAQs and takes a message for the support team. <a href="{{ routes.faq }}">Read the FAQs</a></p>
+          </li>
+        </ul>
       </div>
     </section>
 

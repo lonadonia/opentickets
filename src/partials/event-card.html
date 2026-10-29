@@ -3,6 +3,9 @@
     <a class="ot-card__link" href="{{ url }}" target="_self">
       <div class="m-card-cover ot-card__cover">
         <img src="{{ cardImage }}" class="card-img-top" alt="" width="720" height="268" loading="lazy" decoding="async">
+        <span class="ot-badge ot-badge--glass ot-card__badge">
+          <svg class="ot-icon" aria-hidden="true"><use href="#i-{{ categoryIcon }}"></use></svg>{{ category }}
+        </span>
       </div>
       <div class="card-body ot-card__body">
         <div class="ot-card__stub" aria-hidden="true">
@@ -18,7 +21,10 @@
           <p class="ot-card__meta">
             <svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="{{ isoDateTime }}">{{ weekday }} · {{ time }}<span class="visually-hidden">, {{ shortDate }}</span></time>
           </p>
-          <span class="ot-card__go" aria-hidden="true"><svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
+        </div>
+        <div class="ot-card__foot">
+          <span class="ot-card__perk"><svg class="ot-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg>Mobile ticket</span>
+          <span class="ot-card__cta" aria-hidden="true">Get tickets<svg class="ot-icon"><use href="#i-arrow-right"></use></svg></span>
         </div>
       </div>
     </a>

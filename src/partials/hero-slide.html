@@ -5,7 +5,8 @@
   <div class="ot-hero__caption">
     <div class="ot-hero__caption-text">
       <p class="ot-hero__eyebrow">
-        <svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured
+        <span class="ot-badge ot-badge--gold"><svg class="ot-icon" aria-hidden="true"><use href="#i-{{ categoryIcon }}"></use></svg>{{ category }}</span>
+        <span class="ot-hero__featured"><svg class="ot-icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>Featured</span>
         <span class="ot-hero__count" aria-hidden="true">{{ indexLabel }}<span>/</span>{{ totalLabel }}</span>
       </p>
       <h2 class="ot-hero__title"><a href="{{ url }}">{{ title }}</a></h2>

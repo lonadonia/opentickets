@@ -9,8 +9,9 @@
       <svg class="ot-icon" aria-hidden="true"><use href="#i-menu"></use></svg>
     </button>
 
+    <!-- Current Open Tickets logo, recoloured charcoal for the white header (logo-icon-dark.png) -->
     <a class="ot-brand" href="{{ routes.home }}">
-      <img class="ot-brand__logo" src="{{ base }}assets/images/brand/logo-icon.png" alt="Open Tickets" width="286" height="150">
+      <img class="ot-brand__logo" src="{{ base }}assets/images/brand/logo-icon-dark.png" alt="Open Tickets" width="286" height="150">
     </a>
 
     <!--
@@ -40,6 +41,10 @@
 {{{ languageItems }}}
         </ul>
       </div>
+      <!-- Shortcut to the live "My account" destination (same link as the sidebar item) -->
+      <a class="btn ot-btn ot-btn--outline ot-header__account d-none d-lg-inline-flex" href="{{ routes.account }}">
+        <svg class="ot-icon" aria-hidden="true"><use href="#i-account"></use></svg>My account
+      </a>
     </div>
   </div>
 </header>

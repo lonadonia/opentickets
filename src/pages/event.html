@@ -20,8 +20,9 @@
 
     <div class="ot-container">
       <div class="row g-4 g-xl-5 ot-event-layout">
-        <div class="col-lg-8">
+        <div class="col-lg-7 col-xl-8">
           <header class="ot-event-head">
+            <span class="ot-badge ot-badge--soft"><svg class="ot-icon" aria-hidden="true"><use href="#i-{{ event.categoryIcon }}"></use></svg>{{ event.category }}</span>
             <h1 class="ot-event-head__title">{{ event.title }}</h1>
             <ul class="ot-event-facts">
               <li>
@@ -37,6 +38,25 @@
                 <span><span class="ot-event-facts__label">Venue</span>{{ event.venue }}</span>
               </li>
             </ul>
+
+            <!-- Booking entry point + quick actions (calendar file and sharing are built in the browser; no backend) -->
+            <div class="ot-event-actions">
+              <a class="btn ot-btn ot-btn--primary" href="#tickets" data-ot-book>
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>Get tickets
+              </a>
+              <button class="btn ot-btn ot-btn--outline" type="button" data-ot-calendar
+                      data-uid="{{ event.id }}" data-title="{{ event.title }}" data-start="{{ event.icsStartUtc }}"
+                      data-location="{{ event.venue }}, South Africa" data-filename="{{ event.slug }}.ics">
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-calendar-plus"></use></svg>Add to calendar
+              </button>
+              <button class="btn ot-btn ot-btn--outline" type="button" data-ot-share data-title="{{ event.title }}">
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-share"></use></svg>Share
+              </button>
+              <a class="btn ot-btn ot-btn--outline" href="{{ event.mapsUrl }}" target="_blank" rel="noopener">
+                <svg class="ot-icon" aria-hidden="true"><use href="#i-directions"></use></svg>Directions
+              </a>
+            </div>
+            <p class="ot-toast" data-ot-toast data-label-copied="Link copied to your clipboard" role="status" aria-live="polite" hidden></p>
           </header>
 
           <!-- DESCRIPTION — live theme: render the organiser's description from the CMS here -->
@@ -51,26 +71,18 @@
             </div>
           </section>
 
-          <!--
-            TICKETS — booking entry point. Live theme: mount the existing ticket selector / booking component here
-            unchanged (same ids, wire: bindings and checkout route). The rows below are sample data styled with the
-            .ot-ticket-row / .ot-qty patterns; ot-event.js only updates the preview total.
-          -->
-          <section class="ot-event-section ot-tickets" id="tickets" aria-labelledby="tickets-heading">
+          <section class="ot-event-section" aria-labelledby="venue-heading">
             <div class="ot-event-section__head">
-              <h2 class="ot-event-section__title" id="tickets-heading">Tickets</h2>
-              <span class="ot-sample-badge">Sample ticket data</span>
+              <h2 class="ot-event-section__title" id="venue-heading">Venue</h2>
             </div>
-            <ul class="ot-ticket-list">
-{{{ ticketRows }}}
-            </ul>
-            <div class="ot-tickets__footer">
-              <p class="ot-tickets__total">Total <output data-ot-total>R 0.00</output></p>
-              <button class="btn ot-btn ot-btn--primary" type="button" data-ot-checkout disabled aria-describedby="tickets-preview-note">
-                Continue to checkout<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
-              </button>
+            <div class="ot-venue">
+              <span class="ot-venue__icon"><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+              <div class="ot-venue__text">
+                <p class="ot-venue__name">{{ event.venue }}</p>
+                <p class="ot-venue__meta"><time datetime="{{ event.isoDateTime }}">{{ event.longDate }} · {{ event.time }}</time></p>
+              </div>
+              <a class="ot-venue__link" href="{{ event.mapsUrl }}" target="_blank" rel="noopener">Open in Maps<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
             </div>
-            <p class="ot-tickets__note" id="tickets-preview-note">Preview only: ticket types, prices and checkout come from the existing Open Tickets booking flow, which this refresh does not change.</p>
           </section>
 
           <section class="ot-event-section" aria-labelledby="good-to-know-heading">
@@ -90,37 +102,52 @@
           </section>
         </div>
 
-        <aside class="col-lg-4 ot-booking-col" aria-label="Booking">
-          <div class="ot-booking-card" data-ot-booking-card>
-            <div class="ot-booking-card__stub" aria-hidden="true">
-              <span class="ot-booking-card__weekday">{{ event.weekdayShort }}</span>
-              <span class="ot-booking-card__day">{{ event.day }}</span>
-              <span class="ot-booking-card__month">{{ event.monthLabel }}</span>
+        <!--
+          TICKET PANEL — booking entry point (#tickets). Live theme: mount the existing ticket selector / booking
+          component inside .ot-ticket-panel__body unchanged (same ids, wire: bindings and checkout route). The rows
+          below are sample data styled with the .ot-ticket-row / .ot-qty patterns; ot-event.js only updates the preview total.
+        -->
+        <aside class="col-lg-5 col-xl-4 ot-booking-col" aria-labelledby="tickets-heading">
+          <div class="ot-ticket-panel" id="tickets">
+            <div class="ot-ticket-panel__stub">
+              <div class="ot-ticket-panel__date" aria-hidden="true">
+                <span class="ot-ticket-panel__weekday">{{ event.weekdayShort }}</span>
+                <span class="ot-ticket-panel__day">{{ event.day }}</span>
+                <span class="ot-ticket-panel__month">{{ event.monthLabel }}</span>
+              </div>
+              <div class="ot-ticket-panel__event">
+                <p class="ot-ticket-panel__title">{{ event.title }}</p>
+                <p class="ot-ticket-panel__meta"><svg class="ot-icon" aria-hidden="true"><use href="#i-clock"></use></svg><time datetime="{{ event.isoDateTime }}">{{ event.shortDate }} · {{ event.time }}</time></p>
+                <p class="ot-ticket-panel__meta"><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg>{{ event.venue }}</p>
+              </div>
             </div>
-            <div class="ot-booking-card__body">
-              <p class="ot-booking-card__title">{{ event.title }}</p>
-              <ul class="ot-booking-card__facts">
-                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-calendar"></use></svg><time datetime="{{ event.isoDateTime }}">{{ event.shortDate }} · {{ event.time }}</time></li>
-                <li><svg class="ot-icon" aria-hidden="true"><use href="#i-pin"></use></svg>{{ event.venue }}</li>
+            <div class="ot-ticket-panel__body">
+              <div class="ot-ticket-panel__head">
+                <h2 class="ot-ticket-panel__heading" id="tickets-heading">Select tickets</h2>
+                <span class="ot-sample-badge">Sample data</span>
+              </div>
+              <ul class="ot-ticket-list">
+{{{ ticketRows }}}
               </ul>
-              <!-- Booking entry point: live theme keeps its current "buy tickets" target here -->
-              <a class="btn ot-btn ot-btn--primary ot-btn--block" href="#tickets" data-ot-book>
-                <svg class="ot-icon" aria-hidden="true"><use href="#i-ticket"></use></svg>Buy tickets
-              </a>
-              <p class="ot-booking-card__note"><svg class="ot-icon" aria-hidden="true"><use href="#i-wallet"></use></svg>Tickets go straight to your Apple or Google wallet</p>
+              <p class="ot-ticket-panel__total">Total <output data-ot-total>R 0.00</output></p>
+              <button class="btn ot-btn ot-btn--primary ot-btn--block" type="button" data-ot-checkout disabled aria-describedby="tickets-preview-note">
+                Continue to checkout<svg class="ot-icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </button>
+              <p class="ot-ticket-panel__note" id="tickets-preview-note">Preview only: ticket types, prices and checkout come from the existing Open Tickets booking flow, which this refresh does not change.</p>
+              <p class="ot-ticket-panel__perk"><svg class="ot-icon" aria-hidden="true"><use href="#i-wallet"></use></svg>Tickets go straight to your Apple or Google wallet</p>
             </div>
           </div>
         </aside>
       </div>
     </div>
 
-    <!-- Mobile booking bar — appears once the booking card scrolls out of view -->
+    <!-- Mobile booking bar — slides away while the ticket panel is on screen -->
     <div class="ot-mobile-cta" data-ot-mobile-cta>
       <div class="ot-mobile-cta__text">
         <span class="ot-mobile-cta__title">{{ event.title }}</span>
         <span class="ot-mobile-cta__meta">{{ event.shortDate }} · {{ event.time }}</span>
       </div>
-      <a class="btn ot-btn ot-btn--primary" href="#tickets" data-ot-book>Buy tickets</a>
+      <a class="btn ot-btn ot-btn--primary" href="#tickets" data-ot-book>Get tickets</a>
     </div>
 
 {{> layout-end }}
